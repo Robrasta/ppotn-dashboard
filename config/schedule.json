@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "name": "Vegas Game",
+      "date": "2027-01-16",
+      "place": "Las Vegas",
+      "status": "scheduled"
+    },
+    {
+      "name": "PPOTN FINAL",
+      "date": "2027-02-06",
+      "place": "TBD",
+      "status": "scheduled"
+    }
+  ]
+}
