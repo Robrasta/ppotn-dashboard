@@ -91,12 +91,24 @@
   .calc-pill.first .value { color: var(--gold); }
   .calc-pill.second .value { color: var(--silver); }
   .calc-pill.third .value { color: var(--bronze); }
+  .champion-tag { font-size: 15px; font-weight: 500; color: var(--text-dim); margin-left: 14px; white-space: nowrap; }
+  .champion-name {
+    color: var(--gold);
+    font-weight: 800;
+    margin-left: 4px;
+    display: inline-block;
+    animation: championGlow 1.8s ease-in-out infinite;
+  }
+  @keyframes championGlow {
+    0%, 100% { text-shadow: 0 0 4px rgba(242,201,76,0.35); opacity: 1; transform: scale(1); }
+    50% { text-shadow: 0 0 12px rgba(242,201,76,0.95), 0 0 24px rgba(242,201,76,0.6); opacity: 0.88; transform: scale(1.04); }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>PPOTY <span>&middot;</span> League Dashboard</h1>
+    <h1>PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span></h1>
     <div style="text-align:right;">
       <div class="meta" id="lastUpdated">loading…</div>
       <div class="meta"><a href="#" id="constitutionLink" style="color:var(--text-dim); text-decoration:underline dotted;" title="Link coming soon">PPOTN Constitution &amp; Rules</a></div>
@@ -175,11 +187,21 @@ async function load() {
     </div>
   `;
 
+  try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
   try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
   try { renderTrendChart(season); } catch (e) { console.error('renderTrendChart failed', e); }
   try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
   try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
+}
+
+function renderChampionBadge(history) {
+  const el = document.getElementById('championName');
+  if (!el) return;
+  const champs = (history && history.champions) || [];
+  const decided = champs.filter(c => c.name).sort((a, b) => a.year - b.year);
+  const latest = decided.length ? decided[decided.length - 1] : null;
+  el.textContent = latest ? `${latest.name} (${latest.year})` : '—';
 }
 
 function medalClass(i) {
