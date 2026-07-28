@@ -102,6 +102,27 @@
     0%, 100% { text-shadow: 0 0 4px rgba(242,201,76,0.35); opacity: 1; transform: scale(1); }
     50% { text-shadow: 0 0 12px rgba(242,201,76,0.95), 0 0 24px rgba(242,201,76,0.6); opacity: 0.88; transform: scale(1.04); }
   }
+  .layout { display: grid; grid-template-columns: 250px 1fr; gap: 24px; align-items: start; }
+  .sidebar { position: sticky; top: 20px; }
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+  }
+  .sched-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .sched-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .sched-item:first-child { padding-top: 0; }
+  .sched-name { font-weight: 700; font-size: 14px; }
+  .sched-date { font-size: 13px; margin-top: 2px; }
+  .sched-place { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .sched-item.official .sched-name,
+  .sched-item.official .sched-date {
+    color: var(--gold);
+    animation: championGlow 1.8s ease-in-out infinite;
+  }
+  .sched-item.official .sched-place { color: var(--gold); opacity: 0.75; }
+  .sched-item.proposed .sched-name { color: var(--text); }
+  .sched-item.proposed .sched-date { color: var(--text-dim); }
+  .sched-item.proposed .sched-place { color: var(--text-dim); }
 </style>
 </head>
 <body>
@@ -110,13 +131,21 @@
     <h1>PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span></h1>
     <div style="text-align:right;">
       <div class="meta" id="lastUpdated">loading…</div>
-      <div class="meta"><a href="docs/PPOTN-Constitution-and-Rules.doc" id="constitutionLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">PPOTN Constitution &amp; Rules</a></div>
+      <div class="meta"><a href="docs/PPOTN-Constitution-and-Rules.pdf" id="constitutionLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">PPOTN Constitution &amp; Rules</a></div>
     </div>
   </header>
   <div class="subtitle">Poker Player of the Year — season standings, pulled straight from Tournament Director exports.</div>
 
-  <div id="content">
-    <div class="empty">Loading season data…</div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="card">
+        <h2>Scheduled Games</h2>
+        <div id="scheduledGames"><div class="empty">Loading…</div></div>
+      </div>
+    </aside>
+    <div id="content">
+      <div class="empty">Loading season data…</div>
+    </div>
   </div>
 </div>
 
@@ -183,6 +212,7 @@ async function load() {
   `;
 
   try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
+  try { renderScheduledGames(data.scheduled_games); } catch (e) { console.error('renderScheduledGames failed', e); }
   try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
   try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
@@ -196,6 +226,46 @@ function renderChampionBadge(history) {
   const decided = champs.filter(c => c.name).sort((a, b) => a.year - b.year);
   const latest = decided.length ? decided[decided.length - 1] : null;
   el.textContent = latest ? `${latest.name} (${latest.year})` : '—';
+}
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function ordinal(n) {
+  const rem100 = n % 100;
+  if (rem100 >= 11 && rem100 <= 13) return n + 'th';
+  switch (n % 10) {
+    case 1: return n + 'st';
+    case 2: return n + 'nd';
+    case 3: return n + 'rd';
+    default: return n + 'th';
+  }
+}
+
+function fmtFullDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d.getTime())) return dateStr;
+  return `${MONTH_NAMES[d.getMonth()]} ${ordinal(d.getDate())}, ${d.getFullYear()}`;
+}
+
+function renderScheduledGames(events) {
+  const wrap = document.getElementById('scheduledGames');
+  if (!wrap) return;
+  if (!events || !events.length) {
+    wrap.innerHTML = '<div class="empty">No games on the books yet.</div>';
+    return;
+  }
+  const sorted = events.slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+  wrap.innerHTML = sorted.map(e => {
+    const official = (e.status || 'scheduled') === 'scheduled';
+    return `
+      <div class="sched-item ${official ? 'official' : 'proposed'}">
+        <div class="sched-name">${e.name}</div>
+        <div class="sched-date">${fmtFullDate(e.date)}</div>
+        <div class="sched-place">${e.place || 'TBD'}</div>
+      </div>
+    `;
+  }).join('');
 }
 
 function medalClass(i) {
