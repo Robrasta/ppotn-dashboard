@@ -345,7 +345,14 @@ def current_season(seasons):
 # ---------------------------------------------------------------------------
 
 def build_season(tdt_paths, roster, seasons):
-    roster_lower = {m.lower() for m in roster}
+    # roster: list of {"spreadsheet_name": ..., "display_name": ...}
+    # display_name is the Nickname that actually shows up in Tournament
+    # Director's exports -- that's what we match against. spreadsheet_name
+    # (e.g. "Whited", "Harrison") is what the dashboard displays, matching
+    # the league's spreadsheet.
+    nickname_to_canonical = {
+        m['display_name'].strip().lower(): m['spreadsheet_name'] for m in roster
+    }
 
     tournaments = []
     for path in sorted(tdt_paths):
@@ -365,7 +372,12 @@ def build_season(tdt_paths, roster, seasons):
         s = season_for_date(t['date'], seasons)
         t['season_id'] = s['id'] if s else None
         for pl in t['players']:
-            pl['is_roster'] = pl['name'].strip().lower() in roster_lower
+            canonical = nickname_to_canonical.get(pl['name'].strip().lower())
+            pl['is_roster'] = canonical is not None
+            # display_name is what shows up everywhere on the dashboard:
+            # the spreadsheet name for roster members, the raw TD nickname
+            # for guests.
+            pl['display_name'] = canonical or pl['name']
 
     cur_season = current_season(seasons)
     cur_season_id = cur_season['id'] if cur_season else None
@@ -381,7 +393,7 @@ def build_season(tdt_paths, roster, seasons):
                     continue
                 rec = players.setdefault(pl['uuid'], {
                     'uuid': pl['uuid'],
-                    'name': pl['name'],
+                    'name': pl['display_name'],
                     'tournaments_played': 0,
                     'wins': 0,
                     'cashes': 0,
@@ -392,7 +404,7 @@ def build_season(tdt_paths, roster, seasons):
                     'sum_place': 0,
                     'history': [],
                 })
-                rec['name'] = pl['name']
+                rec['name'] = pl['display_name']
                 rec['tournaments_played'] += 1
                 rec['wins'] += 1 if pl['place'] == 1 else 0
                 rec['cashes'] += 1 if pl['prize_dollars'] > 0 else 0
@@ -444,7 +456,7 @@ def build_season(tdt_paths, roster, seasons):
     return {
         'generated_at': datetime.datetime.utcnow().isoformat() + 'Z',
         'current_season_id': cur_season_id,
-        'roster': sorted(roster),
+        'roster': sorted(m['spreadsheet_name'] for m in roster),
         'seasons': seasons_out,
         'skipped_incomplete_files': skipped,
         'tournaments': [
@@ -457,7 +469,7 @@ def build_season(tdt_paths, roster, seasons):
                 'source_file': t['source_file'],
                 'results': [
                     {
-                        'name': pl['name'],
+                        'name': pl['display_name'],
                         'place': pl['place'],
                         'prize_dollars': pl['prize_dollars'],
                         'net': pl['net'],
