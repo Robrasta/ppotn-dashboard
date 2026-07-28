@@ -1,16 +1,16 @@
 {
   "members": [
-    "Whited",
-    "Harrison",
-    "Graham",
-    "Jones",
-    "Hernandez",
-    "Grissom",
-    "Heins",
-    "Busby",
-    "Lustgarten",
-    "McDowell",
-    "Klinect",
-    "Smith"
+    {"spreadsheet_name": "Busby", "display_name": "Bryce"},
+    {"spreadsheet_name": "Whited", "display_name": "James W"},
+    {"spreadsheet_name": "Harrison", "display_name": "Rob"},
+    {"spreadsheet_name": "Graham", "display_name": "Tom"},
+    {"spreadsheet_name": "Jones", "display_name": "Stuart"},
+    {"spreadsheet_name": "Hernandez", "display_name": "Joe"},
+    {"spreadsheet_name": "Grissom", "display_name": "Dave"},
+    {"spreadsheet_name": "Heins", "display_name": "Mike"},
+    {"spreadsheet_name": "Lustgarten", "display_name": "Maia"},
+    {"spreadsheet_name": "McDowell", "display_name": "Chris"},
+    {"spreadsheet_name": "Klinect", "display_name": "James"},
+    {"spreadsheet_name": "Smith", "display_name": "Sam"}
   ]
 }
