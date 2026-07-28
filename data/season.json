@@ -1,8 +1,30 @@
 {
-  "generated_at": "2026-07-28T18:24:18.709674Z",
-  "current_season_id": null,
-  "roster": [],
-  "seasons": {},
+  "generated_at": "2026-07-28T18:28:56.822534Z",
+  "current_season_id": "2026",
+  "roster": [
+    "Busby",
+    "Graham",
+    "Grissom",
+    "Harrison",
+    "Heins",
+    "Hernandez",
+    "Jones",
+    "Klinect",
+    "Lustgarten",
+    "McDowell",
+    "Smith",
+    "Whited"
+  ],
+  "seasons": {
+    "2026": {
+      "id": "2026",
+      "label": "PPOTY 2026",
+      "start": "2025-03-07",
+      "end": null,
+      "num_tournaments": 0,
+      "players": []
+    }
+  },
   "skipped_incomplete_files": [
     "MAC 2024.tdt"
   ],
@@ -96,8 +118,126 @@
     }
   ],
   "history": {
-    "champions": [],
-    "trophy_counts": [],
-    "years_tracked": 0
+    "champions": [
+      {
+        "year": 2007,
+        "name": "Tawse"
+      },
+      {
+        "year": 2008,
+        "name": "Graham"
+      },
+      {
+        "year": 2009,
+        "name": "Tawse"
+      },
+      {
+        "year": 2010,
+        "name": "Graham"
+      },
+      {
+        "year": 2011,
+        "name": "Graham"
+      },
+      {
+        "year": 2012,
+        "name": "Harrison"
+      },
+      {
+        "year": 2013,
+        "name": "Whited"
+      },
+      {
+        "year": 2014,
+        "name": "Grissom"
+      },
+      {
+        "year": 2015,
+        "name": "Jones"
+      },
+      {
+        "year": 2016,
+        "name": "Jones"
+      },
+      {
+        "year": 2017,
+        "name": "Jones"
+      },
+      {
+        "year": 2018,
+        "name": "Hernandez"
+      },
+      {
+        "year": 2019,
+        "name": "Jones"
+      },
+      {
+        "year": 2020,
+        "name": "COVID"
+      },
+      {
+        "year": 2021,
+        "name": "Klinect"
+      },
+      {
+        "year": 2022,
+        "name": "Hernandez"
+      },
+      {
+        "year": 2023,
+        "name": "Whited"
+      },
+      {
+        "year": 2024,
+        "name": "Whited"
+      },
+      {
+        "year": 2025,
+        "name": "Harrison"
+      },
+      {
+        "year": 2026,
+        "name": null
+      }
+    ],
+    "trophy_counts": [
+      {
+        "name": "Jones",
+        "count": 4
+      },
+      {
+        "name": "Graham",
+        "count": 3
+      },
+      {
+        "name": "Whited",
+        "count": 3
+      },
+      {
+        "name": "Tawse",
+        "count": 2
+      },
+      {
+        "name": "Harrison",
+        "count": 2
+      },
+      {
+        "name": "Hernandez",
+        "count": 2
+      },
+      {
+        "name": "Grissom",
+        "count": 1
+      },
+      {
+        "name": "COVID",
+        "count": 1
+      },
+      {
+        "name": "Klinect",
+        "count": 1
+      }
+    ],
+    "years_tracked": 19
   }
 }
