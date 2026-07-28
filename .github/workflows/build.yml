@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'data/tournaments/**'
+      - 'data/manual_games.json'
       - 'config/**'
       - 'scripts/**'
   workflow_dispatch: {}
