@@ -1,0 +1,1054 @@
+[
+  {
+    "title": "Night 1 Game 1 \u2014 hosted by Jones",
+    "date": "2025-03-07",
+    "start_ms": 1741327200000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 1 Game 2 \u2014 hosted by Jones",
+    "date": "2025-03-07",
+    "start_ms": 1741327200000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 2 Game 1 \u2014 hosted by Jones",
+    "date": "2026-04-03",
+    "start_ms": 1775192400000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Heins",
+        "name": "Heins",
+        "display_name": "Heins",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 2 Game 2 \u2014 hosted by Jones",
+    "date": "2026-04-03",
+    "start_ms": 1775192400000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Heins",
+        "name": "Heins",
+        "display_name": "Heins",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 3 Game 1 \u2014 hosted by Jones",
+    "date": "2026-04-18",
+    "start_ms": 1776488400000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Smith",
+        "name": "Smith",
+        "display_name": "Smith",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 3 Game 2 \u2014 hosted by Jones",
+    "date": "2026-04-19",
+    "start_ms": 1776574800000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Smith",
+        "name": "Smith",
+        "display_name": "Smith",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 4 Game 1 \u2014 hosted by Jones",
+    "date": "2026-06-19",
+    "start_ms": 1781845200000,
+    "num_players": 10,
+    "total_pot": 1000.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 500.0,
+        "fee_paid": 100.0,
+        "net": 400.0
+      },
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 300.0,
+        "fee_paid": 100.0,
+        "net": 200.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Smith",
+        "name": "Smith",
+        "display_name": "Smith",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 10,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 4 Game 2 \u2014 hosted by Jones",
+    "date": "2026-06-19",
+    "start_ms": 1781845200000,
+    "num_players": 10,
+    "total_pot": 1000.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 500.0,
+        "fee_paid": 100.0,
+        "net": 400.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 300.0,
+        "fee_paid": 100.0,
+        "net": 200.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 200.0,
+        "fee_paid": 100.0,
+        "net": 100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Smith",
+        "name": "Smith",
+        "display_name": "Smith",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 10,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+    "date": "2026-06-27",
+    "start_ms": 1782536400000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Busby",
+        "name": "Busby",
+        "display_name": "Busby",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+    "date": "2026-06-27",
+    "start_ms": 1782536400000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Busby",
+        "name": "Busby",
+        "display_name": "Busby",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 6 Game 1 \u2014 hosted by Whited",
+    "date": "2026-07-10",
+    "start_ms": 1783659600000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Heins",
+        "name": "Heins",
+        "display_name": "Heins",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  },
+  {
+    "title": "Night 6 Game 2 \u2014 hosted by Whited",
+    "date": "2026-07-10",
+    "start_ms": 1783659600000,
+    "num_players": 9,
+    "total_pot": 900.0,
+    "incomplete": false,
+    "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+    "players": [
+      {
+        "uuid": "manual:Heins",
+        "name": "Heins",
+        "display_name": "Heins",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450.0,
+        "fee_paid": 100.0,
+        "net": 350.0
+      },
+      {
+        "uuid": "manual:Whited",
+        "name": "Whited",
+        "display_name": "Whited",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270.0,
+        "fee_paid": 100.0,
+        "net": 170.0
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180.0,
+        "fee_paid": 100.0,
+        "net": 80.0
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0.0,
+        "fee_paid": 100.0,
+        "net": -100.0
+      }
+    ]
+  }
+]
