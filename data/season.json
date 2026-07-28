@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T18:28:56.822534Z",
+  "generated_at": "2026-07-28T18:40:45.398034Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -38,46 +38,46 @@
       "source_file": "PPOTN Aug Game 1.tdt",
       "results": [
         {
-          "name": "James W",
+          "name": "Whited",
           "place": 1,
           "prize_dollars": 550.0,
           "net": 450.0,
-          "is_roster": false
+          "is_roster": true
         },
         {
-          "name": "Chris",
+          "name": "McDowell",
           "place": 2,
           "prize_dollars": 330.0,
           "net": 230.0,
-          "is_roster": false
+          "is_roster": true
         },
         {
-          "name": "Dave",
+          "name": "Grissom",
           "place": 3,
           "prize_dollars": 220.0,
           "net": 120.0,
-          "is_roster": false
+          "is_roster": true
         },
         {
-          "name": "Rob",
+          "name": "Harrison",
           "place": 4,
           "prize_dollars": 0,
           "net": -100,
-          "is_roster": false
+          "is_roster": true
         },
         {
-          "name": "Tom",
+          "name": "Graham",
           "place": 5,
           "prize_dollars": 0,
           "net": -100,
-          "is_roster": false
+          "is_roster": true
         },
         {
-          "name": "Stuart",
+          "name": "Jones",
           "place": 6,
           "prize_dollars": 0,
           "net": -100,
-          "is_roster": false
+          "is_roster": true
         },
         {
           "name": "Sammy",
@@ -87,18 +87,18 @@
           "is_roster": false
         },
         {
-          "name": "Bryce",
+          "name": "Busby",
           "place": 8,
           "prize_dollars": 0,
           "net": -100,
-          "is_roster": false
+          "is_roster": true
         },
         {
-          "name": "Maia",
+          "name": "Lustgarten",
           "place": 9,
           "prize_dollars": 0,
           "net": -100,
-          "is_roster": false
+          "is_roster": true
         },
         {
           "name": "Mark",
@@ -108,11 +108,11 @@
           "is_roster": false
         },
         {
-          "name": "Joe",
+          "name": "Hernandez",
           "place": 11,
           "prize_dollars": 0,
           "net": -100,
-          "is_roster": false
+          "is_roster": true
         }
       ]
     }
