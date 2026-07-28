@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPOTN — Poker Player of the Night</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #182028;
+    --panel-2: #1e2830;
+    --border: #2a3540;
+    --text: #e8edf1;
+    --text-dim: #8a97a3;
+    --accent: #3ecf8e;
+    --accent-2: #f2b84b;
+    --red: #e0655a;
+    --gold: #f2c94c;
+    --silver: #c7ccd1;
+    --bronze: #cd8a4d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  h1 { font-size: 26px; margin: 0; letter-spacing: 0.2px; }
+  h1 span { color: var(--accent); }
+  .meta { color: var(--text-dim); font-size: 13px; }
+  .subtitle { color: var(--text-dim); margin: 6px 0 28px; font-size: 14px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-dim); margin: 0 0 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--text-dim); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  tbody tr:hover { background: var(--panel-2); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rank { width: 28px; text-align: center; font-weight: 700; color: var(--text-dim); }
+  .rank.g { color: var(--gold); }
+  .rank.s { color: var(--silver); }
+  .rank.b { color: var(--bronze); }
+  .player-name { font-weight: 600; }
+  .pos { color: var(--accent); }
+  .neg { color: var(--red); }
+  .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; background: var(--panel-2); color: var(--text-dim);
+  }
+  .pill.win { background: rgba(242,201,76,0.15); color: var(--gold); }
+  canvas { max-height: 380px; }
+  .tourn-header { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .tourn-title { font-weight: 600; }
+  .tourn-sub { color: var(--text-dim); font-size: 13px; }
+  .empty { color: var(--text-dim); text-align: center; padding: 40px 0; }
+  .legend-note { color: var(--text-dim); font-size: 12px; margin-top: 10px; }
+  .table-scroll { overflow-x: auto; }
+  select {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>PPOTN <span>&middot;</span> League Dashboard</h1>
+    <div class="meta" id="lastUpdated">loading…</div>
+  </header>
+  <div class="subtitle">Poker Player of the Night — season standings, pulled straight from Tournament Director exports.</div>
+
+  <div id="content">
+    <div class="empty">Loading season data…</div>
+  </div>
+</div>
+
+<script>
+async function load() {
+  const el = document.getElementById('content');
+  let data;
+  try {
+    const res = await fetch('data/season.json?_=' + Date.now());
+    if (!res.ok) throw new Error('no data file');
+    data = await res.json();
+  } catch (e) {
+    el.innerHTML = '<div class="card"><div class="empty">No season data yet. Once tournament files are added to <code>data/tournaments/</code> and the build runs, standings will show up here.</div></div>';
+    document.getElementById('lastUpdated').textContent = '';
+    return;
+  }
+
+  document.getElementById('lastUpdated').textContent = data.num_tournaments
+    ? `${data.num_tournaments} tournaments · updated ${new Date(data.generated_at).toLocaleString()}`
+    : 'no completed tournaments yet';
+
+  if (!data.players || !data.players.length) {
+    el.innerHTML = '<div class="card"><div class="empty">No completed tournaments yet.</div></div>';
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="card">
+      <h2>Season Leaderboard — Gross Winnings</h2>
+      <div class="table-scroll">
+        <table id="leaderboard"></table>
+      </div>
+      ${data.skipped_incomplete_files && data.skipped_incomplete_files.length
+        ? `<div class="legend-note">Skipped (in-progress / no winner recorded yet): ${data.skipped_incomplete_files.join(', ')}</div>`
+        : ''}
+    </div>
+    <div class="card">
+      <h2>Cumulative Winnings Over the Season</h2>
+      <canvas id="trendChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>Tournament Results</h2>
+      <div id="tournaments"></div>
+    </div>
+  `;
+
+  renderLeaderboard(data.players);
+  renderTrendChart(data.players);
+  renderTournaments(data.tournaments);
+}
+
+function medalClass(i) {
+  return i === 0 ? 'g' : i === 1 ? 's' : i === 2 ? 'b' : '';
+}
+
+function renderLeaderboard(players) {
+  const table = document.getElementById('leaderboard');
+  const rows = players.map((p, i) => `
+    <tr>
+      <td class="rank ${medalClass(i)}">${i + 1}</td>
+      <td class="player-name">${p.name}${p.wins ? ` <span class="pill win">${p.wins}x win${p.wins > 1 ? 's' : ''}</span>` : ''}</td>
+      <td class="num">${p.tournaments_played}</td>
+      <td class="num">${p.cashes}</td>
+      <td class="num ${p.total_winnings > 0 ? 'pos' : ''}">$${p.total_winnings.toFixed(0)}</td>
+      <td class="num ${p.net > 0 ? 'pos' : p.net < 0 ? 'neg' : ''}">${p.net >= 0 ? '+' : ''}$${p.net.toFixed(0)}</td>
+      <td class="num">${p.avg_place ?? '–'}</td>
+      <td class="num">${p.best_place ?? '–'}</td>
+    </tr>
+  `).join('');
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th></th>
+        <th>Player</th>
+        <th class="num">Played</th>
+        <th class="num">Cashes</th>
+        <th class="num">Winnings</th>
+        <th class="num">Net</th>
+        <th class="num">Avg Finish</th>
+        <th class="num">Best Finish</th>
+      </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+  `;
+}
+
+const PALETTE = ['#3ecf8e', '#f2b84b', '#e0655a', '#5aa9e6', '#c48ce6', '#e67ea0', '#7ee6c4', '#e6d05a', '#8a97a3', '#e68a5a', '#5ae6d0', '#a9e65a'];
+
+function renderTrendChart(players) {
+  const top = players.slice(0, 12);
+  const dateSet = new Set();
+  top.forEach(p => p.history.forEach(h => dateSet.add(h.date)));
+  const dates = Array.from(dateSet).sort();
+
+  const datasets = top.map((p, i) => {
+    const byDate = {};
+    p.history.forEach(h => { byDate[h.date] = h.cumulative_winnings; });
+    let last = 0;
+    const data = dates.map(d => {
+      if (byDate[d] !== undefined) { last = byDate[d]; }
+      return last;
+    });
+    return {
+      label: p.name,
+      data,
+      borderColor: PALETTE[i % PALETTE.length],
+      backgroundColor: PALETTE[i % PALETTE.length],
+      borderWidth: 2,
+      pointRadius: 2,
+      tension: 0.15,
+      fill: false,
+    };
+  });
+
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: { labels: dates, datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: 'nearest', intersect: false },
+      plugins: {
+        legend: { labels: { color: '#e8edf1', boxWidth: 12 } },
+        tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: $${ctx.parsed.y.toFixed(0)}` } },
+      },
+      scales: {
+        x: { ticks: { color: '#8a97a3' }, grid: { color: '#2a3540' } },
+        y: { ticks: { color: '#8a97a3', callback: (v) => '$' + v }, grid: { color: '#2a3540' } },
+      },
+    },
+  });
+}
+
+function renderTournaments(tournaments) {
+  const container = document.getElementById('tournaments');
+  const sorted = tournaments.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  container.innerHTML = sorted.map(t => {
+    const rows = t.results.slice(0, 5).map(r => `
+      <tr>
+        <td class="rank ${medalClass((r.place || 99) - 1)}">${r.place ?? '–'}</td>
+        <td>${r.name}</td>
+        <td class="num ${r.prize_dollars > 0 ? 'pos' : ''}">$${r.prize_dollars.toFixed(0)}</td>
+      </tr>
+    `).join('');
+    return `
+      <div class="card" style="background: var(--panel-2); margin-bottom: 14px;">
+        <div class="tourn-header">
+          <div class="tourn-title">${t.title}</div>
+          <div class="tourn-sub">${t.date || ''} · ${t.num_players} players · $${t.total_pot.toFixed(0)} pot</div>
+        </div>
+        <table style="margin-top:10px;">
+          <thead><tr><th></th><th>Player</th><th class="num">Prize</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    `;
+  }).join('');
+}
+
+load();
+</script>
+</body>
+</html>
