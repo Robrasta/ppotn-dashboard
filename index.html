@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PPOTN — Poker Player of the Night</title>
+<title>PPOTY — Poker Player of the Year</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <style>
   :root {
@@ -41,17 +41,21 @@
     padding: 20px;
     margin-bottom: 24px;
   }
-  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-dim); margin: 0 0 16px; }
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-dim); margin: 0 0 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .card h2 .badge { text-transform: none; font-size: 12px; color: var(--accent); letter-spacing: 0; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
   th { color: var(--text-dim); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
   tbody tr:hover { background: var(--panel-2); }
+  tbody tr.clickable { cursor: pointer; }
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   .rank { width: 28px; text-align: center; font-weight: 700; color: var(--text-dim); }
   .rank.g { color: var(--gold); }
   .rank.s { color: var(--silver); }
   .rank.b { color: var(--bronze); }
   .player-name { font-weight: 600; }
+  .player-name .chevron { display: inline-block; color: var(--text-dim); font-size: 11px; margin-right: 6px; transition: transform 0.15s; }
+  .player-name .chevron.open { transform: rotate(90deg); }
   .pos { color: var(--accent); }
   .neg { color: var(--red); }
   .pill {
@@ -59,6 +63,7 @@
     font-size: 11px; font-weight: 600; background: var(--panel-2); color: var(--text-dim);
   }
   .pill.win { background: rgba(242,201,76,0.15); color: var(--gold); }
+  .pill.guest { background: rgba(138,151,163,0.15); color: var(--text-dim); }
   canvas { max-height: 380px; }
   .tourn-header { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
   .tourn-title { font-weight: 600; }
@@ -66,19 +71,35 @@
   .empty { color: var(--text-dim); text-align: center; padding: 40px 0; }
   .legend-note { color: var(--text-dim); font-size: 12px; margin-top: 10px; }
   .table-scroll { overflow-x: auto; }
-  select {
-    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
-    border-radius: 6px; padding: 6px 10px; font-size: 13px;
+  .drill-row td { background: var(--panel-2); padding: 16px 20px; }
+  .drill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .drill-stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+  .drill-stat .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; }
+  .drill-stat .value { font-size: 18px; font-weight: 700; margin-top: 2px; }
+  .history-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .history-cols { grid-template-columns: 1fr; } }
+  .calc-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 16px; }
+  .calc-field label { display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .calc-field input {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text); padding: 8px 10px; font-size: 14px; width: 110px;
   }
+  .calc-results { display: flex; gap: 12px; flex-wrap: wrap; }
+  .calc-pill { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; }
+  .calc-pill .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+  .calc-pill .value { font-size: 20px; font-weight: 700; }
+  .calc-pill.first .value { color: var(--gold); }
+  .calc-pill.second .value { color: var(--silver); }
+  .calc-pill.third .value { color: var(--bronze); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>PPOTN <span>&middot;</span> League Dashboard</h1>
+    <h1>PPOTY <span>&middot;</span> League Dashboard</h1>
     <div class="meta" id="lastUpdated">loading…</div>
   </header>
-  <div class="subtitle">Poker Player of the Night — season standings, pulled straight from Tournament Director exports.</div>
+  <div class="subtitle">Poker Player of the Year — season standings, pulled straight from Tournament Director exports.</div>
 
   <div id="content">
     <div class="empty">Loading season data…</div>
@@ -86,6 +107,8 @@
 </div>
 
 <script>
+let SEASON_DATA = null;
+
 async function load() {
   const el = document.getElementById('content');
   let data;
@@ -98,29 +121,50 @@ async function load() {
     document.getElementById('lastUpdated').textContent = '';
     return;
   }
+  SEASON_DATA = data;
 
-  document.getElementById('lastUpdated').textContent = data.num_tournaments
-    ? `${data.num_tournaments} tournaments · updated ${new Date(data.generated_at).toLocaleString()}`
-    : 'no completed tournaments yet';
+  const season = data.seasons[data.current_season_id] || null;
 
-  if (!data.players || !data.players.length) {
-    el.innerHTML = '<div class="card"><div class="empty">No completed tournaments yet.</div></div>';
-    return;
-  }
+  document.getElementById('lastUpdated').textContent = data.generated_at
+    ? `updated ${new Date(data.generated_at).toLocaleString()}`
+    : '';
 
   el.innerHTML = `
     <div class="card">
-      <h2>Season Leaderboard — Gross Winnings</h2>
-      <div class="table-scroll">
-        <table id="leaderboard"></table>
-      </div>
-      ${data.skipped_incomplete_files && data.skipped_incomplete_files.length
-        ? `<div class="legend-note">Skipped (in-progress / no winner recorded yet): ${data.skipped_incomplete_files.join(', ')}</div>`
-        : ''}
+      <h2>Season Leaderboard — Gross Winnings <span class="badge">${season ? season.label : ''}</span></h2>
+      <div id="leaderboardWrap"></div>
     </div>
     <div class="card">
       <h2>Cumulative Winnings Over the Season</h2>
       <canvas id="trendChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>League History</h2>
+      <div class="history-cols">
+        <div>
+          <h2 style="margin-bottom:8px;">Champions by Year</h2>
+          <div class="table-scroll" id="champsWrap"></div>
+        </div>
+        <div>
+          <h2 style="margin-bottom:8px;">Career Trophy Count</h2>
+          <div class="table-scroll" id="trophyWrap"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Big Game Payout Calculator</h2>
+      <div class="calc-row">
+        <div class="calc-field">
+          <label>Buy-in ($)</label>
+          <input type="number" id="calcBuyin" value="250" min="0" step="5">
+        </div>
+        <div class="calc-field">
+          <label>Players</label>
+          <input type="number" id="calcPlayers" value="12" min="0" step="1">
+        </div>
+      </div>
+      <div class="calc-results" id="calcResults"></div>
+      <div class="legend-note">Standard split: 50% / 30% / 20% of the pool to 1st / 2nd / 3rd.</div>
     </div>
     <div class="card">
       <h2>Tournament Results</h2>
@@ -128,50 +172,117 @@ async function load() {
     </div>
   `;
 
-  renderLeaderboard(data.players);
-  renderTrendChart(data.players);
-  renderTournaments(data.tournaments);
+  renderLeaderboard(season);
+  renderTrendChart(season);
+  renderHistory(data.history);
+  renderCalculator();
+  renderTournaments(data.tournaments, data.roster);
 }
 
 function medalClass(i) {
   return i === 0 ? 'g' : i === 1 ? 's' : i === 2 ? 'b' : '';
 }
 
-function renderLeaderboard(players) {
-  const table = document.getElementById('leaderboard');
+function fmtMoney(n, showSign) {
+  const v = Math.round(n);
+  const sign = showSign && v > 0 ? '+' : '';
+  return `${v < 0 ? '-' : sign}$${Math.abs(v)}`;
+}
+
+function renderLeaderboard(season) {
+  const wrap = document.getElementById('leaderboardWrap');
+  if (!season || !season.players.length) {
+    wrap.innerHTML = `<div class="empty">No completed ${season ? season.label : 'season'} games yet for the roster. Upload a finished tournament to see standings.</div>`;
+    return;
+  }
+  const players = season.players;
   const rows = players.map((p, i) => `
-    <tr>
+    <tr class="clickable" data-uuid="${p.uuid}">
       <td class="rank ${medalClass(i)}">${i + 1}</td>
-      <td class="player-name">${p.name}${p.wins ? ` <span class="pill win">${p.wins}x win${p.wins > 1 ? 's' : ''}</span>` : ''}</td>
+      <td class="player-name"><span class="chevron">&#9656;</span>${p.name}${p.wins ? ` <span class="pill win">${p.wins}x win${p.wins > 1 ? 's' : ''}</span>` : ''}</td>
       <td class="num">${p.tournaments_played}</td>
-      <td class="num">${p.cashes}</td>
-      <td class="num ${p.total_winnings > 0 ? 'pos' : ''}">$${p.total_winnings.toFixed(0)}</td>
-      <td class="num ${p.net > 0 ? 'pos' : p.net < 0 ? 'neg' : ''}">${p.net >= 0 ? '+' : ''}$${p.net.toFixed(0)}</td>
+      <td class="num">${p.cashes} <span style="color:var(--text-dim)">(${Math.round(p.itm_pct * 100)}%)</span></td>
+      <td class="num ${p.total_winnings > 0 ? 'pos' : ''}">$${Math.round(p.total_winnings)}</td>
+      <td class="num ${p.diff === 0 ? '' : 'neg'}">${p.diff === 0 ? '—' : fmtMoney(p.diff)}</td>
       <td class="num">${p.avg_place ?? '–'}</td>
       <td class="num">${p.best_place ?? '–'}</td>
     </tr>
+    <tr class="drill-row" id="drill-${p.uuid}" style="display:none;">
+      <td colspan="8">${renderDrillDown(p)}</td>
+    </tr>
   `).join('');
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th></th>
-        <th>Player</th>
-        <th class="num">Played</th>
-        <th class="num">Cashes</th>
-        <th class="num">Winnings</th>
-        <th class="num">Net</th>
-        <th class="num">Avg Finish</th>
-        <th class="num">Best Finish</th>
-      </tr>
-    </thead>
-    <tbody>${rows}</tbody>
+
+  wrap.innerHTML = `
+    <div class="table-scroll">
+      <table id="leaderboard">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Player</th>
+            <th class="num">Played</th>
+            <th class="num">ITM</th>
+            <th class="num">Winnings</th>
+            <th class="num">Diff</th>
+            <th class="num">Avg Finish</th>
+            <th class="num">Best Finish</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+
+  wrap.querySelectorAll('tr.clickable').forEach(row => {
+    row.addEventListener('click', () => {
+      const uuid = row.getAttribute('data-uuid');
+      const drill = document.getElementById(`drill-${uuid}`);
+      const chevron = row.querySelector('.chevron');
+      const isOpen = drill.style.display !== 'none';
+      drill.style.display = isOpen ? 'none' : 'table-row';
+      chevron.classList.toggle('open', !isOpen);
+    });
+  });
+}
+
+function renderDrillDown(p) {
+  const rows = p.history.slice().reverse().map(h => `
+    <tr>
+      <td>${h.date || ''}</td>
+      <td>${h.title}</td>
+      <td class="rank ${medalClass((h.place || 99) - 1)}">${h.place ?? '–'}</td>
+      <td class="num ${h.prize_dollars > 0 ? 'pos' : ''}">$${Math.round(h.prize_dollars)}</td>
+      <td class="num ${h.net >= 0 ? 'pos' : 'neg'}">${fmtMoney(h.net, true)}</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div class="drill-grid">
+      <div class="drill-stat"><div class="label">Games played</div><div class="value">${p.tournaments_played}</div></div>
+      <div class="drill-stat"><div class="label">1st place finishes</div><div class="value">${p.wins}</div></div>
+      <div class="drill-stat"><div class="label">In the money</div><div class="value">${p.cashes} (${Math.round(p.itm_pct * 100)}%)</div></div>
+      <div class="drill-stat"><div class="label">Avg finish</div><div class="value">${p.avg_place ?? '–'}</div></div>
+      <div class="drill-stat"><div class="label">Best finish</div><div class="value">${p.best_place ?? '–'}</div></div>
+      <div class="drill-stat"><div class="label">Net</div><div class="value">${fmtMoney(p.net, true)}</div></div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Date</th><th>Tournament</th><th class="rank">Place</th><th class="num">Winnings</th><th class="num">Net</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
   `;
 }
 
 const PALETTE = ['#3ecf8e', '#f2b84b', '#e0655a', '#5aa9e6', '#c48ce6', '#e67ea0', '#7ee6c4', '#e6d05a', '#8a97a3', '#e68a5a', '#5ae6d0', '#a9e65a'];
+let trendChartInstance = null;
 
-function renderTrendChart(players) {
-  const top = players.slice(0, 12);
+function renderTrendChart(season) {
+  const canvas = document.getElementById('trendChart');
+  if (!season || !season.players.length) {
+    canvas.parentElement.innerHTML = '<div class="empty">No completed games yet.</div>';
+    return;
+  }
+  const top = season.players.slice(0, 12);
   const dateSet = new Set();
   top.forEach(p => p.history.forEach(h => dateSet.add(h.date)));
   const dates = Array.from(dateSet).sort();
@@ -196,7 +307,8 @@ function renderTrendChart(players) {
     };
   });
 
-  new Chart(document.getElementById('trendChart'), {
+  if (trendChartInstance) trendChartInstance.destroy();
+  trendChartInstance = new Chart(canvas, {
     type: 'line',
     data: { labels: dates, datasets },
     options: {
@@ -214,22 +326,66 @@ function renderTrendChart(players) {
   });
 }
 
-function renderTournaments(tournaments) {
+function renderHistory(history) {
+  const champsWrap = document.getElementById('champsWrap');
+  const trophyWrap = document.getElementById('trophyWrap');
+  if (!history || !history.champions || !history.champions.length) {
+    champsWrap.innerHTML = '<div class="empty">No history recorded yet.</div>';
+    trophyWrap.innerHTML = '';
+    return;
+  }
+  const champRows = history.champions.slice().reverse().map(c => `
+    <tr><td>${c.year}</td><td>${c.name || '<span style="color:var(--text-dim)">in progress</span>'}</td></tr>
+  `).join('');
+  champsWrap.innerHTML = `<table><thead><tr><th>Year</th><th>Champion</th></tr></thead><tbody>${champRows}</tbody></table>`;
+
+  const trophyRows = history.trophy_counts.map((t, i) => `
+    <tr><td class="rank ${medalClass(i)}">${i + 1}</td><td class="player-name">${t.name}</td><td class="num">${t.count}</td></tr>
+  `).join('');
+  trophyWrap.innerHTML = `<table><thead><tr><th></th><th>Player</th><th class="num">Titles</th></tr></thead><tbody>${trophyRows}</tbody></table>`;
+}
+
+function renderCalculator() {
+  const buyinEl = document.getElementById('calcBuyin');
+  const playersEl = document.getElementById('calcPlayers');
+  const resultsEl = document.getElementById('calcResults');
+
+  function update() {
+    const buyin = parseFloat(buyinEl.value) || 0;
+    const players = parseFloat(playersEl.value) || 0;
+    const pool = buyin * players;
+    resultsEl.innerHTML = `
+      <div class="calc-pill"><div class="label">Pool</div><div class="value">$${Math.round(pool)}</div></div>
+      <div class="calc-pill first"><div class="label">1st (50%)</div><div class="value">$${Math.round(pool * 0.5)}</div></div>
+      <div class="calc-pill second"><div class="label">2nd (30%)</div><div class="value">$${Math.round(pool * 0.3)}</div></div>
+      <div class="calc-pill third"><div class="label">3rd (20%)</div><div class="value">$${Math.round(pool * 0.2)}</div></div>
+    `;
+  }
+  buyinEl.addEventListener('input', update);
+  playersEl.addEventListener('input', update);
+  update();
+}
+
+function renderTournaments(tournaments, roster) {
   const container = document.getElementById('tournaments');
+  if (!tournaments.length) {
+    container.innerHTML = '<div class="empty">No completed tournaments yet.</div>';
+    return;
+  }
   const sorted = tournaments.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
   container.innerHTML = sorted.map(t => {
-    const rows = t.results.slice(0, 5).map(r => `
+    const rows = t.results.slice(0, 6).map(r => `
       <tr>
         <td class="rank ${medalClass((r.place || 99) - 1)}">${r.place ?? '–'}</td>
-        <td>${r.name}</td>
-        <td class="num ${r.prize_dollars > 0 ? 'pos' : ''}">$${r.prize_dollars.toFixed(0)}</td>
+        <td>${r.name}${!r.is_roster ? ' <span class="pill guest">guest</span>' : ''}</td>
+        <td class="num ${r.prize_dollars > 0 ? 'pos' : ''}">$${Math.round(r.prize_dollars)}</td>
       </tr>
     `).join('');
     return `
       <div class="card" style="background: var(--panel-2); margin-bottom: 14px;">
         <div class="tourn-header">
           <div class="tourn-title">${t.title}</div>
-          <div class="tourn-sub">${t.date || ''} · ${t.num_players} players · $${t.total_pot.toFixed(0)} pot</div>
+          <div class="tourn-sub">${t.date || ''} · ${t.num_players} players · $${Math.round(t.total_pot)} pot${t.season_id ? '' : ' · <span style="color:var(--text-dim)">outside tracked seasons</span>'}</div>
         </div>
         <table style="margin-top:10px;">
           <thead><tr><th></th><th>Player</th><th class="num">Prize</th></tr></thead>
