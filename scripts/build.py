@@ -1,9 +1,17 @@
 """
-PPOTN season dashboard builder.
+PPOTY season dashboard builder.
 
 Scans data/tournaments/*.tdt (raw Tournament Director exports), parses each
 one, and writes data/season.json -- the single data file the dashboard
 (index.html) fetches at load time.
+
+Config (edit these by hand as the league changes -- no code changes needed):
+    config/roster.json    the 12 official league members. Anyone else who
+                           plays is treated as a non-scoring guest.
+    config/seasons.json   season date ranges. A season with "end": null is
+                           the current, still-open season.
+    config/history.json   hand-maintained year-by-year champions list, for
+                           years that predate digital tournament records.
 
 Run locally:
     python3 scripts/build.py
@@ -298,10 +306,47 @@ def extract_tournament(path):
 
 
 # ---------------------------------------------------------------------------
+# Config loading
+# ---------------------------------------------------------------------------
+
+def load_json(path, default):
+    if not os.path.exists(path):
+        return default
+    with open(path) as f:
+        return json.load(f)
+
+
+def season_for_date(date_str, seasons):
+    """Return the season dict whose [start, end] window contains date_str."""
+    if not date_str:
+        return None
+    for s in seasons:
+        if s['start'] and date_str < s['start']:
+            continue
+        if s.get('end') and date_str > s['end']:
+            continue
+        return s
+    return None
+
+
+def current_season(seasons):
+    """The open-ended season (end == null), or failing that the one with the
+    latest start date."""
+    open_seasons = [s for s in seasons if not s.get('end')]
+    if open_seasons:
+        return max(open_seasons, key=lambda s: s['start'])
+    if seasons:
+        return max(seasons, key=lambda s: s['start'])
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Season aggregation
 # ---------------------------------------------------------------------------
 
-def build_season(tdt_paths):
+def build_season(tdt_paths, roster, seasons):
+    roster_lower = {m.lower() for m in roster}
+
     tournaments = []
     for path in sorted(tdt_paths):
         try:
@@ -314,82 +359,135 @@ def build_season(tdt_paths):
 
     complete = [t for t in tournaments if not t['incomplete']]
     skipped = [t['source_file'] for t in tournaments if t['incomplete']]
-
     complete.sort(key=lambda t: t['start_ms'] or 0)
 
-    players = {}  # uuid -> aggregate record
-
-    for t_index, t in enumerate(complete):
+    for t in complete:
+        s = season_for_date(t['date'], seasons)
+        t['season_id'] = s['id'] if s else None
         for pl in t['players']:
-            rec = players.setdefault(pl['uuid'], {
-                'uuid': pl['uuid'],
-                'name': pl['name'],
-                'tournaments_played': 0,
-                'wins': 0,
-                'cashes': 0,
-                'total_winnings': 0.0,
-                'total_fees': 0.0,
-                'net': 0.0,
-                'best_place': None,
-                'sum_place': 0,
-                'history': [],
-            })
-            rec['name'] = pl['name']  # keep most recent nickname
-            rec['tournaments_played'] += 1
-            rec['wins'] += 1 if pl['place'] == 1 else 0
-            rec['cashes'] += 1 if pl['prize_dollars'] > 0 else 0
-            rec['total_winnings'] += pl['prize_dollars']
-            rec['total_fees'] += pl['fee_paid']
-            rec['net'] += pl['net']
-            rec['sum_place'] += pl['place'] or 0
-            if pl['place'] is not None:
-                rec['best_place'] = pl['place'] if rec['best_place'] is None else min(rec['best_place'], pl['place'])
-            rec['history'].append({
-                'date': t['date'],
-                'title': t['title'],
-                'place': pl['place'],
-                'num_players': t['num_players'],
-                'prize_dollars': pl['prize_dollars'],
-                'fee_paid': pl['fee_paid'],
-                'net': pl['net'],
-                'cumulative_winnings': None,  # filled below
-                'cumulative_net': None,
-            })
+            pl['is_roster'] = pl['name'].strip().lower() in roster_lower
 
-    # running cumulative totals per player, in date order
-    for rec in players.values():
-        cum_w, cum_n = 0.0, 0.0
-        for h in rec['history']:
-            cum_w += h['prize_dollars']
-            cum_n += h['net']
-            h['cumulative_winnings'] = round(cum_w, 2)
-            h['cumulative_net'] = round(cum_n, 2)
-        rec['avg_place'] = round(rec['sum_place'] / rec['tournaments_played'], 2) if rec['tournaments_played'] else None
-        rec['total_winnings'] = round(rec['total_winnings'], 2)
-        rec['total_fees'] = round(rec['total_fees'], 2)
-        rec['net'] = round(rec['net'], 2)
+    cur_season = current_season(seasons)
+    cur_season_id = cur_season['id'] if cur_season else None
 
-    players_list = sorted(players.values(), key=lambda r: r['total_winnings'], reverse=True)
+    # per-season per-player aggregation (roster members only)
+    seasons_out = {}
+    for s in seasons:
+        players = {}
+        season_tournaments = [t for t in complete if t['season_id'] == s['id']]
+        for t in season_tournaments:
+            for pl in t['players']:
+                if not pl['is_roster']:
+                    continue
+                rec = players.setdefault(pl['uuid'], {
+                    'uuid': pl['uuid'],
+                    'name': pl['name'],
+                    'tournaments_played': 0,
+                    'wins': 0,
+                    'cashes': 0,
+                    'total_winnings': 0.0,
+                    'total_fees': 0.0,
+                    'net': 0.0,
+                    'best_place': None,
+                    'sum_place': 0,
+                    'history': [],
+                })
+                rec['name'] = pl['name']
+                rec['tournaments_played'] += 1
+                rec['wins'] += 1 if pl['place'] == 1 else 0
+                rec['cashes'] += 1 if pl['prize_dollars'] > 0 else 0
+                rec['total_winnings'] += pl['prize_dollars']
+                rec['total_fees'] += pl['fee_paid']
+                rec['net'] += pl['net']
+                rec['sum_place'] += pl['place'] or 0
+                if pl['place'] is not None:
+                    rec['best_place'] = pl['place'] if rec['best_place'] is None else min(rec['best_place'], pl['place'])
+                rec['history'].append({
+                    'date': t['date'],
+                    'title': t['title'],
+                    'place': pl['place'],
+                    'num_players': t['num_players'],
+                    'prize_dollars': pl['prize_dollars'],
+                    'fee_paid': pl['fee_paid'],
+                    'net': pl['net'],
+                    'cumulative_winnings': None,
+                    'cumulative_net': None,
+                })
+
+        for rec in players.values():
+            cum_w, cum_n = 0.0, 0.0
+            for h in rec['history']:
+                cum_w += h['prize_dollars']
+                cum_n += h['net']
+                h['cumulative_winnings'] = round(cum_w, 2)
+                h['cumulative_net'] = round(cum_n, 2)
+            rec['avg_place'] = round(rec['sum_place'] / rec['tournaments_played'], 2) if rec['tournaments_played'] else None
+            rec['itm_pct'] = round(rec['cashes'] / rec['tournaments_played'], 4) if rec['tournaments_played'] else 0
+            rec['total_winnings'] = round(rec['total_winnings'], 2)
+            rec['total_fees'] = round(rec['total_fees'], 2)
+            rec['net'] = round(rec['net'], 2)
+
+        players_list = sorted(players.values(), key=lambda r: r['total_winnings'], reverse=True)
+        leader_total = players_list[0]['total_winnings'] if players_list else 0
+        for r in players_list:
+            r['diff'] = round(r['total_winnings'] - leader_total, 2)
+
+        seasons_out[s['id']] = {
+            'id': s['id'],
+            'label': s['label'],
+            'start': s['start'],
+            'end': s.get('end'),
+            'num_tournaments': len(season_tournaments),
+            'players': players_list,
+        }
 
     return {
         'generated_at': datetime.datetime.utcnow().isoformat() + 'Z',
-        'num_tournaments': len(complete),
+        'current_season_id': cur_season_id,
+        'roster': sorted(roster),
+        'seasons': seasons_out,
         'skipped_incomplete_files': skipped,
         'tournaments': [
             {
                 'title': t['title'],
                 'date': t['date'],
+                'season_id': t['season_id'],
                 'num_players': t['num_players'],
                 'total_pot': t['total_pot'],
                 'source_file': t['source_file'],
                 'results': [
-                    {'name': pl['name'], 'place': pl['place'], 'prize_dollars': pl['prize_dollars'], 'net': pl['net']}
+                    {
+                        'name': pl['name'],
+                        'place': pl['place'],
+                        'prize_dollars': pl['prize_dollars'],
+                        'net': pl['net'],
+                        'is_roster': pl['is_roster'],
+                    }
                     for pl in t['players']
                 ],
             }
             for t in complete
         ],
-        'players': players_list,
+    }
+
+
+def build_history(history_cfg):
+    champions = history_cfg.get('champions', [])
+    counts = {}
+    for c in champions:
+        name = c.get('name')
+        if not name:
+            continue
+        counts[name] = counts.get(name, 0) + 1
+    trophy_counts = sorted(
+        [{'name': n, 'count': c} for n, c in counts.items()],
+        key=lambda r: r['count'],
+        reverse=True,
+    )
+    return {
+        'champions': sorted(champions, key=lambda c: c['year']),
+        'trophy_counts': trophy_counts,
+        'years_tracked': len([c for c in champions if c.get('name')]),
     }
 
 
@@ -397,21 +495,35 @@ def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     tdt_dir = os.path.join(root, 'data', 'tournaments')
     out_path = os.path.join(root, 'data', 'season.json')
+    config_dir = os.path.join(root, 'config')
+
+    roster_cfg = load_json(os.path.join(config_dir, 'roster.json'), {'members': []})
+    seasons_cfg = load_json(os.path.join(config_dir, 'seasons.json'), {'seasons': []})
+    history_cfg = load_json(os.path.join(config_dir, 'history.json'), {'champions': []})
+
+    roster = roster_cfg.get('members', [])
+    seasons = seasons_cfg.get('seasons', [])
 
     tdt_paths = glob.glob(os.path.join(tdt_dir, '*.tdt'))
     if not tdt_paths:
         print(f"No .tdt files found in {tdt_dir}", file=sys.stderr)
+    if not roster:
+        print("WARNING: config/roster.json has no members -- no one will count toward season stats", file=sys.stderr)
+    if not seasons:
+        print("WARNING: config/seasons.json has no seasons -- tournaments won't be bucketed", file=sys.stderr)
 
-    season = build_season(tdt_paths)
+    season_data = build_season(tdt_paths, roster, seasons)
+    season_data['history'] = build_history(history_cfg)
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
-        json.dump(season, f, indent=2)
+        json.dump(season_data, f, indent=2)
 
     print(f"Wrote {out_path}")
-    print(f"  {season['num_tournaments']} completed tournaments, {len(season['players'])} players")
-    if season['skipped_incomplete_files']:
-        print(f"  Skipped (incomplete): {season['skipped_incomplete_files']}")
+    for sid, s in season_data['seasons'].items():
+        print(f"  Season {sid} ({s['label']}): {s['num_tournaments']} tournaments, {len(s['players'])} scoring players")
+    if season_data['skipped_incomplete_files']:
+        print(f"  Skipped (incomplete): {season_data['skipped_incomplete_files']}")
 
 
 if __name__ == '__main__':
