@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T18:40:45.398034Z",
+  "generated_at": "2026-07-28T18:45:16.107957Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -25,9 +25,7 @@
       "players": []
     }
   },
-  "skipped_incomplete_files": [
-    "MAC 2024.tdt"
-  ],
+  "skipped_incomplete_files": [],
   "tournaments": [
     {
       "title": "PPOTN Aug 24 Game 1",
