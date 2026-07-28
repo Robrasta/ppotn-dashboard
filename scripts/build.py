@@ -344,7 +344,7 @@ def current_season(seasons):
 # Season aggregation
 # ---------------------------------------------------------------------------
 
-def build_season(tdt_paths, roster, seasons):
+def build_season(tdt_paths, roster, seasons, manual_games=None):
     # roster: list of {"spreadsheet_name": ..., "display_name": ...}
     # display_name is the Nickname that actually shows up in Tournament
     # Director's exports -- that's what we match against. spreadsheet_name
@@ -364,6 +364,13 @@ def build_season(tdt_paths, roster, seasons):
         rec['source_file'] = os.path.basename(path)
         tournaments.append(rec)
 
+    # manual_games: pre-parsed tournament dicts (e.g. transcribed from a
+    # spreadsheet, before real .tdt exports exist for them). They already
+    # carry 'is_roster' / 'display_name' per player, so they skip the
+    # nickname-matching step below.
+    for g in (manual_games or []):
+        tournaments.append(g)
+
     complete = [t for t in tournaments if not t['incomplete']]
     skipped = [t['source_file'] for t in tournaments if t['incomplete']]
     complete.sort(key=lambda t: t['start_ms'] or 0)
@@ -372,6 +379,8 @@ def build_season(tdt_paths, roster, seasons):
         s = season_for_date(t['date'], seasons)
         t['season_id'] = s['id'] if s else None
         for pl in t['players']:
+            if 'is_roster' in pl and 'display_name' in pl:
+                continue  # already resolved (manual game entry)
             canonical = nickname_to_canonical.get(pl['name'].strip().lower())
             pl['is_roster'] = canonical is not None
             # display_name is what shows up everywhere on the dashboard:
@@ -506,6 +515,7 @@ def build_history(history_cfg):
 def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     tdt_dir = os.path.join(root, 'data', 'tournaments')
+    manual_games_path = os.path.join(root, 'data', 'manual_games.json')
     out_path = os.path.join(root, 'data', 'season.json')
     config_dir = os.path.join(root, 'config')
 
@@ -515,16 +525,17 @@ def main():
 
     roster = roster_cfg.get('members', [])
     seasons = seasons_cfg.get('seasons', [])
+    manual_games = load_json(manual_games_path, [])
 
     tdt_paths = glob.glob(os.path.join(tdt_dir, '*.tdt'))
-    if not tdt_paths:
-        print(f"No .tdt files found in {tdt_dir}", file=sys.stderr)
+    if not tdt_paths and not manual_games:
+        print(f"No .tdt files found in {tdt_dir} and no data/manual_games.json", file=sys.stderr)
     if not roster:
         print("WARNING: config/roster.json has no members -- no one will count toward season stats", file=sys.stderr)
     if not seasons:
         print("WARNING: config/seasons.json has no seasons -- tournaments won't be bucketed", file=sys.stderr)
 
-    season_data = build_season(tdt_paths, roster, seasons)
+    season_data = build_season(tdt_paths, roster, seasons, manual_games)
     season_data['history'] = build_history(history_cfg)
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
