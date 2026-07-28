@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T20:49:31.696480Z",
+  "generated_at": "2026-07-28T20:50:13.669223Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2131,5 +2131,19 @@
       }
     ],
     "years_tracked": 19
-  }
+  },
+  "scheduled_games": [
+    {
+      "name": "Vegas Game",
+      "date": "2027-01-16",
+      "place": "Las Vegas",
+      "status": "scheduled"
+    },
+    {
+      "name": "PPOTN FINAL",
+      "date": "2027-02-06",
+      "place": "TBD",
+      "status": "scheduled"
+    }
+  ]
 }
