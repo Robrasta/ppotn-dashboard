@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PPOTY — Poker Player of the Year</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <style>
   :root {
     --bg: #0f1419;
@@ -111,7 +110,7 @@
     <h1>PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span></h1>
     <div style="text-align:right;">
       <div class="meta" id="lastUpdated">loading…</div>
-      <div class="meta"><a href="#" id="constitutionLink" style="color:var(--text-dim); text-decoration:underline dotted;" title="Link coming soon">PPOTN Constitution &amp; Rules</a></div>
+      <div class="meta"><a href="docs/PPOTN-Constitution-and-Rules.doc" id="constitutionLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">PPOTN Constitution &amp; Rules</a></div>
     </div>
   </header>
   <div class="subtitle">Poker Player of the Year — season standings, pulled straight from Tournament Director exports.</div>
@@ -150,10 +149,6 @@ async function load() {
       <div id="leaderboardWrap"></div>
     </div>
     <div class="card">
-      <h2>Cumulative Winnings Over the Season</h2>
-      <canvas id="trendChart"></canvas>
-    </div>
-    <div class="card">
       <h2>League History</h2>
       <div class="history-cols">
         <div>
@@ -189,7 +184,6 @@ async function load() {
 
   try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
   try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
-  try { renderTrendChart(season); } catch (e) { console.error('renderTrendChart failed', e); }
   try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
   try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
@@ -296,59 +290,6 @@ function renderDrillDown(p) {
       </table>
     </div>
   `;
-}
-
-const PALETTE = ['#3ecf8e', '#f2b84b', '#e0655a', '#5aa9e6', '#c48ce6', '#e67ea0', '#7ee6c4', '#e6d05a', '#8a97a3', '#e68a5a', '#5ae6d0', '#a9e65a'];
-let trendChartInstance = null;
-
-function renderTrendChart(season) {
-  const canvas = document.getElementById('trendChart');
-  if (!season || !season.players.length) {
-    canvas.parentElement.innerHTML = '<div class="empty">No completed games yet.</div>';
-    return;
-  }
-  const top = season.players.slice(0, 12);
-  const dateSet = new Set();
-  top.forEach(p => p.history.forEach(h => dateSet.add(h.date)));
-  const dates = Array.from(dateSet).sort();
-
-  const datasets = top.map((p, i) => {
-    const byDate = {};
-    p.history.forEach(h => { byDate[h.date] = h.cumulative_winnings; });
-    let last = 0;
-    const data = dates.map(d => {
-      if (byDate[d] !== undefined) { last = byDate[d]; }
-      return last;
-    });
-    return {
-      label: p.name,
-      data,
-      borderColor: PALETTE[i % PALETTE.length],
-      backgroundColor: PALETTE[i % PALETTE.length],
-      borderWidth: 2,
-      pointRadius: 2,
-      tension: 0.15,
-      fill: false,
-    };
-  });
-
-  if (trendChartInstance) trendChartInstance.destroy();
-  trendChartInstance = new Chart(canvas, {
-    type: 'line',
-    data: { labels: dates, datasets },
-    options: {
-      responsive: true,
-      interaction: { mode: 'nearest', intersect: false },
-      plugins: {
-        legend: { labels: { color: '#e8edf1', boxWidth: 12 } },
-        tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: $${ctx.parsed.y.toFixed(0)}` } },
-      },
-      scales: {
-        x: { ticks: { color: '#8a97a3' }, grid: { color: '#2a3540' } },
-        y: { ticks: { color: '#8a97a3', callback: (v) => '$' + v }, grid: { color: '#2a3540' } },
-      },
-    },
-  });
 }
 
 function renderHistory(history) {
