@@ -1,6 +1,8 @@
 {
-  "generated_at": "2026-07-28T17:55:03.330413Z",
-  "num_tournaments": 1,
+  "generated_at": "2026-07-28T18:24:18.709674Z",
+  "current_season_id": null,
+  "roster": [],
+  "seasons": {},
   "skipped_incomplete_files": [
     "MAC 2024.tdt"
   ],
@@ -8,6 +10,7 @@
     {
       "title": "PPOTN Aug 24 Game 1",
       "date": "2024-08-17",
+      "season_id": null,
       "num_players": 11,
       "total_pot": 1100,
       "source_file": "PPOTN Aug Game 1.tdt",
@@ -16,357 +19,85 @@
           "name": "James W",
           "place": 1,
           "prize_dollars": 550.0,
-          "net": 450.0
+          "net": 450.0,
+          "is_roster": false
         },
         {
           "name": "Chris",
           "place": 2,
           "prize_dollars": 330.0,
-          "net": 230.0
+          "net": 230.0,
+          "is_roster": false
         },
         {
           "name": "Dave",
           "place": 3,
           "prize_dollars": 220.0,
-          "net": 120.0
+          "net": 120.0,
+          "is_roster": false
         },
         {
           "name": "Rob",
           "place": 4,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Tom",
           "place": 5,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Stuart",
           "place": 6,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Sammy",
           "place": 7,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Bryce",
           "place": 8,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Maia",
           "place": 9,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Mark",
           "place": 10,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         },
         {
           "name": "Joe",
           "place": 11,
           "prize_dollars": 0,
-          "net": -100
+          "net": -100,
+          "is_roster": false
         }
       ]
     }
   ],
-  "players": [
-    {
-      "uuid": "33f53b0d-8b93-4c3a-94a0-d1fad2452d10",
-      "name": "James W",
-      "tournaments_played": 1,
-      "wins": 1,
-      "cashes": 1,
-      "total_winnings": 550.0,
-      "total_fees": 100.0,
-      "net": 450.0,
-      "best_place": 1,
-      "sum_place": 1,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 1,
-          "num_players": 11,
-          "prize_dollars": 550.0,
-          "fee_paid": 100,
-          "net": 450.0,
-          "cumulative_winnings": 550.0,
-          "cumulative_net": 450.0
-        }
-      ],
-      "avg_place": 1.0
-    },
-    {
-      "uuid": "3342622b-0009-4491-b344-73099237bd0b",
-      "name": "Chris",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 1,
-      "total_winnings": 330.0,
-      "total_fees": 100.0,
-      "net": 230.0,
-      "best_place": 2,
-      "sum_place": 2,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 2,
-          "num_players": 11,
-          "prize_dollars": 330.0,
-          "fee_paid": 100,
-          "net": 230.0,
-          "cumulative_winnings": 330.0,
-          "cumulative_net": 230.0
-        }
-      ],
-      "avg_place": 2.0
-    },
-    {
-      "uuid": "a487f077-ef5a-4e4d-8490-202f2645db60",
-      "name": "Dave",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 1,
-      "total_winnings": 220.0,
-      "total_fees": 100.0,
-      "net": 120.0,
-      "best_place": 3,
-      "sum_place": 3,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 3,
-          "num_players": 11,
-          "prize_dollars": 220.0,
-          "fee_paid": 100,
-          "net": 120.0,
-          "cumulative_winnings": 220.0,
-          "cumulative_net": 120.0
-        }
-      ],
-      "avg_place": 3.0
-    },
-    {
-      "uuid": "f7a5fa27-86a9-4189-884b-b672e6ba1a63",
-      "name": "Rob",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 4,
-      "sum_place": 4,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 4,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 4.0
-    },
-    {
-      "uuid": "fcdab7c0-bd0b-4d29-a981-9fe6c8fad5de",
-      "name": "Tom",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 5,
-      "sum_place": 5,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 5,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 5.0
-    },
-    {
-      "uuid": "94ea1d41-1e4c-4110-aee6-232f5898a879",
-      "name": "Stuart",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 6,
-      "sum_place": 6,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 6,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 6.0
-    },
-    {
-      "uuid": "ccec7b1f-8eca-44b0-90b6-ac9a65b44245",
-      "name": "Sammy",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 7,
-      "sum_place": 7,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 7,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 7.0
-    },
-    {
-      "uuid": "a13a5ea3-0bdb-43a3-8242-44b11944f73e",
-      "name": "Bryce",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 8,
-      "sum_place": 8,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 8,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 8.0
-    },
-    {
-      "uuid": "6ab6ce14-86c1-45f6-bbef-58e352c6a193",
-      "name": "Maia",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 9,
-      "sum_place": 9,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 9,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 9.0
-    },
-    {
-      "uuid": "7a7b5629-acc2-4a74-99c8-05c89d96ee6e",
-      "name": "Mark",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 10,
-      "sum_place": 10,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 10,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 10.0
-    },
-    {
-      "uuid": "99ba5f61-00b1-4a3a-9ba9-9b625c73bd83",
-      "name": "Joe",
-      "tournaments_played": 1,
-      "wins": 0,
-      "cashes": 0,
-      "total_winnings": 0.0,
-      "total_fees": 100.0,
-      "net": -100.0,
-      "best_place": 11,
-      "sum_place": 11,
-      "history": [
-        {
-          "date": "2024-08-17",
-          "title": "PPOTN Aug 24 Game 1",
-          "place": 11,
-          "num_players": 11,
-          "prize_dollars": 0,
-          "fee_paid": 100,
-          "net": -100,
-          "cumulative_winnings": 0.0,
-          "cumulative_net": -100.0
-        }
-      ],
-      "avg_place": 11.0
-    }
-  ]
+  "history": {
+    "champions": [],
+    "trophy_counts": [],
+    "years_tracked": 0
+  }
 }
