@@ -97,7 +97,10 @@
 <div class="wrap">
   <header>
     <h1>PPOTY <span>&middot;</span> League Dashboard</h1>
-    <div class="meta" id="lastUpdated">loading…</div>
+    <div style="text-align:right;">
+      <div class="meta" id="lastUpdated">loading…</div>
+      <div class="meta"><a href="#" id="constitutionLink" style="color:var(--text-dim); text-decoration:underline dotted;" title="Link coming soon">PPOTN Constitution &amp; Rules</a></div>
+    </div>
   </header>
   <div class="subtitle">Poker Player of the Year — season standings, pulled straight from Tournament Director exports.</div>
 
@@ -167,16 +170,16 @@ async function load() {
       <div class="legend-note">Standard split: 50% / 30% / 20% of the pool to 1st / 2nd / 3rd.</div>
     </div>
     <div class="card">
-      <h2>Tournament Results</h2>
+      <h2>Last PPOTN Results</h2>
       <div id="tournaments"></div>
     </div>
   `;
 
-  renderLeaderboard(season);
-  renderTrendChart(season);
-  renderHistory(data.history);
-  renderCalculator();
-  renderTournaments(data.tournaments, data.roster);
+  try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
+  try { renderTrendChart(season); } catch (e) { console.error('renderTrendChart failed', e); }
+  try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
+  try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
+  try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
 }
 
 function medalClass(i) {
@@ -373,8 +376,9 @@ function renderTournaments(tournaments, roster) {
     return;
   }
   const sorted = tournaments.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-  container.innerHTML = sorted.map(t => {
-    const rows = t.results.slice(0, 6).map(r => `
+  const recent = sorted.slice(0, 2);
+  container.innerHTML = recent.map(t => {
+    const rows = t.results.slice(0, 3).map(r => `
       <tr>
         <td class="rank ${medalClass((r.place || 99) - 1)}">${r.place ?? '–'}</td>
         <td>${r.name}${!r.is_roster ? ' <span class="pill guest">guest</span>' : ''}</td>
