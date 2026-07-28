@@ -492,6 +492,11 @@ def build_season(tdt_paths, roster, seasons, manual_games=None):
     }
 
 
+def build_schedule(schedule_cfg):
+    events = schedule_cfg.get('events', []) or []
+    return sorted(events, key=lambda e: e.get('date') or '')
+
+
 def build_history(history_cfg):
     champions = history_cfg.get('champions', [])
     counts = {}
@@ -522,6 +527,7 @@ def main():
     roster_cfg = load_json(os.path.join(config_dir, 'roster.json'), {'members': []})
     seasons_cfg = load_json(os.path.join(config_dir, 'seasons.json'), {'seasons': []})
     history_cfg = load_json(os.path.join(config_dir, 'history.json'), {'champions': []})
+    schedule_cfg = load_json(os.path.join(config_dir, 'schedule.json'), {'events': []})
 
     roster = roster_cfg.get('members', [])
     seasons = seasons_cfg.get('seasons', [])
@@ -537,6 +543,7 @@ def main():
 
     season_data = build_season(tdt_paths, roster, seasons, manual_games)
     season_data['history'] = build_history(history_cfg)
+    season_data['scheduled_games'] = build_schedule(schedule_cfg)
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
