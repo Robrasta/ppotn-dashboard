@@ -202,6 +202,10 @@
         <h2>Scheduled Games</h2>
         <div id="scheduledGames"><div class="empty">Loading…</div></div>
       </div>
+      <div class="card">
+        <h2>Recent Games</h2>
+        <div id="tournaments"></div>
+      </div>
     </aside>
     <div id="content">
       <div class="empty">Loading season data…</div>
@@ -246,6 +250,21 @@ async function load() {
       <div id="leaderboardWrap"></div>
     </div>
     <div class="card">
+      <h2>Game Payout Calculator</h2>
+      <div class="calc-row">
+        <div class="calc-field">
+          <label>Buy-in ($)</label>
+          <input type="number" id="calcBuyin" value="250" min="0" step="5">
+        </div>
+        <div class="calc-field">
+          <label>Players</label>
+          <input type="number" id="calcPlayers" value="12" min="0" step="1">
+        </div>
+      </div>
+      <div class="calc-results" id="calcResults"></div>
+      <div class="legend-note">Standard split: 50% / 30% / 20% of the pool to 1st / 2nd / 3rd.</div>
+    </div>
+    <div class="card">
       <h2>Scenario Builder <span class="badge">What-if standings</span></h2>
       <div class="legend-note" style="margin-top:-8px; margin-bottom:16px;">Add hypothetical games below to see how they'd shift the season leaderboard. This is a live sandbox — nothing here is saved or affects the real standings.</div>
       <div id="scenarioGames"></div>
@@ -267,25 +286,6 @@ async function load() {
           <div class="table-scroll" id="trophyWrap"></div>
         </div>
       </div>
-    </div>
-    <div class="card">
-      <h2>Big Game Payout Calculator</h2>
-      <div class="calc-row">
-        <div class="calc-field">
-          <label>Buy-in ($)</label>
-          <input type="number" id="calcBuyin" value="250" min="0" step="5">
-        </div>
-        <div class="calc-field">
-          <label>Players</label>
-          <input type="number" id="calcPlayers" value="12" min="0" step="1">
-        </div>
-      </div>
-      <div class="calc-results" id="calcResults"></div>
-      <div class="legend-note">Standard split: 50% / 30% / 20% of the pool to 1st / 2nd / 3rd.</div>
-    </div>
-    <div class="card">
-      <h2>Last PPOTN Results</h2>
-      <div id="tournaments"></div>
     </div>
     <div class="card">
       <h2>Photo Gallery <span class="badge"><a href="https://forms.gle/92GndzF5ByH8uup99" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">+ Submit a photo</a></span></h2>
