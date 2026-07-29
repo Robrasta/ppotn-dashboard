@@ -497,6 +497,22 @@ def build_schedule(schedule_cfg):
     return sorted(events, key=lambda e: e.get('date') or '')
 
 
+def build_photos(photos_cfg):
+    photos = photos_cfg.get('photos', []) or []
+    out = []
+    for p in photos:
+        pid = p.get('id')
+        if not pid:
+            continue
+        out.append({
+            'id': pid,
+            'date': p.get('date'),
+            'thumb': f'photos/thumbs/{pid}.jpg',
+            'full': f'photos/full/{pid}.jpg',
+        })
+    return sorted(out, key=lambda p: p.get('date') or '', reverse=True)
+
+
 def build_history(history_cfg):
     champions = history_cfg.get('champions', [])
     counts = {}
@@ -528,6 +544,7 @@ def main():
     seasons_cfg = load_json(os.path.join(config_dir, 'seasons.json'), {'seasons': []})
     history_cfg = load_json(os.path.join(config_dir, 'history.json'), {'champions': []})
     schedule_cfg = load_json(os.path.join(config_dir, 'schedule.json'), {'events': []})
+    photos_cfg = load_json(os.path.join(config_dir, 'photos.json'), {'photos': []})
 
     roster = roster_cfg.get('members', [])
     seasons = seasons_cfg.get('seasons', [])
@@ -544,6 +561,7 @@ def main():
     season_data = build_season(tdt_paths, roster, seasons, manual_games)
     season_data['history'] = build_history(history_cfg)
     season_data['scheduled_games'] = build_schedule(schedule_cfg)
+    season_data['photos'] = build_photos(photos_cfg)
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
