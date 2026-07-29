@@ -123,6 +123,33 @@
   .sched-item.proposed .sched-name { color: var(--text); }
   .sched-item.proposed .sched-date { color: var(--text-dim); }
   .sched-item.proposed .sched-place { color: var(--text-dim); }
+
+  .gallery-group { margin-bottom: 20px; }
+  .gallery-group:last-child { margin-bottom: 0; }
+  .gallery-date-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .gallery-thumb {
+    position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 8px;
+    cursor: pointer; background: var(--panel-2); border: 1px solid var(--border);
+  }
+  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s ease; }
+  .gallery-thumb:hover img { transform: scale(1.06); }
+  .lightbox-overlay {
+    position: fixed; inset: 0; background: rgba(6,9,12,0.92);
+    display: none; align-items: center; justify-content: center; z-index: 1000; padding: 24px;
+  }
+  .lightbox-overlay.open { display: flex; }
+  .lightbox-overlay img { max-width: 100%; max-height: 86vh; border-radius: 8px; box-shadow: 0 10px 50px rgba(0,0,0,0.6); }
+  .lightbox-close, .lightbox-nav {
+    position: absolute; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text); cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-close { top: 18px; right: 18px; width: 40px; height: 40px; font-size: 20px; }
+  .lightbox-nav { top: 50%; transform: translateY(-50%); width: 48px; height: 48px; font-size: 22px; }
+  .lightbox-prev { left: 18px; }
+  .lightbox-next { right: 18px; }
+  .lightbox-close:hover, .lightbox-nav:hover { background: rgba(255,255,255,0.18); }
+  .lightbox-caption { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: var(--text-dim); font-size: 13px; }
 </style>
 </head>
 <body>
@@ -147,6 +174,14 @@
       <div class="empty">Loading season data…</div>
     </div>
   </div>
+</div>
+
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose">&#10005;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
 <script>
@@ -209,6 +244,10 @@ async function load() {
       <h2>Last PPOTN Results</h2>
       <div id="tournaments"></div>
     </div>
+    <div class="card">
+      <h2>Photo Gallery</h2>
+      <div id="photoGallery"></div>
+    </div>
   `;
 
   try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
@@ -217,6 +256,7 @@ async function load() {
   try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
   try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
+  try { renderPhotoGallery(data.photos); } catch (e) { console.error('renderPhotoGallery failed', e); }
 }
 
 function renderChampionBadge(history) {
@@ -432,6 +472,97 @@ function renderTournaments(tournaments, roster) {
     `;
   }).join('');
 }
+
+function monthLabel(dateStr) {
+  if (!dateStr) return 'Undated';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d.getTime())) return 'Undated';
+  return `${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+let GALLERY_PHOTOS = [];
+
+function renderPhotoGallery(photos) {
+  const wrap = document.getElementById('photoGallery');
+  if (!wrap) return;
+  if (!photos || !photos.length) {
+    wrap.innerHTML = '<div class="empty">No photos yet.</div>';
+    return;
+  }
+  GALLERY_PHOTOS = photos.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+  const groups = [];
+  let curLabel = null, curGroup = null;
+  GALLERY_PHOTOS.forEach((p) => {
+    const label = monthLabel(p.date);
+    if (label !== curLabel) {
+      curLabel = label;
+      curGroup = { label, photos: [] };
+      groups.push(curGroup);
+    }
+    curGroup.photos.push(p);
+  });
+
+  wrap.innerHTML = groups.map(g => `
+    <div class="gallery-group">
+      <div class="gallery-date-label">${g.label}</div>
+      <div class="gallery-grid">
+        ${g.photos.map(p => `
+          <div class="gallery-thumb" data-id="${p.id}">
+            <img src="${p.thumb}" alt="" loading="lazy">
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('.gallery-thumb').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-id');
+      const idx = GALLERY_PHOTOS.findIndex(p => p.id === id);
+      openLightbox(idx);
+    });
+  });
+}
+
+let lightboxIndex = 0;
+
+function openLightbox(idx) {
+  lightboxIndex = idx;
+  showLightboxImage();
+  document.getElementById('lightboxOverlay').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('open');
+}
+
+function showLightboxImage() {
+  const p = GALLERY_PHOTOS[lightboxIndex];
+  if (!p) return;
+  document.getElementById('lightboxImg').src = p.full;
+  document.getElementById('lightboxCaption').textContent = fmtFullDate(p.date);
+}
+
+function lightboxStep(delta) {
+  if (!GALLERY_PHOTOS.length) return;
+  lightboxIndex = (lightboxIndex + delta + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+  showLightboxImage();
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', () => lightboxStep(-1));
+document.getElementById('lightboxNext').addEventListener('click', () => lightboxStep(1));
+document.getElementById('lightboxOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'lightboxOverlay') closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  const overlay = document.getElementById('lightboxOverlay');
+  if (!overlay.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxStep(-1);
+  if (e.key === 'ArrowRight') lightboxStep(1);
+});
 
 load();
 </script>
