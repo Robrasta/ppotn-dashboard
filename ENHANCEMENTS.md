@@ -16,25 +16,22 @@ Status legend: 🔲 Not started · 🔄 In progress · ✅ Done
 
 ---
 
-## 2. 🔲 Scenario builder for standings
+## 2. 🔄 Scenario builder for standings
 
 **Idea:** An interactive "what-if" tool on the dashboard — pick hypothetical finishes for upcoming games (or tweak past ones) and see how the season leaderboard would shift in response. E.g. "if I win the next 3 games, do I catch Whited for 1st?"
 
-**Likely shape:** client-side only — reuse the existing aggregation logic (`build.py`'s scoring math, ported to JS or run against a copy of `season.json`) so it can recompute instantly in the browser without touching the real data or triggering a rebuild.
+**Status:** In progress — building a client-side scenario builder card. Any visitor can add one or more hypothetical games (buy-in, total players, per-player finish place), computed against the standard 50/30/20 payout split, and see a projected leaderboard with rank-change indicators. Not limited to the big Vegas/final games — works for any hypothetical game size. Nothing is saved server-side; it's a live in-browser sandbox that resets on reload.
 
-**Open questions:** how many hypothetical games to allow at once, whether it should support editing past results too (probably not — keep it forward-looking only), and how to keep the UI simple enough that it doesn't compete with the real leaderboard for attention.
+**Open questions:** whether to support custom (non-50/30/20) payout splits per hypothetical game, and whether to let a visitor save/share a specific scenario via a URL.
 
 ---
 
-## 3. 🔲 Photo gallery section
+## 3. ✅ Photo gallery section
 
 **Idea:** A section for photos from game nights.
 
-**Open questions:**
-- Hosting: store images directly in the repo (simple, but GitHub Pages/repo size limits matter once photo volume grows) vs. an external image host.
-- Upload workflow: same pattern as `.tdt` uploads (drag files into a repo folder, auto-picked up by the build) vs. something lighter-weight.
-- Display: grid with lightbox, grouped by game night/date, tied to the tournament results section, or a totally separate stand-alone page.
+**Status:** Done. Grid gallery with lightbox, grouped by month, on the main dashboard (`photos/thumbs` + `photos/full`, driven by `config/photos.json`). Visitors can also submit their own photos for review via a linked Google Form ("+ Submit a photo" in the gallery header) — Rob reviews submissions and adds approved ones to `config/photos.json`. Note: Google's file-upload form questions require the submitter to sign in with a Google account.
 
 ---
 
-*Last updated: 2026-07-28*
+*Last updated: 2026-07-29*

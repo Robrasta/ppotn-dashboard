@@ -150,6 +150,39 @@
   .lightbox-next { right: 18px; }
   .lightbox-close:hover, .lightbox-nav:hover { background: rgba(255,255,255,0.18); }
   .lightbox-caption { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: var(--text-dim); font-size: 13px; }
+
+  .scenario-game { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .scenario-game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
+  .scenario-game-title { font-weight: 700; font-size: 14px; }
+  .scenario-game-config { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 14px; }
+  .scenario-game-config .calc-field input { width: 90px; }
+  .scenario-pot-preview { font-size: 12px; color: var(--text-dim); margin-bottom: 12px; }
+  .scenario-pot-preview b { color: var(--text); }
+  .scenario-players { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px 16px; }
+  .scenario-player-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .scenario-player-row label { display: flex; align-items: center; gap: 6px; flex: 1; cursor: pointer; }
+  .scenario-player-row input[type="number"] {
+    width: 56px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text); padding: 5px 6px; font-size: 13px;
+  }
+  .scenario-player-row input[type="number"]:disabled { opacity: 0.35; }
+  .scenario-remove-btn {
+    background: none; border: 1px solid var(--border); color: var(--text-dim); border-radius: 6px;
+    padding: 4px 10px; font-size: 12px; cursor: pointer;
+  }
+  .scenario-remove-btn:hover { color: var(--red); border-color: var(--red); }
+  .scenario-btn {
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 8px; padding: 8px 16px; font-size: 13px; cursor: pointer; margin-right: 10px;
+  }
+  .scenario-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .scenario-btn-ghost { color: var(--text-dim); }
+  .scenario-warning { color: var(--accent-2); font-size: 12px; margin-top: 8px; }
+  .scenario-empty { color: var(--text-dim); font-size: 13px; padding: 8px 0 16px; }
+  .rank-change { font-size: 11px; margin-left: 6px; white-space: nowrap; }
+  .rank-change.up { color: var(--accent); }
+  .rank-change.down { color: var(--red); }
+  .rank-change.same { color: var(--text-dim); }
 </style>
 </head>
 <body>
@@ -213,6 +246,16 @@ async function load() {
       <div id="leaderboardWrap"></div>
     </div>
     <div class="card">
+      <h2>Scenario Builder <span class="badge">What-if standings</span></h2>
+      <div class="legend-note" style="margin-top:-8px; margin-bottom:16px;">Add hypothetical games below to see how they'd shift the season leaderboard. This is a live sandbox — nothing here is saved or affects the real standings.</div>
+      <div id="scenarioGames"></div>
+      <div style="margin-bottom:18px;">
+        <button class="scenario-btn" id="addScenarioGameBtn">+ Add hypothetical game</button>
+        <button class="scenario-btn scenario-btn-ghost" id="resetScenarioBtn">Reset all</button>
+      </div>
+      <div id="scenarioResults"></div>
+    </div>
+    <div class="card">
       <h2>League History</h2>
       <div class="history-cols">
         <div>
@@ -253,6 +296,7 @@ async function load() {
   try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
   try { renderScheduledGames(data.scheduled_games); } catch (e) { console.error('renderScheduledGames failed', e); }
   try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
+  try { initScenarioBuilder(data); } catch (e) { console.error('initScenarioBuilder failed', e); }
   try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
   try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
@@ -563,6 +607,250 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') lightboxStep(-1);
   if (e.key === 'ArrowRight') lightboxStep(1);
 });
+
+// --- Scenario builder ---------------------------------------------------
+
+let scenarioGames = [];
+let scenarioGameSeq = 0;
+
+function baselineScenarioPlayers(data) {
+  const season = data.seasons[data.current_season_id];
+  const roster = data.roster || [];
+  const byName = {};
+  ((season && season.players) || []).forEach(p => { byName[p.name] = p; });
+  return roster.map(name => {
+    const p = byName[name];
+    if (p) {
+      return {
+        name,
+        tournaments_played: p.tournaments_played,
+        wins: p.wins,
+        cashes: p.cashes,
+        total_winnings: p.total_winnings,
+        net: p.net,
+        sum_place: p.sum_place,
+        best_place: p.best_place,
+      };
+    }
+    return { name, tournaments_played: 0, wins: 0, cashes: 0, total_winnings: 0, net: 0, sum_place: 0, best_place: null };
+  });
+}
+
+function scenarioPayout(place, pot) {
+  if (place === 1) return pot * 0.5;
+  if (place === 2) return pot * 0.3;
+  if (place === 3) return pot * 0.2;
+  return 0;
+}
+
+function addScenarioGame() {
+  scenarioGameSeq += 1;
+  const roster = (SEASON_DATA && SEASON_DATA.roster) || [];
+  scenarioGames.push({
+    id: scenarioGameSeq,
+    buyin: 100,
+    totalPlayers: roster.length ? Math.min(10, roster.length) : 10,
+    entries: {},
+  });
+  renderScenarioGames();
+  renderScenarioResults();
+}
+
+function removeScenarioGame(id) {
+  scenarioGames = scenarioGames.filter(g => g.id !== id);
+  renderScenarioGames();
+  renderScenarioResults();
+}
+
+function renderScenarioGames() {
+  const wrap = document.getElementById('scenarioGames');
+  if (!wrap) return;
+  const roster = (SEASON_DATA && SEASON_DATA.roster) || [];
+
+  if (!scenarioGames.length) {
+    wrap.innerHTML = '<div class="scenario-empty">No hypothetical games yet — click "+ Add hypothetical game" below to start.</div>';
+    return;
+  }
+
+  wrap.innerHTML = scenarioGames.map((g, gi) => {
+    const pot = (g.buyin || 0) * (g.totalPlayers || 0);
+    const placesUsed = Object.values(g.entries).filter(v => v !== undefined && v !== null && v !== '' && !isNaN(v));
+    const dupe = placesUsed.length !== new Set(placesUsed).size;
+    const enteredCount = placesUsed.length;
+    return `
+      <div class="scenario-game" data-gid="${g.id}">
+        <div class="scenario-game-header">
+          <div class="scenario-game-title">Hypothetical Game ${gi + 1}</div>
+          <button class="scenario-remove-btn" data-action="remove" data-gid="${g.id}">Remove</button>
+        </div>
+        <div class="scenario-game-config">
+          <div class="calc-field">
+            <label>Buy-in ($)</label>
+            <input type="number" min="0" step="5" value="${g.buyin}" data-action="buyin" data-gid="${g.id}">
+          </div>
+          <div class="calc-field">
+            <label>Total players</label>
+            <input type="number" min="0" step="1" value="${g.totalPlayers}" data-action="totalPlayers" data-gid="${g.id}">
+          </div>
+        </div>
+        <div class="scenario-pot-preview">
+          Pot: <b>$${Math.round(pot)}</b> &middot; standard split &mdash; 1st <b>$${Math.round(pot * 0.5)}</b> / 2nd <b>$${Math.round(pot * 0.3)}</b> / 3rd <b>$${Math.round(pot * 0.2)}</b>
+        </div>
+        <div class="scenario-players">
+          ${roster.map(name => {
+            const val = g.entries[name];
+            const checked = val !== undefined;
+            return `
+              <div class="scenario-player-row">
+                <label>
+                  <input type="checkbox" data-action="toggle" data-gid="${g.id}" data-name="${name}" ${checked ? 'checked' : ''}>
+                  ${name}
+                </label>
+                <input type="number" min="1" step="1" placeholder="place" data-action="place" data-gid="${g.id}" data-name="${name}"
+                  value="${checked && val !== '' ? val : ''}" ${checked ? '' : 'disabled'}>
+              </div>
+            `;
+          }).join('')}
+        </div>
+        ${dupe ? '<div class="scenario-warning">Two players cannot finish in the same place — fix the duplicate finish above.</div>' : ''}
+        ${enteredCount > g.totalPlayers ? '<div class="scenario-warning">More finishes entered than total players in this game.</div>' : ''}
+      </div>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('[data-action="remove"]').forEach(btn => {
+    btn.addEventListener('click', () => removeScenarioGame(parseInt(btn.getAttribute('data-gid'), 10)));
+  });
+  wrap.querySelectorAll('[data-action="buyin"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      if (!g) return;
+      g.buyin = parseFloat(inp.value) || 0;
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="totalPlayers"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      if (!g) return;
+      g.totalPlayers = parseInt(inp.value, 10) || 0;
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="toggle"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(cb.getAttribute('data-gid'), 10));
+      const name = cb.getAttribute('data-name');
+      if (!g) return;
+      if (cb.checked) {
+        g.entries[name] = '';
+      } else {
+        delete g.entries[name];
+      }
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="place"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      const name = inp.getAttribute('data-name');
+      if (!g) return;
+      g.entries[name] = inp.value === '' ? '' : parseInt(inp.value, 10);
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+}
+
+function computeScenarioStandings() {
+  const baseline = baselineScenarioPlayers(SEASON_DATA);
+  const byName = {};
+  baseline.forEach(p => { byName[p.name] = Object.assign({}, p); });
+
+  scenarioGames.forEach(g => {
+    const pot = (g.buyin || 0) * (g.totalPlayers || 0);
+    Object.keys(g.entries).forEach(name => {
+      const place = g.entries[name];
+      if (place === '' || place === undefined || place === null || isNaN(place)) return;
+      const p = byName[name];
+      if (!p) return;
+      const prize = scenarioPayout(place, pot);
+      p.total_winnings += prize;
+      p.net += (prize - (g.buyin || 0));
+      p.tournaments_played += 1;
+      p.sum_place += place;
+      if (place === 1) p.wins += 1;
+      if (prize > 0) p.cashes += 1;
+      p.best_place = p.best_place === null ? place : Math.min(p.best_place, place);
+    });
+  });
+
+  const projected = Object.values(byName).sort((a, b) => b.total_winnings - a.total_winnings);
+  const leader = projected.length ? projected[0].total_winnings : 0;
+  projected.forEach(p => { p.diff = p.total_winnings - leader; });
+
+  const baselineSorted = baseline.slice().sort((a, b) => b.total_winnings - a.total_winnings);
+  const baselineRank = {};
+  baselineSorted.forEach((p, i) => { baselineRank[p.name] = i + 1; });
+
+  return { projected, baselineRank };
+}
+
+function renderScenarioResults() {
+  const wrap = document.getElementById('scenarioResults');
+  if (!wrap) return;
+  if (!scenarioGames.length) {
+    wrap.innerHTML = '';
+    return;
+  }
+
+  const { projected, baselineRank } = computeScenarioStandings();
+  const rows = projected.map((p, i) => {
+    const rank = i + 1;
+    const oldRank = baselineRank[p.name] || rank;
+    let arrow = '<span class="rank-change same">&ndash;</span>';
+    if (oldRank > rank) arrow = `<span class="rank-change up">&#9650; ${oldRank - rank}</span>`;
+    if (oldRank < rank) arrow = `<span class="rank-change down">&#9660; ${rank - oldRank}</span>`;
+    return `
+      <tr>
+        <td class="rank ${medalClass(i)}">${rank}</td>
+        <td class="player-name">${p.name} ${arrow}</td>
+        <td class="num">${p.tournaments_played}</td>
+        <td class="num ${p.total_winnings > 0 ? 'pos' : ''}">$${Math.round(p.total_winnings)}</td>
+        <td class="num ${p.diff === 0 ? '' : 'neg'}">${p.diff === 0 ? '—' : fmtMoney(p.diff)}</td>
+      </tr>
+    `;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="legend-note" style="margin-bottom:10px;">Projected standings if the hypothetical games above played out as entered:</div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th></th><th>Player</th><th class="num">Played</th><th class="num">Winnings</th><th class="num">Diff</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function initScenarioBuilder(data) {
+  scenarioGames = [];
+  renderScenarioGames();
+  renderScenarioResults();
+  const addBtn = document.getElementById('addScenarioGameBtn');
+  const resetBtn = document.getElementById('resetScenarioBtn');
+  if (addBtn) addBtn.addEventListener('click', addScenarioGame);
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    scenarioGames = [];
+    renderScenarioGames();
+    renderScenarioResults();
+  });
+}
 
 load();
 </script>
