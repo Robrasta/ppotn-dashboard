@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T01:20:31.533814Z",
+  "generated_at": "2026-07-29T21:51:37.420910Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2147,6 +2147,12 @@
     }
   ],
   "photos": [
+    {
+      "id": "email_1785361872714",
+      "date": "2026-07-29",
+      "thumb": "photos/thumbs/email_1785361872714.jpg",
+      "full": "photos/full/email_1785361872714.jpg"
+    },
     {
       "id": "20260118_103408-1",
       "date": "2026-01-18",
