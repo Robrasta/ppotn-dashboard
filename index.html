@@ -426,7 +426,7 @@ function renderScheduledGames(events) {
     return `
       <div class="sched-item ${official ? 'official' : 'proposed'}">
         <div class="sched-name">${e.name}</div>
-        <div class="sched-date">${fmtFullDate(e.date)}</div>
+        <div class="sched-date">${fmtFullDate(e.date)}${e.time ? ' &middot; ' + e.time : ''}</div>
         <div class="sched-place">${e.place || 'TBD'}</div>
       </div>
     `;
