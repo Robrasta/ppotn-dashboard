@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T22:20:21.477419Z",
+  "generated_at": "2026-07-29T22:37:27.909550Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2135,7 +2135,8 @@
   "scheduled_games": [
     {
       "name": "PPOTN Night",
-      "date": "2026-08-08",
+      "date": "2026-08-07",
+      "time": "7:00 PM",
       "place": "Rastaland",
       "status": "scheduled"
     },
