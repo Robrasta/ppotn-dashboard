@@ -645,15 +645,22 @@ function scenarioPayout(place, pot) {
 
 function addScenarioGame() {
   scenarioGameSeq += 1;
-  const roster = (SEASON_DATA && SEASON_DATA.roster) || [];
   scenarioGames.push({
     id: scenarioGameSeq,
     buyin: 100,
-    totalPlayers: roster.length ? Math.min(10, roster.length) : 10,
+    guests: 0,
+    guestPlacesRaw: '',
     entries: {},
   });
   renderScenarioGames();
   renderScenarioResults();
+}
+
+function parseGuestPlaces(raw) {
+  return (raw || '')
+    .split(',')
+    .map(s => parseInt(s.trim(), 10))
+    .filter(n => !isNaN(n));
 }
 
 function removeScenarioGame(id) {
@@ -662,9 +669,33 @@ function removeScenarioGame(id) {
   renderScenarioResults();
 }
 
+function captureScenarioFocus() {
+  const el = document.activeElement;
+  if (!el || typeof el.closest !== 'function' || !el.closest('#scenarioGames')) return null;
+  return {
+    action: el.getAttribute('data-action'),
+    gid: el.getAttribute('data-gid'),
+    name: el.getAttribute('data-name'),
+    selectionStart: (typeof el.selectionStart === 'number') ? el.selectionStart : null,
+  };
+}
+
+function restoreScenarioFocus(key) {
+  if (!key) return;
+  let selector = `[data-action="${key.action}"][data-gid="${key.gid}"]`;
+  if (key.name) selector += `[data-name="${key.name}"]`;
+  const el = document.querySelector('#scenarioGames ' + selector);
+  if (!el) return;
+  el.focus();
+  if (key.selectionStart !== null && typeof el.setSelectionRange === 'function') {
+    try { el.setSelectionRange(key.selectionStart, key.selectionStart); } catch (e) { /* ignore */ }
+  }
+}
+
 function renderScenarioGames() {
   const wrap = document.getElementById('scenarioGames');
   if (!wrap) return;
+  const focusKey = captureScenarioFocus();
   const roster = (SEASON_DATA && SEASON_DATA.roster) || [];
 
   if (!scenarioGames.length) {
@@ -673,10 +704,15 @@ function renderScenarioGames() {
   }
 
   wrap.innerHTML = scenarioGames.map((g, gi) => {
-    const pot = (g.buyin || 0) * (g.totalPlayers || 0);
-    const placesUsed = Object.values(g.entries).filter(v => v !== undefined && v !== null && v !== '' && !isNaN(v));
-    const dupe = placesUsed.length !== new Set(placesUsed).size;
-    const enteredCount = placesUsed.length;
+    const rosterCount = Object.keys(g.entries).length;
+    const guestCount = g.guests || 0;
+    const totalPlayers = rosterCount + guestCount;
+    const pot = (g.buyin || 0) * totalPlayers;
+    const guestPlaces = parseGuestPlaces(g.guestPlacesRaw);
+    const rosterPlaces = Object.values(g.entries).filter(v => v !== undefined && v !== null && v !== '' && !isNaN(v));
+    const dupe = rosterPlaces.length !== new Set(rosterPlaces).size;
+    const guestOverlap = rosterPlaces.some(p => guestPlaces.includes(p));
+    const enteredCount = rosterPlaces.length + guestPlaces.length;
     return `
       <div class="scenario-game" data-gid="${g.id}">
         <div class="scenario-game-header">
@@ -689,12 +725,13 @@ function renderScenarioGames() {
             <input type="number" min="0" step="5" value="${g.buyin}" data-action="buyin" data-gid="${g.id}">
           </div>
           <div class="calc-field">
-            <label>Total players</label>
-            <input type="number" min="0" step="1" value="${g.totalPlayers}" data-action="totalPlayers" data-gid="${g.id}">
+            <label>Guests in game</label>
+            <input type="number" min="0" step="1" value="${guestCount}" data-action="guests" data-gid="${g.id}">
           </div>
         </div>
         <div class="scenario-pot-preview">
-          Pot: <b>$${Math.round(pot)}</b> &middot; standard split &mdash; 1st <b>$${Math.round(pot * 0.5)}</b> / 2nd <b>$${Math.round(pot * 0.3)}</b> / 3rd <b>$${Math.round(pot * 0.2)}</b>
+          Pot: <b>$${Math.round(pot)}</b> (${rosterCount} roster + ${guestCount} guest${guestCount === 1 ? '' : 's'}) &middot; standard split &mdash; 1st <b>$${Math.round(pot * 0.5)}</b> / 2nd <b>$${Math.round(pot * 0.3)}</b> / 3rd <b>$${Math.round(pot * 0.2)}</b>
+          <br>Guest buy-ins count toward the pot; guests don't appear in the projected standings below.
         </div>
         <div class="scenario-players">
           ${roster.map(name => {
@@ -712,8 +749,15 @@ function renderScenarioGames() {
             `;
           }).join('')}
         </div>
-        ${dupe ? '<div class="scenario-warning">Two players cannot finish in the same place — fix the duplicate finish above.</div>' : ''}
-        ${enteredCount > g.totalPlayers ? '<div class="scenario-warning">More finishes entered than total players in this game.</div>' : ''}
+        ${guestCount > 0 ? `
+          <div class="calc-field" style="margin-top:12px;">
+            <label>Guest finishes (optional — places guests took, e.g. "1, 4")</label>
+            <input type="text" placeholder="e.g. 1, 4" value="${g.guestPlacesRaw || ''}" data-action="guestPlaces" data-gid="${g.id}" style="width:220px;">
+          </div>
+        ` : ''}
+        ${dupe ? '<div class="scenario-warning">Two roster players cannot finish in the same place — fix the duplicate finish above.</div>' : ''}
+        ${guestOverlap ? '<div class="scenario-warning">A roster player and a guest can’t both be listed for the same place.</div>' : ''}
+        ${enteredCount > totalPlayers ? '<div class="scenario-warning">More finishes entered than total players in this game.</div>' : ''}
       </div>
     `;
   }).join('');
@@ -730,11 +774,20 @@ function renderScenarioGames() {
       renderScenarioResults();
     });
   });
-  wrap.querySelectorAll('[data-action="totalPlayers"]').forEach(inp => {
+  wrap.querySelectorAll('[data-action="guests"]').forEach(inp => {
     inp.addEventListener('input', () => {
       const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
       if (!g) return;
-      g.totalPlayers = parseInt(inp.value, 10) || 0;
+      g.guests = parseInt(inp.value, 10) || 0;
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="guestPlaces"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      if (!g) return;
+      g.guestPlacesRaw = inp.value;
       renderScenarioGames();
       renderScenarioResults();
     });
@@ -763,6 +816,8 @@ function renderScenarioGames() {
       renderScenarioResults();
     });
   });
+
+  restoreScenarioFocus(focusKey);
 }
 
 function computeScenarioStandings() {
@@ -771,7 +826,9 @@ function computeScenarioStandings() {
   baseline.forEach(p => { byName[p.name] = Object.assign({}, p); });
 
   scenarioGames.forEach(g => {
-    const pot = (g.buyin || 0) * (g.totalPlayers || 0);
+    const rosterCount = Object.keys(g.entries).length;
+    const totalPlayers = rosterCount + (g.guests || 0);
+    const pot = (g.buyin || 0) * totalPlayers;
     Object.keys(g.entries).forEach(name => {
       const place = g.entries[name];
       if (place === '' || place === undefined || place === null || isNaN(place)) return;

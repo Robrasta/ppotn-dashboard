@@ -20,7 +20,7 @@ Status legend: 🔲 Not started · 🔄 In progress · ✅ Done
 
 **Idea:** An interactive "what-if" tool on the dashboard — pick hypothetical finishes for upcoming games (or tweak past ones) and see how the season leaderboard would shift in response. E.g. "if I win the next 3 games, do I catch Whited for 1st?"
 
-**Status:** Done. Live client-side scenario builder card on the dashboard, right under the Season Leaderboard. Any visitor can add one or more hypothetical games (buy-in, total players, per-player finish place), computed against the standard 50/30/20 payout split, and see a projected leaderboard with rank-change indicators. Not limited to the big Vegas/final games — works for any hypothetical game size. Nothing is saved server-side; it's a live in-browser sandbox that resets on reload.
+**Status:** Done. Live client-side scenario builder card on the dashboard, right under the Season Leaderboard. Any visitor can add one or more hypothetical games (buy-in, number of guests, per-roster-player finish place), computed against the standard 50/30/20 payout split, and see a projected leaderboard with rank-change indicators. Not limited to the big Vegas/final games — works for any hypothetical game size. Guests are supported: their buy-ins count toward the pot (and can be optionally marked as taking specific finish places, for validation), but guests never appear in or affect the projected roster standings, matching how real games work. Nothing is saved server-side; it's a live in-browser sandbox that resets on reload.
 
 **Possible future extensions:** custom (non-50/30/20) payout splits per hypothetical game, and letting a visitor save/share a specific scenario via a URL.
 
