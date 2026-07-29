@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T01:19:44.376605Z",
+  "generated_at": "2026-07-29T01:20:31.533814Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2144,6 +2144,380 @@
       "date": "2027-02-06",
       "place": "TBD",
       "status": "scheduled"
+    }
+  ],
+  "photos": [
+    {
+      "id": "20260118_103408-1",
+      "date": "2026-01-18",
+      "thumb": "photos/thumbs/20260118_103408-1.jpg",
+      "full": "photos/full/20260118_103408-1.jpg"
+    },
+    {
+      "id": "20260118_103427",
+      "date": "2026-01-18",
+      "thumb": "photos/thumbs/20260118_103427.jpg",
+      "full": "photos/full/20260118_103427.jpg"
+    },
+    {
+      "id": "20260117_102332_6204ad42",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_102332_6204ad42.jpg",
+      "full": "photos/full/20260117_102332_6204ad42.jpg"
+    },
+    {
+      "id": "20260117_131257",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_131257.jpg",
+      "full": "photos/full/20260117_131257.jpg"
+    },
+    {
+      "id": "20260117_131340-1",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_131340-1.jpg",
+      "full": "photos/full/20260117_131340-1.jpg"
+    },
+    {
+      "id": "20260117_220609",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_220609.jpg",
+      "full": "photos/full/20260117_220609.jpg"
+    },
+    {
+      "id": "20260117_220614",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_220614.jpg",
+      "full": "photos/full/20260117_220614.jpg"
+    },
+    {
+      "id": "img_6354-1",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/img_6354-1.jpg",
+      "full": "photos/full/img_6354-1.jpg"
+    },
+    {
+      "id": "img_6354",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/img_6354.jpg",
+      "full": "photos/full/img_6354.jpg"
+    },
+    {
+      "id": "20260116_091740-0-1",
+      "date": "2026-01-16",
+      "thumb": "photos/thumbs/20260116_091740-0-1.jpg",
+      "full": "photos/full/20260116_091740-0-1.jpg"
+    },
+    {
+      "id": "20260116_102923-1",
+      "date": "2026-01-16",
+      "thumb": "photos/thumbs/20260116_102923-1.jpg",
+      "full": "photos/full/20260116_102923-1.jpg"
+    },
+    {
+      "id": "img_20260116_190317",
+      "date": "2026-01-16",
+      "thumb": "photos/thumbs/img_20260116_190317.jpg",
+      "full": "photos/full/img_20260116_190317.jpg"
+    },
+    {
+      "id": "20260115_204608",
+      "date": "2026-01-15",
+      "thumb": "photos/thumbs/20260115_204608.jpg",
+      "full": "photos/full/20260115_204608.jpg"
+    },
+    {
+      "id": "20260115_215928",
+      "date": "2026-01-15",
+      "thumb": "photos/thumbs/20260115_215928.jpg",
+      "full": "photos/full/20260115_215928.jpg"
+    },
+    {
+      "id": "20240810_203602",
+      "date": "2024-08-10",
+      "thumb": "photos/thumbs/20240810_203602.jpg",
+      "full": "photos/full/20240810_203602.jpg"
+    },
+    {
+      "id": "20240114_004643",
+      "date": "2024-01-14",
+      "thumb": "photos/thumbs/20240114_004643.jpg",
+      "full": "photos/full/20240114_004643.jpg"
+    },
+    {
+      "id": "20240113_064631",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_064631.jpg",
+      "full": "photos/full/20240113_064631.jpg"
+    },
+    {
+      "id": "20240113_092057",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_092057.jpg",
+      "full": "photos/full/20240113_092057.jpg"
+    },
+    {
+      "id": "20240113_092129",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_092129.jpg",
+      "full": "photos/full/20240113_092129.jpg"
+    },
+    {
+      "id": "20240113_224419",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_224419.jpg",
+      "full": "photos/full/20240113_224419.jpg"
+    },
+    {
+      "id": "20240113_224455",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_224455.jpg",
+      "full": "photos/full/20240113_224455.jpg"
+    },
+    {
+      "id": "20230826_171759",
+      "date": "2023-08-26",
+      "thumb": "photos/thumbs/20230826_171759.jpg",
+      "full": "photos/full/20230826_171759.jpg"
+    },
+    {
+      "id": "20230409_142958",
+      "date": "2023-04-09",
+      "thumb": "photos/thumbs/20230409_142958.jpg",
+      "full": "photos/full/20230409_142958.jpg"
+    },
+    {
+      "id": "20230114_083620",
+      "date": "2023-01-14",
+      "thumb": "photos/thumbs/20230114_083620.jpg",
+      "full": "photos/full/20230114_083620.jpg"
+    },
+    {
+      "id": "20230114_100223",
+      "date": "2023-01-14",
+      "thumb": "photos/thumbs/20230114_100223.jpg",
+      "full": "photos/full/20230114_100223.jpg"
+    },
+    {
+      "id": "20230114_120929",
+      "date": "2023-01-14",
+      "thumb": "photos/thumbs/20230114_120929.jpg",
+      "full": "photos/full/20230114_120929.jpg"
+    },
+    {
+      "id": "20230113_202709",
+      "date": "2023-01-13",
+      "thumb": "photos/thumbs/20230113_202709.jpg",
+      "full": "photos/full/20230113_202709.jpg"
+    },
+    {
+      "id": "20221015_171012",
+      "date": "2022-10-15",
+      "thumb": "photos/thumbs/20221015_171012.jpg",
+      "full": "photos/full/20221015_171012.jpg"
+    },
+    {
+      "id": "20220925_142441",
+      "date": "2022-09-25",
+      "thumb": "photos/thumbs/20220925_142441.jpg",
+      "full": "photos/full/20220925_142441.jpg"
+    },
+    {
+      "id": "20220628_195435",
+      "date": "2022-06-28",
+      "thumb": "photos/thumbs/20220628_195435.jpg",
+      "full": "photos/full/20220628_195435.jpg"
+    },
+    {
+      "id": "20220121_143837",
+      "date": "2022-01-21",
+      "thumb": "photos/thumbs/20220121_143837.jpg",
+      "full": "photos/full/20220121_143837.jpg"
+    },
+    {
+      "id": "20211106_195731",
+      "date": "2021-11-06",
+      "thumb": "photos/thumbs/20211106_195731.jpg",
+      "full": "photos/full/20211106_195731.jpg"
+    },
+    {
+      "id": "20210828_165244",
+      "date": "2021-08-28",
+      "thumb": "photos/thumbs/20210828_165244.jpg",
+      "full": "photos/full/20210828_165244.jpg"
+    },
+    {
+      "id": "20210828_171257",
+      "date": "2021-08-28",
+      "thumb": "photos/thumbs/20210828_171257.jpg",
+      "full": "photos/full/20210828_171257.jpg"
+    },
+    {
+      "id": "20210212_085424",
+      "date": "2021-02-12",
+      "thumb": "photos/thumbs/20210212_085424.jpg",
+      "full": "photos/full/20210212_085424.jpg"
+    },
+    {
+      "id": "20200111_110206-0",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_110206-0.jpg",
+      "full": "photos/full/20200111_110206-0.jpg"
+    },
+    {
+      "id": "20200111_110313",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_110313.jpg",
+      "full": "photos/full/20200111_110313.jpg"
+    },
+    {
+      "id": "20200111_185410",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_185410.jpg",
+      "full": "photos/full/20200111_185410.jpg"
+    },
+    {
+      "id": "20200111_191852",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_191852.jpg",
+      "full": "photos/full/20200111_191852.jpg"
+    },
+    {
+      "id": "20200110_103755",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_103755.jpg",
+      "full": "photos/full/20200110_103755.jpg"
+    },
+    {
+      "id": "20200110_143436",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_143436.jpg",
+      "full": "photos/full/20200110_143436.jpg"
+    },
+    {
+      "id": "20200110_155516",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_155516.jpg",
+      "full": "photos/full/20200110_155516.jpg"
+    },
+    {
+      "id": "20200110_165714-0",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_165714-0.jpg",
+      "full": "photos/full/20200110_165714-0.jpg"
+    },
+    {
+      "id": "20191026_151304",
+      "date": "2019-10-26",
+      "thumb": "photos/thumbs/20191026_151304.jpg",
+      "full": "photos/full/20191026_151304.jpg"
+    },
+    {
+      "id": "20191026_184920",
+      "date": "2019-10-26",
+      "thumb": "photos/thumbs/20191026_184920.jpg",
+      "full": "photos/full/20191026_184920.jpg"
+    },
+    {
+      "id": "20191026_194609",
+      "date": "2019-10-26",
+      "thumb": "photos/thumbs/20191026_194609.jpg",
+      "full": "photos/full/20191026_194609.jpg"
+    },
+    {
+      "id": "20190125_192627",
+      "date": "2019-01-25",
+      "thumb": "photos/thumbs/20190125_192627.jpg",
+      "full": "photos/full/20190125_192627.jpg"
+    },
+    {
+      "id": "20190112_175121",
+      "date": "2019-01-12",
+      "thumb": "photos/thumbs/20190112_175121.jpg",
+      "full": "photos/full/20190112_175121.jpg"
+    },
+    {
+      "id": "20190112_182552",
+      "date": "2019-01-12",
+      "thumb": "photos/thumbs/20190112_182552.jpg",
+      "full": "photos/full/20190112_182552.jpg"
+    },
+    {
+      "id": "img_3237_20190112_124253",
+      "date": "2019-01-12",
+      "thumb": "photos/thumbs/img_3237_20190112_124253.jpg",
+      "full": "photos/full/img_3237_20190112_124253.jpg"
+    },
+    {
+      "id": "20160116_112032",
+      "date": "2016-01-16",
+      "thumb": "photos/thumbs/20160116_112032.jpg",
+      "full": "photos/full/20160116_112032.jpg"
+    },
+    {
+      "id": "20160116_112114",
+      "date": "2016-01-16",
+      "thumb": "photos/thumbs/20160116_112114.jpg",
+      "full": "photos/full/20160116_112114.jpg"
+    },
+    {
+      "id": "20160115_084111",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_084111.jpg",
+      "full": "photos/full/20160115_084111.jpg"
+    },
+    {
+      "id": "20160115_084733",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_084733.jpg",
+      "full": "photos/full/20160115_084733.jpg"
+    },
+    {
+      "id": "20160115_085138",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_085138.jpg",
+      "full": "photos/full/20160115_085138.jpg"
+    },
+    {
+      "id": "20160115_085142",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_085142.jpg",
+      "full": "photos/full/20160115_085142.jpg"
+    },
+    {
+      "id": "20160115_182106",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_182106.jpg",
+      "full": "photos/full/20160115_182106.jpg"
+    },
+    {
+      "id": "20160115_182309",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_182309.jpg",
+      "full": "photos/full/20160115_182309.jpg"
+    },
+    {
+      "id": "20160115_190055",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_190055.jpg",
+      "full": "photos/full/20160115_190055.jpg"
+    },
+    {
+      "id": "20160115_195253",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_195253.jpg",
+      "full": "photos/full/20160115_195253.jpg"
+    },
+    {
+      "id": "20130525_232318",
+      "date": "2013-05-25",
+      "thumb": "photos/thumbs/20130525_232318.jpg",
+      "full": "photos/full/20130525_232318.jpg"
+    },
+    {
+      "id": "20130525_232446-motion",
+      "date": "2013-05-25",
+      "thumb": "photos/thumbs/20130525_232446-motion.jpg",
+      "full": "photos/full/20130525_232446-motion.jpg"
     }
   ]
 }
