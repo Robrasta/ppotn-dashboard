@@ -186,9 +186,82 @@
   .rank-change.up { color: var(--accent); }
   .rank-change.down { color: var(--red); }
   .rank-change.same { color: var(--text-dim); }
+
+  .bg-totem {
+    position: fixed;
+    right: -10px;
+    bottom: -30px;
+    width: 150px;
+    height: 423px;
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @media (max-width: 900px) {
+    .bg-totem { display: none; }
+  }
 </style>
 </head>
 <body>
+<div class="bg-totem" aria-hidden="true">
+  <svg viewBox="0 0 170 480" width="100%" height="100%">
+    <defs>
+      <symbol id="bgSpd" viewBox="0 0 100 100"><path d="M50 8 C20 35 8 55 8 70 C8 85 22 92 35 85 C40 82 45 76 47 70 C44 88 38 92 30 96 L70 96 C62 92 56 88 53 70 C55 76 60 82 65 85 C78 92 92 85 92 70 C92 55 80 35 50 8Z"/></symbol>
+      <symbol id="bgDmd" viewBox="0 0 100 100"><path d="M50 4 L92 50 L50 96 L8 50Z"/></symbol>
+      <symbol id="bgHrt" viewBox="0 0 100 100"><path d="M50 92 C10 62 4 40 18 24 C30 10 48 14 50 32 C52 14 70 10 82 24 C96 40 90 62 50 92Z"/></symbol>
+      <symbol id="bgClb" viewBox="0 0 100 100"><path d="M50 10 C62 10 71 19 71 31 C71 37 69 42 65 46 C77 44 87 53 87 65 C87 77 77 86 65 86 C58 86 52 83 48 78 C50 88 54 92 62 96 L38 96 C46 92 50 88 52 78 C48 83 42 86 35 86 C23 86 13 77 13 65 C13 53 23 44 35 46 C31 42 29 37 29 31 C29 19 38 10 50 10Z"/></symbol>
+      <pattern id="bgDotsDark" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.3" fill="#0f1419"/></pattern>
+      <pattern id="bgDotsStone" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1" fill="#2c2a26"/></pattern>
+    </defs>
+
+    <rect x="37" y="0" width="16" height="480" rx="6" fill="#3a2a1e"/>
+    <rect x="125" y="0" width="16" height="480" rx="6" fill="#3a2a1e"/>
+    <g fill="#241810">
+      <rect x="35" y="60" width="20" height="7" rx="2"/>
+      <rect x="35" y="240" width="20" height="7" rx="2"/>
+      <rect x="35" y="420" width="20" height="7" rx="2"/>
+      <rect x="123" y="60" width="20" height="7" rx="2"/>
+      <rect x="123" y="240" width="20" height="7" rx="2"/>
+      <rect x="123" y="420" width="20" height="7" rx="2"/>
+    </g>
+
+    <rect x="77" y="140" width="16" height="325" fill="#1a1410"/>
+
+    <ellipse cx="85" cy="420" rx="52" ry="40" fill="#3d6b52" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="420" rx="52" ry="40" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="404" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgClb" x="63" y="398" width="44" height="44" fill="#12181c"/>
+
+    <ellipse cx="85" cy="346" rx="52" ry="40" fill="#e0a83f" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="346" rx="52" ry="40" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="330" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgDmd" x="63" y="324" width="44" height="44" fill="#12181c"/>
+
+    <ellipse cx="85" cy="272" rx="52" ry="38" fill="#c9553f" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="272" rx="52" ry="38" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="257" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgHrt" x="63" y="251" width="44" height="44" fill="#12181c"/>
+
+    <ellipse cx="85" cy="200" rx="52" ry="38" fill="#3ecf8e" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="200" rx="52" ry="38" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="185" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgSpd" x="63" y="179" width="44" height="44" fill="#12181c"/>
+
+    <rect x="67" y="138" width="36" height="26" fill="#4a453e" stroke="#12181c" stroke-width="3"/>
+
+    <rect x="27" y="8" width="116" height="132" rx="18" fill="#635d52" stroke="#12181c" stroke-width="6"/>
+    <rect x="27" y="8" width="116" height="132" rx="18" fill="url(#bgDotsStone)" opacity="0.35"/>
+    <rect x="37" y="44" width="96" height="20" rx="6" fill="#12181c"/>
+    <rect x="47" y="62" width="26" height="18" rx="3" fill="#0a0d0f"/>
+    <rect x="97" y="62" width="26" height="18" rx="3" fill="#0a0d0f"/>
+    <rect x="77" y="44" width="16" height="46" fill="#4a453e" stroke="#12181c" stroke-width="3"/>
+    <rect x="53" y="96" width="64" height="8" rx="2" fill="#12181c"/>
+    <path d="M45 108 Q85 124 125 108 L121 126 Q85 138 49 126 Z" fill="#524d44" stroke="#12181c" stroke-width="3"/>
+    <rect x="15" y="56" width="14" height="30" rx="4" fill="#524d44" stroke="#12181c" stroke-width="3"/>
+    <rect x="141" y="56" width="14" height="30" rx="4" fill="#524d44" stroke="#12181c" stroke-width="3"/>
+    <path d="M41 20 L41 132 M49 14 L49 136" stroke="#12181c" stroke-width="1.5" opacity="0.4"/>
+  </svg>
+</div>
 <div class="wrap">
   <header>
     <h1>PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span></h1>
