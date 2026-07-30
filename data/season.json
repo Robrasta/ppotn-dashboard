@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T22:38:31.479032Z",
+  "generated_at": "2026-07-30T23:16:21.540446Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2133,6 +2133,13 @@
     "years_tracked": 19
   },
   "scheduled_games": [
+    {
+      "name": "PPOTN Night",
+      "date": "2026-08-08",
+      "time": null,
+      "place": "Stuart's House",
+      "status": "scheduled"
+    },
     {
       "name": "Vegas Game",
       "date": "2027-01-16",
