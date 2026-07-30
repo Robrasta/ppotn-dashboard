@@ -53,6 +53,29 @@
     background: var(--accent); color: #0f1419; font-weight: 600; font-size: 14px; cursor: pointer;
   }
   .gate-error { color: var(--red); font-size: 13px; margin: 10px 0 0; min-height: 16px; }
+  .ticker {
+    display: none;
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 0;
+    margin: 14px 0 0;
+  }
+  .ticker-track {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-scroll 22s linear infinite;
+    color: var(--accent-2);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
   header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
   h1 { font-size: 26px; margin: 0; letter-spacing: 0.2px; display: flex; align-items: center; }
   h1 span { color: var(--accent); }
@@ -308,6 +331,7 @@
     </div>
   </header>
   <div class="subtitle">Poker Player of the Year — season standings, pulled straight from Tournament Director exports.</div>
+  <div class="ticker" id="siteMessage"><div class="ticker-track" id="siteMessageText"></div></div>
 
   <div class="layout">
     <aside class="sidebar">
@@ -409,6 +433,7 @@ async function load() {
   `;
 
   try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
+  try { renderSiteMessage(data.message); } catch (e) { console.error('renderSiteMessage failed', e); }
   try { renderScheduledGames(data.scheduled_games); } catch (e) { console.error('renderScheduledGames failed', e); }
   try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
   try { initScenarioBuilder(data); } catch (e) { console.error('initScenarioBuilder failed', e); }
@@ -416,6 +441,19 @@ async function load() {
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
   try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
   try { renderPhotoGallery(data.photos); } catch (e) { console.error('renderPhotoGallery failed', e); }
+}
+
+function renderSiteMessage(message) {
+  const wrap = document.getElementById('siteMessage');
+  const track = document.getElementById('siteMessageText');
+  if (!wrap || !track) return;
+  const text = message && message.text ? String(message.text).trim() : '';
+  if (!text) {
+    wrap.style.display = 'none';
+    return;
+  }
+  track.textContent = text;
+  wrap.style.display = 'block';
 }
 
 function renderChampionBadge(history) {
