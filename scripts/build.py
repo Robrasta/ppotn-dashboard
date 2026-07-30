@@ -497,6 +497,13 @@ def build_schedule(schedule_cfg):
     return sorted(events, key=lambda e: e.get('date') or '')
 
 
+def build_message(message_cfg):
+    text = (message_cfg or {}).get('text')
+    if not text:
+        return None
+    return {'text': text, 'updated': (message_cfg or {}).get('updated')}
+
+
 def build_photos(photos_cfg):
     photos = photos_cfg.get('photos', []) or []
     out = []
@@ -545,6 +552,7 @@ def main():
     history_cfg = load_json(os.path.join(config_dir, 'history.json'), {'champions': []})
     schedule_cfg = load_json(os.path.join(config_dir, 'schedule.json'), {'events': []})
     photos_cfg = load_json(os.path.join(config_dir, 'photos.json'), {'photos': []})
+    message_cfg = load_json(os.path.join(config_dir, 'message.json'), {'text': None})
 
     roster = roster_cfg.get('members', [])
     seasons = seasons_cfg.get('seasons', [])
@@ -562,6 +570,7 @@ def main():
     season_data['history'] = build_history(history_cfg)
     season_data['scheduled_games'] = build_schedule(schedule_cfg)
     season_data['photos'] = build_photos(photos_cfg)
+    season_data['message'] = build_message(message_cfg)
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
