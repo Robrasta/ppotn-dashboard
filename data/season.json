@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T22:13:34.571530Z",
+  "generated_at": "2026-07-30T22:24:23.238412Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2526,5 +2526,8 @@
       "full": "photos/full/20130525_232446-motion.jpg"
     }
   ],
-  "message": null
+  "message": {
+    "text": "Message: Book your Vegas Big Game stay !! Aria suite secured.",
+    "updated": "2026-07-30T22:24:13.176Z"
+  }
 }
