@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PPOTY — Site Help / Email Cheat Sheet</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #182028;
+    --panel-2: #1e2830;
+    --border: #2a3540;
+    --text: #e8edf1;
+    --text-dim: #8a97a3;
+    --accent: #3ecf8e;
+    --accent-2: #f2b84b;
+    --red: #e0655a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+  a { color: var(--accent); }
+  .back-link { color: var(--text-dim); text-decoration: underline dotted; font-size: 13px; }
+  h1 { font-size: 26px; margin: 18px 0 4px; }
+  .subtitle { color: var(--text-dim); margin: 0 0 28px; font-size: 14px; }
+  h2 { font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent-2); margin: 0 0 12px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+  }
+  code, .kw {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--accent);
+  }
+  .step-list { margin: 0; padding-left: 20px; }
+  .step-list li { margin-bottom: 8px; }
+  .keyword-block { margin-bottom: 22px; }
+  .keyword-block:last-child { margin-bottom: 0; }
+  .keyword-block h3 { font-size: 15px; margin: 0 0 6px; color: var(--text); }
+  .keyword-block p { margin: 4px 0; color: var(--text-dim); font-size: 14px; }
+  .example {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin: 8px 0;
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--text);
+  }
+  .note {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="../index.html" class="back-link">&larr; Back to dashboard</a>
+  <h1>Site Help — Updating PPOTY by Email</h1>
+  <div class="subtitle">Everything on the dashboard (results, schedule, photos, the scrolling message) is updated by sending an email to the intake address. This page is the full cheat sheet: every keyword, what it does, and how the confirmation step works.</div>
+
+  <div class="card">
+    <h2>How it works, in short</h2>
+    <ol class="step-list">
+      <li>Send an email to the intake address (from an approved sender — see below).</li>
+      <li>Put a keyword as the <strong>first line</strong> of either the subject or the body — see the keyword list below.</li>
+      <li>The system checks the inbox every few minutes. If it understood you, it replies with a summary of what it's about to do and asks for confirmation.</li>
+      <li>Reply <span class="kw">YES</span> to publish it, or <span class="kw">NO</span> to discard it. Nothing goes live until you reply YES.</li>
+      <li>Once confirmed, most updates appear on the live site within a couple of minutes.</li>
+    </ol>
+    <div class="note">Only email addresses on the approved-sender list can trigger updates. Anyone else emailing the intake address is silently ignored (no reply, no error) — this is intentional so it can't be abused. Ask whoever runs the automation to add an address if it needs to be able to make updates.</div>
+  </div>
+
+  <div class="card">
+    <h2>Keywords</h2>
+
+    <div class="keyword-block">
+      <h3>Photo by itself — add to the gallery</h3>
+      <p>Attach a photo with no special keyword in the subject or body. It's added straight to the site's photo gallery — <strong>no YES/NO confirmation needed</strong>, it publishes immediately.</p>
+    </div>
+
+    <div class="keyword-block">
+      <h3><span class="kw">RESULTS</span> — publish a game's results</h3>
+      <p>Put <span class="kw">RESULTS</span> as the first line of the subject or body, and attach a photo of the payouts (a Tournament Director screen, a printed sheet, or handwritten notes all work). The system reads the photo, matches player names to the roster, and drafts a game entry.</p>
+      <p>It replies with a summary (date, pot, places, payouts) — check it over, then reply YES to publish or NO to discard. If the photo can't be read clearly, it'll ask for a clearer one instead of guessing.</p>
+      <div class="example">Subject: RESULTS
+(attach photo of the payout sheet)</div>
+    </div>
+
+    <div class="keyword-block">
+      <h3><span class="kw">SCHEDULE:</span> — add a new game to the schedule</h3>
+      <p>Put <span class="kw">SCHEDULE:</span> followed by the details (name, date, time, place — plain English is fine) as the first line of the subject or body.</p>
+      <div class="example">SCHEDULE: PPOTN Night, August 8 2026, 7pm, Stuart's House</div>
+      <p>It replies with the parsed event — reply YES to add it to the schedule sidebar on the site, or NO to discard.</p>
+    </div>
+
+    <div class="keyword-block">
+      <h3><span class="kw">SCHEDULE CHANGE:</span> — edit or cancel an existing game</h3>
+      <p>Put <span class="kw">SCHEDULE CHANGE:</span> followed by the date of the game you're changing (as it appears on the site) and either what's changing (new time, new place, new date) or the word <span class="kw">cancel</span> to remove it entirely.</p>
+      <div class="example">SCHEDULE CHANGE: August 8 2026, moved to 8pm
+
+SCHEDULE CHANGE: August 8 2026, cancel</div>
+      <p>It matches your message to the existing entry by date. If it can't find a match, it replies with the current schedule so you can try again with the exact date. Reply YES to confirm the edit or cancellation, NO to leave the schedule as-is.</p>
+    </div>
+
+    <div class="keyword-block">
+      <h3><span class="kw">MESSAGE:</span> — set the scrolling banner on the site</h3>
+      <p>Put <span class="kw">MESSAGE:</span> followed by whatever you want the scrolling banner to say, as the first line of the subject or body.</p>
+      <div class="example">MESSAGE: Reminder — bring cash for next week's buy-in!</div>
+      <p>To remove the current banner, send <span class="kw">MESSAGE: clear</span> (or <span class="kw">none</span> / <span class="kw">remove</span>). Reply YES to confirm either way.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Replying YES or NO</h2>
+    <p style="color:var(--text-dim); font-size:14px; margin-top:0;">Whatever you're confirming, reply to that same email thread with YES or NO as the very first line of your reply (before any quoted text below it).</p>
+    <table>
+      <tr><th>You reply with</th><th>What happens</th></tr>
+      <tr><td><span class="kw">YES</span> or <span class="kw">Y</span></td><td>Publishes the change to the live site.</td></tr>
+      <tr><td><span class="kw">NO</span> or <span class="kw">N</span></td><td>Discards it — nothing changes.</td></tr>
+    </table>
+    <p style="color:var(--text-dim); font-size:14px;">Gmail's "Smart Reply" suggestion buttons (e.g. "Yes!", "No for me.", "No, sorry.") are also recognized — it only looks at the first word of your reply. If you're ever unsure, just type a plain YES or NO yourself.</p>
+    <div class="note">If you don't reply YES or NO, the request just sits there — it'll gently remind you once, but it won't nag repeatedly, and it never publishes anything on its own.</div>
+  </div>
+
+  <div class="card">
+    <h2>Notifications</h2>
+    <p style="color:var(--text-dim); font-size:14px; margin-top:0;">When results are published or the schedule is added to / changed / cancelled, everyone on the notification list gets a short email with a link to the site. Photos and the scrolling message don't trigger a notification.</p>
+  </div>
+
+  <div class="card">
+    <h2>Multiple people making updates</h2>
+    <p style="color:var(--text-dim); font-size:14px; margin-top:0;">More than one email address can be approved to send updates — it's a simple list, so an admin or a second trusted person can be added the same way as any other approved sender. Each person's replies (YES/NO) only affect the thread they're replying to, so there's no conflict between people working on different updates at the same time.</p>
+  </div>
+</div>
+</body>
+</html>
