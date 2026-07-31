@@ -205,6 +205,24 @@
   .lightbox-close:hover, .lightbox-nav:hover { background: rgba(255,255,255,0.18); }
   .lightbox-caption { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: var(--text-dim); font-size: 13px; }
 
+  .dynasty { margin-bottom: 26px; }
+  .dynasty-label { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .dynasty-strip { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; }
+  .dynasty-cell { display: flex; flex-direction: column; gap: 4px; cursor: default; }
+  .dynasty-block { height: 54px; border-radius: 3px; transition: transform 0.12s, outline-color 0.12s; outline: 2px solid transparent; }
+  .dynasty-cell:hover .dynasty-block { transform: scaleY(1.06); outline-color: var(--text); }
+  .dynasty-year { font-size: 11px; color: var(--text-dim); text-align: center; font-variant-numeric: tabular-nums; }
+  .dynasty-cell.is-open .dynasty-block { background: transparent; border: 1px dashed var(--border); }
+  .dynasty-cell.is-open .dynasty-year { color: var(--accent); }
+  .dynasty-cell.is-gap .dynasty-block { background: repeating-linear-gradient(45deg, #3a4450, #3a4450 3px, transparent 3px, transparent 7px); border: 1px solid var(--border); }
+  .dynasty-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-size: 12px; color: var(--text-dim); }
+  .dynasty-legend span { display: flex; align-items: center; gap: 6px; }
+  .dynasty-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  @media (max-width: 720px) {
+    .dynasty-strip { grid-template-columns: repeat(10, 1fr); gap: 4px; }
+    .dynasty-block { height: 42px; }
+  }
+
   .scenario-game { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
   .scenario-game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
   .scenario-game-title { font-weight: 700; font-size: 14px; }
@@ -416,6 +434,11 @@ async function load() {
     </div>
     <div class="card">
       <h2>League History</h2>
+      <div class="dynasty">
+        <div class="dynasty-label">Champion by year</div>
+        <div class="dynasty-strip" id="dynastyStrip"></div>
+        <div class="dynasty-legend" id="dynastyLegend"></div>
+      </div>
       <div class="history-cols">
         <div>
           <h2 style="margin-bottom:8px;">Champions by Year</h2>
@@ -600,6 +623,70 @@ function renderDrillDown(p) {
   `;
 }
 
+// Non-champion placeholder values that may appear in config/history.json --
+// years the league didn't run. Rendered as a hatched gap, not as a person.
+const DYNASTY_GAP_NAMES = ['covid', 'none', 'no season', 'cancelled', 'canceled'];
+
+// Colors are keyed to the person, not to their rank, so adding a future
+// champion never repaints anyone else's history. Known names are pinned;
+// anything new hashes deterministically into the same palette.
+const DYNASTY_PALETTE = ['#3ecf8e', '#f2b84b', '#5aa9e6', '#e0655a', '#c48ee0', '#7ed6a5', '#f2994a', '#9db4c0'];
+const DYNASTY_PINNED = {
+  jones: '#3ecf8e', graham: '#f2b84b', whited: '#5aa9e6', tawse: '#e0655a',
+  harrison: '#c48ee0', hernandez: '#7ed6a5', grissom: '#f2994a', klinect: '#9db4c0',
+};
+
+function dynastyColor(name) {
+  const key = String(name || '').trim().toLowerCase();
+  if (DYNASTY_PINNED[key]) return DYNASTY_PINNED[key];
+  let h = 0;
+  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+  return DYNASTY_PALETTE[h % DYNASTY_PALETTE.length];
+}
+
+function renderDynasty(history) {
+  const strip = document.getElementById('dynastyStrip');
+  const legend = document.getElementById('dynastyLegend');
+  if (!strip || !legend) return;
+  strip.innerHTML = '';
+  legend.innerHTML = '';
+
+  const champions = (history.champions || []).slice().sort((a, b) => a.year - b.year);
+  champions.forEach(c => {
+    const name = c.name;
+    const isGap = name && DYNASTY_GAP_NAMES.indexOf(String(name).trim().toLowerCase()) !== -1;
+    const isOpen = !name;
+
+    const cell = document.createElement('div');
+    cell.className = 'dynasty-cell' + (isOpen ? ' is-open' : isGap ? ' is-gap' : '');
+    cell.title = c.year + ' — ' + (isOpen ? 'in progress' : isGap ? 'no season (' + name + ')' : name);
+
+    const block = document.createElement('div');
+    block.className = 'dynasty-block';
+    if (!isOpen && !isGap) block.style.background = dynastyColor(name);
+
+    const yr = document.createElement('div');
+    yr.className = 'dynasty-year';
+    yr.textContent = String(c.year).slice(2);
+
+    cell.appendChild(block);
+    cell.appendChild(yr);
+    strip.appendChild(cell);
+  });
+
+  (history.trophy_counts || [])
+    .filter(t => DYNASTY_GAP_NAMES.indexOf(String(t.name || '').trim().toLowerCase()) === -1)
+    .forEach(t => {
+      const s = document.createElement('span');
+      const sw = document.createElement('span');
+      sw.className = 'dynasty-swatch';
+      sw.style.background = dynastyColor(t.name);
+      s.appendChild(sw);
+      s.appendChild(document.createTextNode(t.name + ' · ' + t.count));
+      legend.appendChild(s);
+    });
+}
+
 function renderHistory(history) {
   const champsWrap = document.getElementById('champsWrap');
   const trophyWrap = document.getElementById('trophyWrap');
@@ -608,6 +695,7 @@ function renderHistory(history) {
     trophyWrap.innerHTML = '';
     return;
   }
+  try { renderDynasty(history); } catch (e) { console.error('renderDynasty failed', e); }
   const champRows = history.champions.slice().reverse().map(c => `
     <tr><td>${c.year}</td><td>${c.name || '<span style="color:var(--text-dim)">in progress</span>'}</td></tr>
   `).join('');
