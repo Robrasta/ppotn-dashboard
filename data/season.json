@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T15:31:24.685061Z",
+  "generated_at": "2026-07-31T16:02:30.566878Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2133,13 +2133,6 @@
     "years_tracked": 19
   },
   "scheduled_games": [
-    {
-      "name": "SCHEDULE CHANGE",
-      "date": "2026-08-08",
-      "time": null,
-      "place": "TBD",
-      "status": "scheduled"
-    },
     {
       "name": "Vegas Game",
       "date": "2027-01-16",
