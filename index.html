@@ -209,15 +209,23 @@
   .dynasty-label { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
   .dynasty-strip { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; }
   .dynasty-cell { display: flex; flex-direction: column; gap: 4px; cursor: default; }
-  .dynasty-block { height: 54px; border-radius: 3px; transition: transform 0.12s, outline-color 0.12s; outline: 2px solid transparent; }
+  .dynasty-block {
+    height: 56px; border-radius: 4px; position: relative;
+    border: 1px solid rgba(0,0,0,0.38); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);
+    transition: transform 0.12s, outline-color 0.12s; outline: 2px solid transparent;
+  }
   .dynasty-cell:hover .dynasty-block { transform: scaleY(1.06); outline-color: var(--text); }
+  .dynasty-rank { position: absolute; top: 2px; left: 3px; font-size: 9px; font-weight: 700; color: rgba(0,0,0,0.72); line-height: 1; }
+  .dynasty-pip { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; color: rgba(0,0,0,0.6); }
   .dynasty-year { font-size: 11px; color: var(--text-dim); text-align: center; font-variant-numeric: tabular-nums; }
-  .dynasty-cell.is-open .dynasty-block { background: transparent; border: 1px dashed var(--border); }
+  .dynasty-cell.is-open .dynasty-block { background: transparent; border: 1px dashed var(--accent); box-shadow: none; }
+  .dynasty-cell.is-open .dynasty-pip { color: var(--accent); font-size: 13px; }
   .dynasty-cell.is-open .dynasty-year { color: var(--accent); }
-  .dynasty-cell.is-gap .dynasty-block { background: repeating-linear-gradient(45deg, #3a4450, #3a4450 3px, transparent 3px, transparent 7px); border: 1px solid var(--border); }
-  .dynasty-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-size: 12px; color: var(--text-dim); }
-  .dynasty-legend span { display: flex; align-items: center; gap: 6px; }
-  .dynasty-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .dynasty-cell.is-gap .dynasty-block { background: repeating-linear-gradient(45deg, #3a4450, #3a4450 3px, transparent 3px, transparent 7px); border: 1px solid var(--border); box-shadow: none; }
+  .dynasty-legend { display: flex; flex-wrap: wrap; gap: 9px 16px; margin-top: 15px; font-size: 12px; color: var(--text-dim); }
+  .dynasty-legend span { display: flex; align-items: center; gap: 7px; }
+  .dynasty-swatch { width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; position: relative; border: 1px solid rgba(0,0,0,0.4); }
+  .dynasty-swatch::after { content: ''; position: absolute; inset: 2px; border-radius: 50%; border: 1.5px dashed rgba(255,255,255,0.85); }
   @media (max-width: 720px) {
     .dynasty-strip { grid-template-columns: repeat(10, 1fr); gap: 4px; }
     .dynasty-block { height: 42px; }
@@ -636,12 +644,31 @@ const DYNASTY_PINNED = {
   harrison: '#c48ee0', hernandez: '#7ed6a5', grissom: '#f2994a', klinect: '#9db4c0',
 };
 
+// Each champion also gets a fixed suit, so the strip stays readable without
+// relying on color alone.
+const DYNASTY_SUITS = ['♠', '♥', '♦', '♣'];
+const DYNASTY_SUIT_PINNED = {
+  jones: '♠', graham: '♦', whited: '♥', tawse: '♣',
+  harrison: '♠', hernandez: '♥', grissom: '♦', klinect: '♣',
+};
+
+function dynastyHash(name) {
+  const key = String(name || '').trim().toLowerCase();
+  let h = 0;
+  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+  return h;
+}
+
 function dynastyColor(name) {
   const key = String(name || '').trim().toLowerCase();
   if (DYNASTY_PINNED[key]) return DYNASTY_PINNED[key];
-  let h = 0;
-  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
-  return DYNASTY_PALETTE[h % DYNASTY_PALETTE.length];
+  return DYNASTY_PALETTE[dynastyHash(name) % DYNASTY_PALETTE.length];
+}
+
+function dynastySuit(name) {
+  const key = String(name || '').trim().toLowerCase();
+  if (DYNASTY_SUIT_PINNED[key]) return DYNASTY_SUIT_PINNED[key];
+  return DYNASTY_SUITS[dynastyHash(name) % DYNASTY_SUITS.length];
 }
 
 function renderDynasty(history) {
@@ -663,7 +690,22 @@ function renderDynasty(history) {
 
     const block = document.createElement('div');
     block.className = 'dynasty-block';
-    if (!isOpen && !isGap) block.style.background = dynastyColor(name);
+    if (!isOpen && !isGap) {
+      block.style.background = dynastyColor(name);
+      const rank = document.createElement('div');
+      rank.className = 'dynasty-rank';
+      rank.textContent = String(name).trim().charAt(0).toUpperCase();
+      const pip = document.createElement('div');
+      pip.className = 'dynasty-pip';
+      pip.textContent = dynastySuit(name);
+      block.appendChild(rank);
+      block.appendChild(pip);
+    } else if (isOpen) {
+      const pip = document.createElement('div');
+      pip.className = 'dynasty-pip';
+      pip.textContent = '?';
+      block.appendChild(pip);
+    }
 
     const yr = document.createElement('div');
     yr.className = 'dynasty-year';
