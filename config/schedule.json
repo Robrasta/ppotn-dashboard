@@ -18,6 +18,13 @@
       "time": null,
       "place": "Stuart's House",
       "status": "scheduled"
+    },
+    {
+      "name": "SCHEDULE CHANGE",
+      "date": "2026-08-08",
+      "time": null,
+      "place": "TBD",
+      "status": "scheduled"
     }
   ]
 }
