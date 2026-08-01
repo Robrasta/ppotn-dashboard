@@ -80,11 +80,7 @@
   h1 { font-size: 26px; margin: 0; letter-spacing: 0.2px; display: flex; align-items: center; }
   h1 span { color: var(--accent); }
   .chip-icon { width: 51px; height: 51px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.45); flex-shrink: 0; }
-  .chip-icon-left { margin-right: 12px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .chip-icon-left:hover { transform: scale(1.06); }
-  .chip-icon-left:active { transform: scale(0.96); }
-  .chip-icon-left.is-spinning { animation: chip-spin 2.4s linear infinite; box-shadow: 0 0 14px rgba(62,207,142,0.55); }
-  @keyframes chip-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+  .chip-icon-left { margin-right: 12px; }
   .chip-icon-right { margin-left: 12px; }
   .meta { color: var(--text-dim); font-size: 13px; }
   .subtitle { color: var(--text-dim); margin: 6px 0 28px; font-size: 14px; }
@@ -240,8 +236,15 @@
   .dynasty-cell.is-open .dynasty-name { color: var(--accent); }
   .dynasty-cell.is-open .dynasty-year { color: var(--accent); }
   .dynasty-cell.is-gap .dynasty-block { background: repeating-linear-gradient(45deg, #3a4450, #3a4450 3px, transparent 3px, transparent 7px); border: 1px solid var(--border); box-shadow: none; }
-  .dynasty-cell.has-sound .dynasty-block { cursor: pointer; }
-  .dynasty-cell.has-sound:hover .dynasty-block { transform: translateY(-3px) scaleY(1.04); }
+  .dynasty-cell.has-sound .dynasty-block,
+  .dynasty-cell.has-photo .dynasty-block { cursor: pointer; }
+  .dynasty-cell.has-sound:hover .dynasty-block,
+  .dynasty-cell.has-photo:hover .dynasty-block { transform: translateY(-3px) scaleY(1.04); }
+  .dynasty-block { background-size: cover; background-position: center; background-repeat: no-repeat; }
+  .dynasty-cell.has-photo .dynasty-block { background-image: none !important; }
+  .dynasty-cell.has-photo .dynasty-block.show-photo { background-image: var(--card-photo) !important; }
+  .dynasty-block.show-photo .dynasty-pip,
+  .dynasty-block.show-photo .dynasty-name { opacity: 0; }
   .dynasty-block.is-playing { animation: card-pulse 0.9s ease-in-out infinite; }
   @keyframes card-pulse {
     0%, 100% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 4px rgba(255,255,255,0.15); }
@@ -375,7 +378,7 @@
 </div>
 <div class="wrap">
   <header>
-    <h1><img src="assets/chip-green-25.png" alt="" class="chip-icon chip-icon-left" id="chipSoundBtn">PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span><img src="assets/chip-orange-1000.png" alt="" class="chip-icon chip-icon-right"></h1>
+    <h1><img src="assets/chip-green-25.png" alt="" class="chip-icon chip-icon-left">PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span><img src="assets/chip-orange-1000.png" alt="" class="chip-icon chip-icon-right"></h1>
     <div style="text-align:right;">
       <div class="meta" id="lastUpdated">loading…</div>
       <div class="meta"><a href="docs/PPOTN-Constitution-and-Rules.pdf" id="constitutionLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">PPOTN Constitution &amp; Rules</a></div>
@@ -794,6 +797,14 @@ const DYNASTY_SOUNDS = {
   harrison: 'assets/harrison-sound.mp3',
   grissom: 'assets/grissom-sound.mp3',
   whited: 'assets/whited-sound.mp3',
+  klinect: 'assets/klinect-sound.mp3',
+  tawse: 'assets/tawse-sound.mp3',
+};
+
+// Champions whose cards flip to a photo instead of playing a clip. Click
+// once to show the photo, again to flip back to the card face.
+const DYNASTY_PHOTOS = {
+  graham: 'assets/graham-card.png',
 };
 
 function dynastyHash(name) {
@@ -848,11 +859,22 @@ function renderDynasty(history) {
       label.textContent = name;
       block.appendChild(label);
 
-      const clip = DYNASTY_SOUNDS[String(name).trim().toLowerCase()];
+      const key = String(name).trim().toLowerCase();
+      const clip = DYNASTY_SOUNDS[key];
       if (clip) {
         cell.classList.add('has-sound');
         block.addEventListener('click', () => {
           SoundToggle.toggle(block, clip, 'is-playing');
+        });
+      }
+
+      const pic = DYNASTY_PHOTOS[key];
+      if (pic) {
+        cell.classList.add('has-photo');
+        new Image().src = pic; // warm the cache so the first flip is instant
+        block.style.setProperty('--card-photo', 'url("' + pic + '")');
+        block.addEventListener('click', () => {
+          block.classList.toggle('show-photo');
         });
       }
     } else if (isOpen) {
@@ -1404,14 +1426,6 @@ const SoundToggle = (function () {
   }
 
   return { toggle: toggle, stop: stop };
-})();
-
-(function setupChipSound() {
-  const chip = document.getElementById('chipSoundBtn');
-  if (!chip) return;
-  chip.addEventListener('click', () => {
-    SoundToggle.toggle(chip, 'assets/chip-sound.mp3', 'is-spinning');
-  });
 })();
 
 if (localStorage.getItem(GATE_KEY) === '1') {
