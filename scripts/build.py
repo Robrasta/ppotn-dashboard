@@ -471,6 +471,9 @@ def build_season(tdt_paths, roster, seasons, manual_games=None):
         'tournaments': [
             {
                 'title': t['title'],
+                # Only games added by email carry a separate host; the older
+                # spreadsheet ones keep it inside the title string.
+                'host': t.get('host'),
                 'date': t['date'],
                 'season_id': t['season_id'],
                 'num_players': t['num_players'],
