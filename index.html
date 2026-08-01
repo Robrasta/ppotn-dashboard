@@ -240,11 +240,13 @@
   .dynasty-cell.has-photo .dynasty-block { cursor: pointer; }
   .dynasty-cell.has-sound:hover .dynasty-block,
   .dynasty-cell.has-photo:hover .dynasty-block { transform: translateY(-3px) scaleY(1.04); }
-  .dynasty-block { background-size: cover; background-position: center; background-repeat: no-repeat; }
-  .dynasty-cell.has-photo .dynasty-block { background-image: none !important; }
-  .dynasty-cell.has-photo .dynasty-block.show-photo { background-image: var(--card-photo) !important; }
-  .dynasty-block.show-photo .dynasty-pip,
-  .dynasty-block.show-photo .dynasty-name { opacity: 0; }
+  .dynasty-cell.has-photo .dynasty-block.show-photo { outline-color: var(--accent); }
+  .card-photo-pop {
+    position: absolute; z-index: 900; width: 148px; padding: 4px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    box-shadow: 0 10px 34px rgba(0,0,0,0.65); line-height: 0;
+  }
+  .card-photo-pop img { width: 100%; height: auto; border-radius: 6px; display: block; }
   .dynasty-block.is-playing { animation: card-pulse 0.9s ease-in-out infinite; }
   @keyframes card-pulse {
     0%, 100% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 4px rgba(255,255,255,0.15); }
@@ -801,11 +803,54 @@ const DYNASTY_SOUNDS = {
   tawse: 'assets/tawse-sound.mp3',
 };
 
-// Champions whose cards flip to a photo instead of playing a clip. Click
-// once to show the photo, again to flip back to the card face.
+// Champions whose cards pop out a photo instead of playing a clip. Click
+// once to show it, again (or anywhere else, or Escape) to dismiss.
 const DYNASTY_PHOTOS = {
   graham: 'assets/graham-card.png',
 };
+
+const CardPhotoPop = (function () {
+  let pop = null;
+  let owner = null;
+
+  function close() {
+    if (pop) { pop.remove(); pop = null; }
+    if (owner) { owner.classList.remove('show-photo'); owner = null; }
+  }
+
+  function toggle(block, src) {
+    if (owner === block) { close(); return; }
+    close();
+    owner = block;
+    block.classList.add('show-photo');
+
+    pop = document.createElement('div');
+    pop.className = 'card-photo-pop';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    pop.appendChild(img);
+    pop.addEventListener('click', e => { e.stopPropagation(); close(); });
+    document.body.appendChild(pop);
+
+    // Anchor above the card, flipping below if there isn't room, and keep it
+    // inside the viewport horizontally.
+    const r = block.getBoundingClientRect();
+    const w = pop.offsetWidth, h = pop.offsetHeight;
+    let left = r.left + window.scrollX + (r.width / 2) - (w / 2);
+    left = Math.max(8 + window.scrollX, Math.min(left, window.scrollX + document.documentElement.clientWidth - w - 8));
+    let top = r.top + window.scrollY - h - 10;
+    if (r.top - h - 10 < 0) top = r.bottom + window.scrollY + 10;
+    pop.style.left = Math.round(left) + 'px';
+    pop.style.top = Math.round(top) + 'px';
+  }
+
+  document.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  window.addEventListener('resize', close);
+
+  return { toggle: toggle, close: close };
+})();
 
 function dynastyHash(name) {
   const key = String(name || '').trim().toLowerCase();
@@ -871,10 +916,10 @@ function renderDynasty(history) {
       const pic = DYNASTY_PHOTOS[key];
       if (pic) {
         cell.classList.add('has-photo');
-        new Image().src = pic; // warm the cache so the first flip is instant
-        block.style.setProperty('--card-photo', 'url("' + pic + '")');
-        block.addEventListener('click', () => {
-          block.classList.toggle('show-photo');
+        new Image().src = pic; // warm the cache so the first click is instant
+        block.addEventListener('click', e => {
+          e.stopPropagation();
+          CardPhotoPop.toggle(block, pic);
         });
       }
     } else if (isOpen) {
