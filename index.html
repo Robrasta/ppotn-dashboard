@@ -80,7 +80,11 @@
   h1 { font-size: 26px; margin: 0; letter-spacing: 0.2px; display: flex; align-items: center; }
   h1 span { color: var(--accent); }
   .chip-icon { width: 51px; height: 51px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.45); flex-shrink: 0; }
-  .chip-icon-left { margin-right: 12px; }
+  .chip-icon-left { margin-right: 12px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .chip-icon-left:hover { transform: scale(1.06); }
+  .chip-icon-left:active { transform: scale(0.96); }
+  .chip-icon-left.is-spinning { animation: chip-spin 2.4s linear infinite; box-shadow: 0 0 14px rgba(62,207,142,0.55); }
+  @keyframes chip-spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
   .chip-icon-right { margin-left: 12px; }
   .meta { color: var(--text-dim); font-size: 13px; }
   .subtitle { color: var(--text-dim); margin: 6px 0 28px; font-size: 14px; }
@@ -364,7 +368,7 @@
 </div>
 <div class="wrap">
   <header>
-    <h1><img src="assets/chip-green-25.png" alt="" class="chip-icon chip-icon-left">PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span><img src="assets/chip-orange-1000.png" alt="" class="chip-icon chip-icon-right"></h1>
+    <h1><img src="assets/chip-green-25.png" alt="" class="chip-icon chip-icon-left" id="chipSoundBtn">PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span><img src="assets/chip-orange-1000.png" alt="" class="chip-icon chip-icon-right"></h1>
     <div style="text-align:right;">
       <div class="meta" id="lastUpdated">loading…</div>
       <div class="meta"><a href="docs/PPOTN-Constitution-and-Rules.pdf" id="constitutionLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">PPOTN Constitution &amp; Rules</a></div>
@@ -1337,6 +1341,33 @@ async function tryUnlock(pass) {
     document.getElementById('gatePassword').focus();
   }
 }
+
+// Left header chip doubles as a hidden play button. Deliberately unlabelled --
+// no tooltip, no alt text, no aria-label. Click once to play, again to stop.
+(function setupChipSound() {
+  const chip = document.getElementById('chipSoundBtn');
+  if (!chip) return;
+  let audio = null;
+
+  function stop() {
+    if (audio) { audio.pause(); audio.currentTime = 0; }
+    chip.classList.remove('is-spinning');
+  }
+
+  chip.addEventListener('click', () => {
+    if (audio && !audio.paused) { stop(); return; }
+    if (!audio) {
+      audio = new Audio('assets/chip-sound.mp3');
+      audio.preload = 'none';
+      audio.addEventListener('ended', stop);
+      audio.addEventListener('error', stop);
+    }
+    audio.currentTime = 0;
+    const p = audio.play();
+    if (p && p.catch) p.catch(stop);
+    chip.classList.add('is-spinning');
+  });
+})();
 
 if (localStorage.getItem(GATE_KEY) === '1') {
   unlockSite();
