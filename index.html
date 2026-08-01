@@ -240,6 +240,13 @@
   .dynasty-cell.is-open .dynasty-name { color: var(--accent); }
   .dynasty-cell.is-open .dynasty-year { color: var(--accent); }
   .dynasty-cell.is-gap .dynasty-block { background: repeating-linear-gradient(45deg, #3a4450, #3a4450 3px, transparent 3px, transparent 7px); border: 1px solid var(--border); box-shadow: none; }
+  .dynasty-cell.has-sound .dynasty-block { cursor: pointer; }
+  .dynasty-cell.has-sound:hover .dynasty-block { transform: translateY(-3px) scaleY(1.04); }
+  .dynasty-block.is-playing { animation: card-pulse 0.9s ease-in-out infinite; }
+  @keyframes card-pulse {
+    0%, 100% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 4px rgba(255,255,255,0.15); }
+    50% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 0 16px rgba(255,255,255,0.55); }
+  }
   .dynasty-legend { display: flex; flex-wrap: wrap; gap: 9px 16px; margin-top: 15px; font-size: 12px; color: var(--text-dim); }
   .dynasty-legend span { display: flex; align-items: center; gap: 7px; }
   .dynasty-swatch { width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; position: relative; border: 1px solid rgba(0,0,0,0.4); }
@@ -780,6 +787,12 @@ const DYNASTY_SUIT_PINNED = {
   harrison: '♠', hernandez: '♥', grissom: '♦', klinect: '♣',
 };
 
+// Champions with a hidden sound clip on their cards. Add a name here (lower
+// case) plus the file in assets/ to give someone else one.
+const DYNASTY_SOUNDS = {
+  jones: 'assets/jones-sound.mp3',
+};
+
 function dynastyHash(name) {
   const key = String(name || '').trim().toLowerCase();
   let h = 0;
@@ -831,6 +844,14 @@ function renderDynasty(history) {
       label.className = 'dynasty-name';
       label.textContent = name;
       block.appendChild(label);
+
+      const clip = DYNASTY_SOUNDS[String(name).trim().toLowerCase()];
+      if (clip) {
+        cell.classList.add('has-sound');
+        block.addEventListener('click', () => {
+          SoundToggle.toggle(block, clip, 'is-playing');
+        });
+      }
     } else if (isOpen) {
       const label = document.createElement('div');
       label.className = 'dynasty-name';
@@ -1342,30 +1363,51 @@ async function tryUnlock(pass) {
   }
 }
 
-// Left header chip doubles as a hidden play button. Deliberately unlabelled --
-// no tooltip, no alt text, no aria-label. Click once to play, again to stop.
-(function setupChipSound() {
-  const chip = document.getElementById('chipSoundBtn');
-  if (!chip) return;
+// Hidden play buttons. Deliberately unlabelled -- no tooltip, no alt text,
+// no aria-label. Click once to play, again to stop. Only one clip plays at a
+// time, so starting a new one cuts off whatever was already running.
+const SoundToggle = (function () {
   let audio = null;
+  let activeEl = null;
+  let activeClass = '';
+
+  function clear() {
+    if (activeEl) activeEl.classList.remove(activeClass);
+    activeEl = null;
+    activeClass = '';
+  }
 
   function stop() {
     if (audio) { audio.pause(); audio.currentTime = 0; }
-    chip.classList.remove('is-spinning');
+    clear();
   }
 
-  chip.addEventListener('click', () => {
-    if (audio && !audio.paused) { stop(); return; }
+  function toggle(el, src, playingClass) {
+    if (activeEl === el && audio && !audio.paused) { stop(); return; }
+    stop();
     if (!audio) {
-      audio = new Audio('assets/chip-sound.mp3');
+      audio = new Audio();
       audio.preload = 'none';
-      audio.addEventListener('ended', stop);
-      audio.addEventListener('error', stop);
+      audio.addEventListener('ended', clear);
+      audio.addEventListener('error', clear);
     }
+    if (audio.getAttribute('src') !== src) audio.setAttribute('src', src);
     audio.currentTime = 0;
+    activeEl = el;
+    activeClass = playingClass;
+    el.classList.add(playingClass);
     const p = audio.play();
-    if (p && p.catch) p.catch(stop);
-    chip.classList.add('is-spinning');
+    if (p && p.catch) p.catch(clear);
+  }
+
+  return { toggle: toggle, stop: stop };
+})();
+
+(function setupChipSound() {
+  const chip = document.getElementById('chipSoundBtn');
+  if (!chip) return;
+  chip.addEventListener('click', () => {
+    SoundToggle.toggle(chip, 'assets/chip-sound.mp3', 'is-spinning');
   });
 })();
 
