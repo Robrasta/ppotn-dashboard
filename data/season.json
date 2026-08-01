@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T22:10:24.283606Z",
+  "generated_at": "2026-08-01T22:29:21.778397Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -274,23 +274,23 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 9,
-              "num_players": 10,
-              "prize_dollars": 0,
-              "fee_paid": 100,
-              "net": -100,
-              "cumulative_winnings": 1940.0,
-              "cumulative_net": 640.0
-            },
-            {
-              "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
+              "title": "07/24/2026 - Game 1",
               "place": 3,
               "num_players": 10,
               "prize_dollars": 200,
               "fee_paid": 100,
               "net": 100,
+              "cumulative_winnings": 2140.0,
+              "cumulative_net": 840.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 9,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
               "cumulative_winnings": 2140.0,
               "cumulative_net": 740.0
             }
@@ -401,23 +401,23 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 2,
-              "num_players": 10,
-              "prize_dollars": 300,
-              "fee_paid": 100,
-              "net": 200,
-              "cumulative_winnings": 1200.0,
-              "cumulative_net": 300.0
-            },
-            {
-              "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
+              "title": "07/24/2026 - Game 1",
               "place": 1,
               "num_players": 10,
               "prize_dollars": 500,
               "fee_paid": 100,
               "net": 400,
+              "cumulative_winnings": 1400.0,
+              "cumulative_net": 500.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 2,
+              "num_players": 10,
+              "prize_dollars": 300,
+              "fee_paid": 100,
+              "net": 200,
               "cumulative_winnings": 1700.0,
               "cumulative_net": 700.0
             }
@@ -550,23 +550,23 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 3,
-              "num_players": 10,
-              "prize_dollars": 200,
-              "fee_paid": 100,
-              "net": 100,
-              "cumulative_winnings": 830.0,
-              "cumulative_net": -270.0
-            },
-            {
-              "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
+              "title": "07/24/2026 - Game 1",
               "place": 2,
               "num_players": 10,
               "prize_dollars": 300,
               "fee_paid": 100,
               "net": 200,
+              "cumulative_winnings": 930.0,
+              "cumulative_net": -170.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 3,
+              "num_players": 10,
+              "prize_dollars": 200,
+              "fee_paid": 100,
+              "net": 100,
               "cumulative_winnings": 1130.0,
               "cumulative_net": -70.0
             }
@@ -633,23 +633,23 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 1,
-              "num_players": 10,
-              "prize_dollars": 500,
-              "fee_paid": 100,
-              "net": 400,
-              "cumulative_winnings": 950.0,
-              "cumulative_net": 450.0
-            },
-            {
-              "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
+              "title": "07/24/2026 - Game 1",
               "place": 8,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
               "net": -100,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": -50.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 1,
+              "num_players": 10,
+              "prize_dollars": 500,
+              "fee_paid": 100,
+              "net": 400,
               "cumulative_winnings": 950.0,
               "cumulative_net": 350.0
             }
@@ -804,8 +804,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 4,
+              "title": "07/24/2026 - Game 1",
+              "place": 5,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -815,8 +815,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 5,
+              "title": "07/24/2026 - Game 2",
+              "place": 4,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1097,8 +1097,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 8,
+              "title": "07/24/2026 - Game 1",
+              "place": 9,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1108,8 +1108,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 9,
+              "title": "07/24/2026 - Game 2",
+              "place": 8,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1224,8 +1224,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 7,
+              "title": "07/24/2026 - Game 1",
+              "place": 4,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1235,8 +1235,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 4,
+              "title": "07/24/2026 - Game 2",
+              "place": 7,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1329,8 +1329,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 6,
+              "title": "07/24/2026 - Game 1",
+              "place": 10,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1340,8 +1340,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 10,
+              "title": "07/24/2026 - Game 2",
+              "place": 6,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1412,8 +1412,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 10,
+              "title": "07/24/2026 - Game 1",
+              "place": 7,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -1423,8 +1423,8 @@
             },
             {
               "date": "2026-07-24",
-              "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-              "place": 7,
+              "title": "07/24/2026 - Game 2",
+              "place": 10,
               "num_players": 10,
               "prize_dollars": 0,
               "fee_paid": 100,
@@ -2207,7 +2207,87 @@
       ]
     },
     {
-      "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
+      "title": "07/24/2026 - Game 1",
+      "date": "2026-07-24",
+      "season_id": "2026",
+      "num_players": 10,
+      "total_pot": 1000,
+      "source_file": "email @ 2026-08-01T22:09:17.100Z",
+      "results": [
+        {
+          "name": "Graham",
+          "place": 1,
+          "prize_dollars": 500,
+          "net": 400,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 2,
+          "prize_dollars": 300,
+          "net": 200,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 3,
+          "prize_dollars": 200,
+          "net": 100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Kotwas",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": false
+        },
+        {
+          "name": "Smith",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Heins",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 10,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "07/24/2026 - Game 2",
       "date": "2026-07-24",
       "season_id": "2026",
       "num_players": 10,
@@ -2279,86 +2359,6 @@
         },
         {
           "name": "Smith",
-          "place": 10,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": true
-        }
-      ]
-    },
-    {
-      "title": "2026-07-24 game \u2014 hosted by Jones (via email)",
-      "date": "2026-07-24",
-      "season_id": "2026",
-      "num_players": 10,
-      "total_pot": 1000,
-      "source_file": "email @ 2026-08-01T22:09:17.100Z",
-      "results": [
-        {
-          "name": "Graham",
-          "place": 1,
-          "prize_dollars": 500,
-          "net": 400,
-          "is_roster": true
-        },
-        {
-          "name": "Grissom",
-          "place": 2,
-          "prize_dollars": 300,
-          "net": 200,
-          "is_roster": true
-        },
-        {
-          "name": "Harrison",
-          "place": 3,
-          "prize_dollars": 200,
-          "net": 100,
-          "is_roster": true
-        },
-        {
-          "name": "McDowell",
-          "place": 4,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": true
-        },
-        {
-          "name": "Jones",
-          "place": 5,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": true
-        },
-        {
-          "name": "Matt Kotwas",
-          "place": 6,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": false
-        },
-        {
-          "name": "Smith",
-          "place": 7,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": true
-        },
-        {
-          "name": "Heins",
-          "place": 8,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": true
-        },
-        {
-          "name": "Lustgarten",
-          "place": 9,
-          "prize_dollars": 0,
-          "net": -100,
-          "is_roster": true
-        },
-        {
-          "name": "Klinect",
           "place": 10,
           "prize_dollars": 0,
           "net": -100,
