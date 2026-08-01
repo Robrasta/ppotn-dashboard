@@ -117,7 +117,8 @@
   canvas { max-height: 380px; }
   .tourn-header { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
   .tourn-title { font-weight: 600; }
-  .tourn-sub { color: var(--text-dim); font-size: 13px; }
+  .tourn-host { font-weight: 600; font-size: 13px; margin-top: 2px; }
+  .tourn-sub { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
   .empty { color: var(--text-dim); text-align: center; padding: 40px 0; }
   .legend-note { color: var(--text-dim); font-size: 12px; margin-top: 10px; }
   .table-scroll { overflow-x: auto; }
@@ -1002,6 +1003,7 @@ function renderTournaments(tournaments, roster) {
       <div class="card" style="background: var(--panel-2); margin-bottom: 14px;">
         <div class="tourn-header">
           <div class="tourn-title">${t.title}</div>
+          ${t.host ? `<div class="tourn-host">Hosted by ${t.host}</div>` : ''}
           <div class="tourn-sub">${t.date || ''} · ${t.num_players} players · $${Math.round(t.total_pot)} pot${t.season_id ? '' : ' · <span style="color:var(--text-dim)">outside tracked seasons</span>'}</div>
         </div>
         <table style="margin-top:10px;">
