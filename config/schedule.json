@@ -11,6 +11,13 @@
       "date": "2027-02-06",
       "place": "TBD",
       "status": "scheduled"
+    },
+    {
+      "name": "PPOTN Night",
+      "date": "2026-08-08",
+      "time": null,
+      "place": "jones",
+      "status": "scheduled"
     }
   ]
 }
