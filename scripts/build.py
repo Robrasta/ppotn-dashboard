@@ -344,7 +344,46 @@ def current_season(seasons):
 # Season aggregation
 # ---------------------------------------------------------------------------
 
-def build_season(tdt_paths, roster, seasons, manual_games=None):
+def build_extra_winnings(winnings_cfg, seasons, roster):
+    """Non-traditional earnings emailed in with the WINNINGS keyword.
+
+    These are net profit figures from games that don't follow the usual
+    format. They count toward the Winnings column of the standings only --
+    deliberately NOT toward games played, cashes, average finish or net, so
+    the consistency chart stays a pure game-play view.
+    """
+    canonical = {m['spreadsheet_name'].strip().lower(): m['spreadsheet_name'] for m in roster}
+    entries = winnings_cfg.get('entries', []) or []
+    out = []
+    for e in entries:
+        raw = (e.get('player') or '').strip()
+        try:
+            amount = round(float(e.get('amount') or 0), 2)
+        except (TypeError, ValueError):
+            print(f"WARNING: WINNINGS entry with bad amount {e.get('amount')!r} ignored", file=sys.stderr)
+            continue
+        if not raw or amount <= 0:
+            print(f"WARNING: WINNINGS entry {e!r} ignored (missing player or non-positive amount)", file=sys.stderr)
+            continue
+        player = canonical.get(raw.lower())
+        if not player:
+            print(f"WARNING: WINNINGS entry for unknown player {raw!r} ignored", file=sys.stderr)
+            continue
+        date = e.get('date')
+        se = season_for_date(date, seasons)
+        if not se:
+            print(f"WARNING: WINNINGS entry for {player} on {date!r} falls outside any season", file=sys.stderr)
+        out.append({
+            'date': date,
+            'player': player,
+            'amount': amount,
+            'note': e.get('note') or None,
+            'season_id': se['id'] if se else None,
+        })
+    return sorted(out, key=lambda x: (x.get('date') or ''), reverse=True)
+
+
+def build_season(tdt_paths, roster, seasons, manual_games=None, extra_winnings=None):
     # roster: list of {"spreadsheet_name": ..., "display_name": ...}
     # display_name is the Nickname that actually shows up in Tournament
     # Director's exports -- that's what we match against. spreadsheet_name
@@ -447,6 +486,38 @@ def build_season(tdt_paths, roster, seasons, manual_games=None):
             rec['total_winnings'] = round(rec['total_winnings'], 2)
             rec['total_fees'] = round(rec['total_fees'], 2)
             rec['net'] = round(rec['net'], 2)
+            rec['extra_winnings'] = 0.0
+
+        # Fold in non-traditional earnings. Winnings only -- tournaments_played,
+        # cashes, avg_place, itm_pct and net are all left alone on purpose so
+        # the consistency chart keeps measuring actual game play.
+        season_extras = [x for x in (extra_winnings or []) if x['season_id'] == s['id']]
+        extra_by_player = {}
+        for x in season_extras:
+            extra_by_player[x['player']] = round(extra_by_player.get(x['player'], 0.0) + x['amount'], 2)
+
+        for xname, xamount in extra_by_player.items():
+            rec = next((r for r in players.values() if r['name'] == xname), None)
+            if rec is None:
+                rec = {
+                    'uuid': f'extra:{xname}',
+                    'name': xname,
+                    'tournaments_played': 0,
+                    'wins': 0,
+                    'cashes': 0,
+                    'total_winnings': 0.0,
+                    'total_fees': 0.0,
+                    'net': 0.0,
+                    'best_place': None,
+                    'sum_place': 0,
+                    'history': [],
+                    'avg_place': None,
+                    'itm_pct': 0,
+                    'extra_winnings': 0.0,
+                }
+                players[rec['uuid']] = rec
+            rec['extra_winnings'] = round(rec['extra_winnings'] + xamount, 2)
+            rec['total_winnings'] = round(rec['total_winnings'] + xamount, 2)
 
         players_list = sorted(players.values(), key=lambda r: r['total_winnings'], reverse=True)
         leader_total = players_list[0]['total_winnings'] if players_list else 0
@@ -467,6 +538,7 @@ def build_season(tdt_paths, roster, seasons, manual_games=None):
         'current_season_id': cur_season_id,
         'roster': sorted(m['spreadsheet_name'] for m in roster),
         'seasons': seasons_out,
+        'extra_winnings': extra_winnings or [],
         'skipped_incomplete_files': skipped,
         'tournaments': [
             {
@@ -556,6 +628,7 @@ def main():
     schedule_cfg = load_json(os.path.join(config_dir, 'schedule.json'), {'events': []})
     photos_cfg = load_json(os.path.join(config_dir, 'photos.json'), {'photos': []})
     message_cfg = load_json(os.path.join(config_dir, 'message.json'), {'text': None})
+    winnings_cfg = load_json(os.path.join(config_dir, 'winnings.json'), {'entries': []})
 
     roster = roster_cfg.get('members', [])
     seasons = seasons_cfg.get('seasons', [])
@@ -569,7 +642,8 @@ def main():
     if not seasons:
         print("WARNING: config/seasons.json has no seasons -- tournaments won't be bucketed", file=sys.stderr)
 
-    season_data = build_season(tdt_paths, roster, seasons, manual_games)
+    extra_winnings = build_extra_winnings(winnings_cfg, seasons, roster)
+    season_data = build_season(tdt_paths, roster, seasons, manual_games, extra_winnings)
     season_data['history'] = build_history(history_cfg)
     season_data['scheduled_games'] = build_schedule(schedule_cfg)
     season_data['photos'] = build_photos(photos_cfg)
