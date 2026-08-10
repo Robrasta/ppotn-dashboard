@@ -406,6 +406,11 @@
         <h2>Recent Games</h2>
         <div id="tournaments"></div>
       </div>
+      <div class="card" id="extraWinningsCard" style="display:none;">
+        <h2>Non-traditional PPOTN Earnings</h2>
+        <div id="extraWinnings"></div>
+        <div class="legend-note">Counts toward season winnings only &mdash; not toward games played, cash rate or the consistency chart.</div>
+      </div>
     </aside>
   </div>
 </div>
@@ -500,6 +505,7 @@ async function load() {
   try { renderScheduledGames(data.scheduled_games); } catch (e) { console.error('renderScheduledGames failed', e); }
   try { renderLeaderboard(season); } catch (e) { console.error('renderLeaderboard failed', e); }
   try { renderScatter(season); } catch (e) { console.error('renderScatter failed', e); }
+  try { renderExtraWinnings(data, season); } catch (e) { console.error('renderExtraWinnings failed', e); }
   try { initScenarioBuilder(data); } catch (e) { console.error('initScenarioBuilder failed', e); }
   try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
   try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
@@ -660,6 +666,7 @@ function renderDrillDown(p) {
         <tbody>${rows}</tbody>
       </table>
     </div>
+    ${p.extra_winnings > 0 ? `<div class="legend-note">Plus ${Math.round(p.extra_winnings).toLocaleString()} in non-traditional earnings, which is why the winnings total above is higher than the games listed here.</div>` : ''}
   `;
 }
 
@@ -981,6 +988,27 @@ function renderCalculator() {
   buyinEl.addEventListener('input', update);
   playersEl.addEventListener('input', update);
   update();
+}
+
+// Per-player totals for the season\u0027s non-traditional earnings. Entries that
+// fall outside a tracked season are skipped, matching how they are scored.
+function renderExtraWinnings(data, season) {
+  var card = document.getElementById("extraWinningsCard");
+  var wrap = document.getElementById("extraWinnings");
+  if (!card || !wrap) return;
+  var seasonId = season && season.id;
+  var entries = (data.extra_winnings || []).filter(function (e) { return e.season_id && e.season_id === seasonId; });
+  if (!entries.length) { card.style.display = "none"; return; }
+  var totals = {};
+  entries.forEach(function (e) { totals[e.player] = (totals[e.player] || 0) + (e.amount || 0); });
+  var names = Object.keys(totals).sort(function (a, b) { return totals[b] - totals[a]; });
+  var rows = names.map(function (n) {
+    return "<tr><td class=" + "\u0027player-name\u0027" + ">" + n + "</td><td class=" + "\u0027num pos\u0027" + ">$" + Math.round(totals[n]).toLocaleString() + "</td></tr>";
+  }).join("");
+  var grand = names.reduce(function (t, n) { return t + totals[n]; }, 0);
+  card.style.display = "";
+  wrap.innerHTML = "<table><thead><tr><th>Player</th><th class=" + "\u0027num\u0027" + ">Earned</th></tr></thead><tbody>" + rows +
+    "</tbody><tfoot><tr><td class=" + "\u0027player-name\u0027" + ">Total</td><td class=" + "\u0027num\u0027" + ">$" + Math.round(grand).toLocaleString() + "</td></tr></tfoot></table>";
 }
 
 function renderTournaments(tournaments, roster) {
