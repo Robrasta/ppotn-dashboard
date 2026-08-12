@@ -18,6 +18,13 @@
       "time": null,
       "place": "jones",
       "status": "scheduled"
+    },
+    {
+      "name": "Legends Tournament",
+      "date": "2026-08-29",
+      "time": "5:30 PM",
+      "place": "Rastaland",
+      "status": "scheduled"
     }
   ]
 }
