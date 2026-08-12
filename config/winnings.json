@@ -1,1 +1,28 @@
-{"entries": []}
+{
+  "entries": [
+    {
+      "date": "2026-08-07",
+      "player": "Hernandez",
+      "amount": 796,
+      "note": null
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Klinect",
+      "amount": 548,
+      "note": null
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Whited",
+      "amount": 499,
+      "note": null
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Jones",
+      "amount": 278,
+      "note": null
+    }
+  ]
+}
