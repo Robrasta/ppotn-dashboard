@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T14:45:21.862750Z",
+  "generated_at": "2026-08-12T14:59:23.040730Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2552,6 +2552,13 @@
       "date": "2026-08-08",
       "time": null,
       "place": "jones",
+      "status": "scheduled"
+    },
+    {
+      "name": "Legends Tournament",
+      "date": "2026-08-29",
+      "time": "5:30 PM",
+      "place": "Rastaland",
       "status": "scheduled"
     },
     {
