@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>FF War Room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12181B;
+    --panel:#1C2427;
+    --panel-hi:#232D31;
+    --line:#2E3A3E;
+    --green:#4C7A3D;
+    --green-bright:#6FA357;
+    --amber:#E8A33D;
+    --bone:#ECE7DD;
+    --muted:#8B9296;
+    --red:#C4573B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(76,122,61,0.12), transparent),
+      radial-gradient(ellipse 700px 400px at 100% 0%, rgba(232,163,61,0.07), transparent),
+      var(--bg);
+    color:var(--bone);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    padding:32px 20px 60px;
+  }
+  .wrap{max-width:1180px; margin:0 auto;}
+  .back-link{
+    display:inline-block; margin-bottom:20px;
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+    font-size:12px; color:var(--muted); text-decoration:none;
+    letter-spacing:.04em;
+  }
+  .back-link:hover{color:var(--amber);}
+  header{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:2px solid var(--line);
+    padding-bottom:18px; margin-bottom:28px;
+    flex-wrap:wrap; gap:16px;
+  }
+  .title-block .eyebrow{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+    font-size:11px; letter-spacing:.18em; color:var(--amber);
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  h1{
+    font-family:'Oswald', 'Arial Narrow', sans-serif;
+    font-weight:700; font-size:38px; letter-spacing:.01em;
+    text-transform:uppercase; line-height:1;
+  }
+  .refresh-info{ text-align:right; }
+  .mail-link{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+    background:var(--green); color:#0e1210; text-decoration:none;
+    border:none; padding:12px 20px; font-size:13px; font-weight:600;
+    letter-spacing:.06em; text-transform:uppercase; cursor:pointer;
+    border-radius:2px; transition:background .15s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .mail-link:hover{background:var(--green-bright);}
+  .mail-link:focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+  .mail-link svg{width:14px; height:14px;}
+  .last-updated{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:11px; color:var(--muted);
+    margin-top:8px;
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;
+  }
+  @media (max-width:820px){ .grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    position:relative;
+  }
+  .card-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 20px; border-bottom:1px solid var(--line);
+    background:var(--panel-hi);
+  }
+  .league-name{
+    font-family:'Oswald', 'Arial Narrow', sans-serif; font-weight:600; font-size:18px;
+    text-transform:uppercase; letter-spacing:.02em;
+  }
+  .league-sub{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:10.5px; color:var(--muted);
+    margin-top:2px; letter-spacing:.03em;
+  }
+  .status-pill{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:10px; font-weight:600;
+    letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .status-live{background:rgba(76,122,61,0.25); color:var(--green-bright); border:1px solid var(--green);}
+  .status-pending{background:rgba(232,163,61,0.15); color:var(--amber); border:1px solid var(--amber);}
+  .status-setup{background:rgba(139,146,150,0.15); color:var(--muted); border:1px solid var(--line);}
+  .card-body{padding:20px;}
+  .scoreboard{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:18px;
+  }
+  .score-digits{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-weight:600; font-size:42px;
+    background:#0e1412; border:1px solid var(--line); border-radius:3px;
+    padding:6px 16px; letter-spacing:.02em;
+    color:var(--green-bright);
+    text-shadow:0 0 12px rgba(111,163,87,0.35);
+  }
+  .score-digits.dim{color:var(--muted); text-shadow:none;}
+  .score-label{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:11px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.08em;
+  }
+  .empty-state{
+    font-family:'Inter', sans-serif; font-size:13.5px; color:var(--muted);
+    line-height:1.6; padding:10px 0 4px;
+    border-top:1px dashed var(--line); margin-top:4px;
+  }
+  .empty-state strong{color:var(--bone);}
+  .roster-list{list-style:none; display:flex; flex-direction:column; gap:1px;}
+  .roster-row{
+    display:grid; grid-template-columns:34px 1fr auto; gap:10px; align-items:center;
+    padding:7px 0; border-bottom:1px solid var(--line);
+    font-size:13px;
+  }
+  .roster-row:last-child{border-bottom:none;}
+  .pos-tag{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:10px; font-weight:600;
+    color:var(--amber); background:rgba(232,163,61,0.1);
+    border:1px solid rgba(232,163,61,0.3); border-radius:2px;
+    text-align:center; padding:2px 0;
+  }
+  .player-name{font-weight:500;}
+  .player-team{color:var(--muted); font-size:11.5px; margin-left:5px;}
+  .stack-flag{
+    font-size:10px; color:var(--green-bright); margin-left:6px;
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+  }
+  .roster-pts{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:12.5px; color:var(--muted);
+  }
+  .loading{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:13px; color:var(--muted);
+    padding:20px;
+  }
+  .load-error{
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:13px; color:var(--red);
+    padding:20px; border:1px solid var(--red); border-radius:4px; background:rgba(196,87,59,0.08);
+  }
+  footer{
+    margin-top:32px; padding-top:18px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; font-size:11px; color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../index.html">&larr; Back to dashboard</a>
+  <header>
+    <div class="title-block">
+      <div class="eyebrow">4 Leagues &middot; 1 Command Post</div>
+      <h1>FF War Room</h1>
+    </div>
+    <div class="refresh-info">
+      <a class="mail-link" href="mailto:PPOTN420@gmail.com?subject=FF&body=Paste%20scores%20or%20attach%20a%20screenshot%20here.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+        Email an update
+      </a>
+      <div class="last-updated" id="lastUpdated">Loading&hellip;</div>
+    </div>
+  </header>
+  <div class="grid" id="leagueGrid">
+    <div class="loading">Loading league data&hellip;</div>
+  </div>
+  <footer>
+    <span>Scores calculated against each league's actual scoring rules &mdash; not generic PPR.</span>
+    <span id="weekLabel"></span>
+  </footer>
+</div>
+<script>
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  // ---- Scoring engine: computes fantasy points from raw stat lines + a league's scoring config ----
+  function calcPoints(stats, scoring){
+    if(!stats || !scoring) return null;
+    let pts = 0;
+    const map = {
+      pass_yd:"pass_yd", pass_td:"pass_td", int:"int",
+      rush_yd:"rush_yd", rush_td:"rush_td",
+      rec:"rec", rec_yd:"rec_yd", rec_td:"rec_td",
+      two_pt:"two_pt", fumble_lost:"fumble_lost", fumble_rec_td:"fumble_rec_td"
+    };
+    for(const key in map){
+      if(stats[key] != null && scoring[key] != null){
+        pts += stats[key] * scoring[key];
+      }
+    }
+    // Threshold bonuses: highest qualifying tier per stat wins (not stacked)
+    if(scoring.thresholds && scoring.thresholds.length){
+      const totals = {};
+      scoring.thresholds.forEach(t => {
+        const val = stats[t.stat];
+        if(val == null) return;
+        if(val >= t.min){
+          if(!totals[t.stat] || t.points > totals[t.stat]) totals[t.stat] = t.points;
+        }
+      });
+      Object.values(totals).forEach(bonus => pts += bonus);
+    }
+    // Big play bonus: flat points per qualifying play, if a count is provided
+    if(scoring.big_play_bonus && stats.big_plays_40 != null){
+      pts += stats.big_plays_40 * scoring.big_play_bonus.points;
+    }
+    return pts;
+  }
+
+  // Team total: an explicit `score` in the JSON always wins. Otherwise sum the
+  // computed points for players marked `starter` (or everyone, if none are marked).
+  function teamScore(lg){
+    if(lg.score !== null && lg.score !== undefined) return Number(lg.score);
+    const roster = lg.roster || [];
+    const marked = roster.filter(p => p.starter);
+    const counted = marked.length ? marked : roster;
+    const pts = counted.map(p => calcPoints(p.stats, lg.scoring)).filter(v => v !== null);
+    if(!pts.length) return null;
+    return pts.reduce((a, b) => a + b, 0);
+  }
+
+  function statusPillClass(status){
+    if(status === "live") return "status-live";
+    if(status === "pending") return "status-pending";
+    return "status-setup";
+  }
+  function renderRoster(roster, scoring){
+    if(!roster.length) return "";
+    return `<ul class="roster-list">` + roster.map(p => {
+      const pts = calcPoints(p.stats, scoring);
+      const ptsDisplay = pts !== null ? pts.toFixed(1) : "&mdash;";
+      return `
+      <li class="roster-row">
+        <span class="pos-tag">${esc(p.pos)}</span>
+        <span><span class="player-name">${esc(p.name)}</span><span class="player-team">${esc(p.team)}</span>${p.stack ? '<span class="stack-flag">&#9673; STACK</span>' : ''}</span>
+        <span class="roster-pts">${ptsDisplay}</span>
+      </li>
+    `;
+    }).join("") + `</ul>`;
+  }
+  function renderCard(lg){
+    const score = teamScore(lg);
+    const scoreDisplay = score !== null ? score.toFixed(1) : "--.-";
+    const emptyMsg = lg.status === "pending"
+      ? `<div class="empty-state">Draft is <strong>TBD</strong>. Once picks are in, email an update and this card goes live.</div>`
+      : lg.status === "config"
+      ? `<div class="empty-state">Waiting on <strong>league settings</strong> and roster.</div>`
+      : "";
+    return `
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="league-name">${esc(lg.name)}</div>
+            <div class="league-sub">${esc(lg.sub)}</div>
+          </div>
+          <div class="status-pill ${statusPillClass(lg.status)}">${esc(lg.statusLabel)}</div>
+        </div>
+        <div class="card-body">
+          <div class="scoreboard">
+            <div class="score-digits ${score === null ? 'dim' : ''}">${scoreDisplay}</div>
+            <div class="score-label">pts this week</div>
+          </div>
+          ${renderRoster(lg.roster || [], lg.scoring)}
+          ${emptyMsg}
+        </div>
+      </div>
+    `;
+  }
+  // Cache-buster: GitHub Pages caches aggressively, and without this a fresh
+  // football.json can take a long time to show up. Matches archive.html.
+  fetch("../data/football.json?t=" + Date.now())
+    .then(r => {
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(data => {
+      document.getElementById("leagueGrid").innerHTML = (data.leagues || []).map(renderCard).join("");
+      const updated = data.updated ? new Date(data.updated) : null;
+      document.getElementById("lastUpdated").textContent = updated
+        ? "Updated " + updated.toLocaleString([], {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"})
+        : "";
+      document.getElementById("weekLabel").textContent = data.week ? "Week " + data.week : "";
+    })
+    .catch(err => {
+      document.getElementById("leagueGrid").innerHTML =
+        `<div class="load-error">Couldn't load league data (${esc(err.message)}). Check that data/football.json exists and is valid JSON.</div>`;
+      document.getElementById("lastUpdated").textContent = "";
+    });
+</script>
+</body>
+</html>
