@@ -1,0 +1,99 @@
+{
+  "updated": "2026-08-17T00:00:00Z",
+  "week": 0,
+  "leagues": [
+    {
+      "id": "sleep",
+      "name": "Sleep League",
+      "sub": "12-team · Snake · Full PPR",
+      "status": "live",
+      "statusLabel": "Roster Set",
+      "score": null,
+      "scoring": {
+        "pass_yd": 0.04,
+        "pass_td": 4,
+        "int": -1,
+        "rush_yd": 0.1,
+        "rush_td": 6,
+        "rec": 1,
+        "rec_yd": 0.1,
+        "rec_td": 6,
+        "two_pt": 2,
+        "fumble_lost": -2,
+        "fumble_rec_td": 6,
+        "thresholds": []
+      },
+      "roster": [
+        { "pos": "QB", "name": "Drake Maye", "team": "NE", "stack": true },
+        { "pos": "QB", "name": "Kyler Murray", "team": "MIN" },
+        { "pos": "WR", "name": "Amon-Ra St. Brown", "team": "DET" },
+        { "pos": "WR", "name": "A.J. Brown", "team": "NE", "stack": true },
+        { "pos": "WR", "name": "Courtland Sutton", "team": "DEN" },
+        { "pos": "WR", "name": "Wan'Dale Robinson", "team": "TEN" },
+        { "pos": "WR", "name": "Jauan Jennings", "team": "SF" },
+        { "pos": "RB", "name": "Breece Hall", "team": "NYJ" },
+        { "pos": "RB", "name": "D'Andre Swift", "team": "CHI" },
+        { "pos": "RB", "name": "J.K. Dobbins", "team": "DEN" },
+        { "pos": "RB", "name": "Rachaad White", "team": "WAS" },
+        { "pos": "TE", "name": "Travis Kelce", "team": "KC" },
+        { "pos": "K", "name": "Jake Bates", "team": "DET" },
+        { "pos": "DEF", "name": "Texans", "team": "HOU" },
+        { "pos": "DEF", "name": "Packers", "team": "GB" }
+      ]
+    },
+    {
+      "id": "yahoo",
+      "name": "Yahoo",
+      "sub": "I-35 Fantasy Battle · 16-team H2H",
+      "status": "pending",
+      "statusLabel": "Draft Pending",
+      "score": null,
+      "scoring": {
+        "pass_yd": 0.04,
+        "pass_td": 4,
+        "int": -1,
+        "rush_yd": 0.1,
+        "rush_td": 6,
+        "rec": 1,
+        "rec_yd": 0.1,
+        "rec_td": 6,
+        "two_pt": 2,
+        "fumble_lost": -2,
+        "fumble_rec_td": 6,
+        "thresholds": [
+          { "stat": "pass_yd", "min": 300, "points": 4 },
+          { "stat": "pass_yd", "min": 350, "points": 8 },
+          { "stat": "pass_yd", "min": 400, "points": 12 },
+          { "stat": "rush_yd", "min": 100, "points": 4 },
+          { "stat": "rush_yd", "min": 150, "points": 8 },
+          { "stat": "rush_yd", "min": 200, "points": 12 },
+          { "stat": "rec_yd", "min": 100, "points": 4 },
+          { "stat": "rec_yd", "min": 150, "points": 8 },
+          { "stat": "rec_yd", "min": 200, "points": 12 }
+        ],
+        "big_play_bonus": { "min_yards": 40, "points": 2, "applies_to": ["completion", "pass_td", "rush", "rush_td", "reception", "rec_td"] }
+      },
+      "roster": []
+    },
+    {
+      "id": "bsfl",
+      "name": "BSFL League",
+      "sub": "Settings not yet loaded",
+      "status": "config",
+      "statusLabel": "Needs Setup",
+      "score": null,
+      "scoring": null,
+      "roster": []
+    },
+    {
+      "id": "legends",
+      "name": "Legends League",
+      "sub": "Auction draft & waivers · You're commish",
+      "status": "config",
+      "statusLabel": "Needs Setup",
+      "score": null,
+      "scoring": null,
+      "roster": []
+    }
+  ]
+}
