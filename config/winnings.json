@@ -23,6 +23,24 @@
       "player": "Jones",
       "amount": 278,
       "note": null
+    },
+    {
+      "date": "2026-08-29",
+      "player": "Harrison",
+      "amount": 800,
+      "note": null
+    },
+    {
+      "date": "2026-08-29",
+      "player": "Graham",
+      "amount": 480,
+      "note": null
+    },
+    {
+      "date": "2026-08-29",
+      "player": "Busby",
+      "amount": 320,
+      "note": null
     }
   ]
 }
