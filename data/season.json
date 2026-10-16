@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T15:21:22.944889Z",
+  "generated_at": "2026-10-16T15:52:24.117873Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -2899,13 +2899,6 @@
     "years_tracked": 19
   },
   "scheduled_games": [
-    {
-      "name": "Legends Tournament",
-      "date": "2026-08-29",
-      "time": "5:30 PM",
-      "place": "Rastaland",
-      "status": "scheduled"
-    },
     {
       "name": "PPOTN Night",
       "date": "2026-10-17",
