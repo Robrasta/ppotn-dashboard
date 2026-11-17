@@ -1605,5 +1605,110 @@
     ],
     "buyin": 100,
     "derived_payouts": true
+  },
+  {
+    "title": "10/17/2026 - Game 2",
+    "host": "Jones",
+    "game_number": 2,
+    "date": "2026-10-17",
+    "start_ms": 1792195200000,
+    "num_players": 9,
+    "total_pot": 900,
+    "incomplete": false,
+    "source_file": "email @ 2026-11-17T04:33:21.567Z",
+    "players": [
+      {
+        "uuid": "manual:Grissom",
+        "name": "Grissom",
+        "display_name": "Grissom",
+        "is_roster": true,
+        "place": 1,
+        "prize_dollars": 450,
+        "fee_paid": 100,
+        "net": 350
+      },
+      {
+        "uuid": "manual:Graham",
+        "name": "Graham",
+        "display_name": "Graham",
+        "is_roster": true,
+        "place": 2,
+        "prize_dollars": 270,
+        "fee_paid": 100,
+        "net": 170
+      },
+      {
+        "uuid": "manual:Hernandez",
+        "name": "Hernandez",
+        "display_name": "Hernandez",
+        "is_roster": true,
+        "place": 3,
+        "prize_dollars": 180,
+        "fee_paid": 100,
+        "net": 80
+      },
+      {
+        "uuid": "manual:Busby",
+        "name": "Busby",
+        "display_name": "Busby",
+        "is_roster": true,
+        "place": 4,
+        "prize_dollars": 0,
+        "fee_paid": 100,
+        "net": -100
+      },
+      {
+        "uuid": "manual:Klinect",
+        "name": "Klinect",
+        "display_name": "Klinect",
+        "is_roster": true,
+        "place": 5,
+        "prize_dollars": 0,
+        "fee_paid": 100,
+        "net": -100
+      },
+      {
+        "uuid": "manual:Jones",
+        "name": "Jones",
+        "display_name": "Jones",
+        "is_roster": true,
+        "place": 6,
+        "prize_dollars": 0,
+        "fee_paid": 100,
+        "net": -100
+      },
+      {
+        "uuid": "manual:McDowell",
+        "name": "McDowell",
+        "display_name": "McDowell",
+        "is_roster": true,
+        "place": 7,
+        "prize_dollars": 0,
+        "fee_paid": 100,
+        "net": -100
+      },
+      {
+        "uuid": "manual:Harrison",
+        "name": "Harrison",
+        "display_name": "Harrison",
+        "is_roster": true,
+        "place": 8,
+        "prize_dollars": 0,
+        "fee_paid": 100,
+        "net": -100
+      },
+      {
+        "uuid": "manual:Lustgarten",
+        "name": "Lustgarten",
+        "display_name": "Lustgarten",
+        "is_roster": true,
+        "place": 9,
+        "prize_dollars": 0,
+        "fee_paid": 100,
+        "net": -100
+      }
+    ],
+    "buyin": 100,
+    "derived_payouts": true
   }
 ]
