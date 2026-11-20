@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T04:34:22.101148Z",
+  "generated_at": "2026-11-20T01:12:26.799092Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -3249,6 +3249,13 @@
       "name": "PPOTN Night",
       "date": "2026-10-17",
       "time": null,
+      "place": "Stuart's House",
+      "status": "scheduled"
+    },
+    {
+      "name": "Stuart's House",
+      "date": "2026-11-20",
+      "time": "6:30 PM",
       "place": "Stuart's House",
       "status": "scheduled"
     },
