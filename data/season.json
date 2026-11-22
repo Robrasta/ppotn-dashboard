@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T22:11:28.300417Z",
+  "generated_at": "2026-11-22T22:18:20.539866Z",
   "current_season_id": "2026",
   "roster": [
     "Busby",
@@ -3569,13 +3569,6 @@
     "years_tracked": 19
   },
   "scheduled_games": [
-    {
-      "name": "Stuart's House",
-      "date": "2026-11-20",
-      "time": "6:30 PM",
-      "place": "Stuart's House",
-      "status": "scheduled"
-    },
     {
       "name": "Vegas Game",
       "date": "2027-01-16",
