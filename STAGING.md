@@ -24,11 +24,20 @@ During staging, the landing page links are relative to its staged location:
 ## Go-live swap (only when Rob approves)
 
 1. Move the current root `index.html` to `historical/index.html`.
+   - **Move it WHOLE and unmodified** apart from the relative-path fixes
+     below — do not rebuild, strip, or "improve" any part of it. In
+     particular, the dashboard's built-in analytics and finish-modeling
+     features (the Scenario / What-if / projected-finish tooling) must ALL be
+     preserved exactly as they are (Rob confirmed Nov 24, 2026). No rebuild of
+     those features is needed or wanted: they read the same
+     `data/season.json` the bot regenerates, so they keep working on the moved
+     page as long as the data path resolves.
    - **Path check required:** the dashboard uses relative paths —
      `fetch('data/season.json')`, `assets/chip-*.png`, `docs/...` links, and
      photo thumbnails under `photos/`. After the move, each of these must be
      prefixed with `../` (or the data/assets/docs/photos folders duplicated
-     under `historical/`) or the dashboard will break.
+     under `historical/`) or the dashboard will break — including the
+     analytics, which fetch `data/season.json` the same way.
 2. Move `landing/index.html` to the root as the new `index.html`.
 3. Update the landing links for the final layout:
    - Historical → `./historical/`
