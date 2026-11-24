@@ -41,16 +41,16 @@
   }
   .tagline { color: var(--text); font-size: clamp(16px, 3.5vw, 21px); margin: 0 0 6px; font-weight: 600; }
   .sub { color: var(--text-dim); font-size: 15px; margin: 0 0 40px; }
-  .choices { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+  .choices { display: flex; gap: 17px; justify-content: center; flex-wrap: wrap; }
   a.choice {
-    flex: 1 1 280px;
-    max-width: 340px;
+    flex: 1 1 238px;
+    max-width: 289px;
     display: block;
     text-decoration: none;
     background: var(--panel);
     border: 2px solid var(--border);
     border-radius: 14px;
-    padding: 30px 24px 26px;
+    padding: 26px 20px 22px;
     color: var(--text);
     transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   }
@@ -59,9 +59,9 @@
     border-color: var(--gold);
     box-shadow: 0 12px 32px rgba(0,0,0,0.45);
   }
-  a.choice .icon { font-size: 40px; display: block; margin-bottom: 12px; }
-  a.choice h2 { margin: 0 0 8px; font-size: 26px; color: var(--gold); letter-spacing: 1px; }
-  a.choice p { margin: 0; color: var(--text-dim); font-size: 14.5px; line-height: 1.5; }
+  a.choice .icon { font-size: 34px; display: block; margin-bottom: 10px; }
+  a.choice h2 { margin: 0 0 7px; font-size: 22px; color: var(--gold); letter-spacing: 1px; }
+  a.choice p { margin: 0; color: var(--text-dim); font-size: 12.5px; line-height: 1.5; }
   .staging {
     margin: 44px auto 0;
     max-width: 520px;
@@ -82,15 +82,15 @@
     <p class="sub">Friends playing together for 20+ years. Two tournaments a night, one Player of the Night.</p>
 
     <div class="choices">
-      <a class="choice" href="../index.html">
-        <span class="icon" aria-hidden="true">&#127942;</span>
-        <h2>Historical</h2>
-        <p>Current standings, season stats, and the league&rsquo;s historical records.</p>
-      </a>
       <a class="choice" href="../game/">
         <span class="icon" aria-hidden="true">&#9201;</span>
         <h2>New Game</h2>
         <p>Start a new tournament &mdash; the PPOTN tournament clock, blinds, seat draw, and bust-outs.</p>
+      </a>
+      <a class="choice" href="../index.html">
+        <span class="icon" aria-hidden="true">&#127942;</span>
+        <h2>Historical</h2>
+        <p>Current standings, season stats, and the league&rsquo;s historical records.</p>
       </a>
     </div>
 
