@@ -23,6 +23,9 @@ During staging, the landing page links are relative to its staged location:
 
 ## Go-live swap (only when Rob approves)
 
+Go-live happens **only** on Rob's explicit go — never automatically, and
+never as a side effect of staging work on this branch.
+
 1. Move the current root `index.html` to `historical/index.html`.
    - **Move it WHOLE and unmodified** apart from the relative-path fixes
      below — do not rebuild, strip, or "improve" any part of it. In
@@ -66,7 +69,17 @@ During staging, the landing page links are relative to its staged location:
    - Historical → `./historical/`
    - New Game → `./game/` (unchanged)
 4. Remove the "Staging preview" note from the landing page.
-5. Merge this branch to `main` (Pages only publishes `main`). Verify
+5. **Keep the passphrase gate at the site entry (Rob, Nov 24, 2026 —
+   MUST-KEEP).** The current site is protected by a passphrase-gate
+   overlay (in the current root `index.html`). In the new structure the
+   gate must protect the site's entry point: a visitor hitting the new
+   landing page at the root must pass the same passphrase check — the
+   existing passphrase, whose value is intentionally not recorded
+   anywhere in this repo or its docs — before they can reach either
+   Historical or New Game, exactly as the site is protected today.
+   Carry the gate over to the landing page as part of the swap; do not
+   launch the new structure without it.
+6. Merge this branch to `main` (Pages only publishes `main`). Verify
    www.ppotn.com serves the landing page, and that Historical and New Game
    both load, before announcing it to the league.
 
