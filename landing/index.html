@@ -44,13 +44,13 @@
   .choices { display: flex; gap: 17px; justify-content: center; flex-wrap: wrap; }
   a.choice {
     flex: 1 1 238px;
-    max-width: 289px;
+    max-width: 280px;
     display: block;
     text-decoration: none;
     background: var(--panel);
     border: 2px solid var(--border);
     border-radius: 14px;
-    padding: 26px 20px 22px;
+    padding: 22px 20px 19px;
     color: var(--text);
     transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   }
@@ -59,9 +59,42 @@
     border-color: var(--gold);
     box-shadow: 0 12px 32px rgba(0,0,0,0.45);
   }
-  a.choice .icon { font-size: 34px; display: block; margin-bottom: 10px; }
-  a.choice h2 { margin: 0 0 7px; font-size: 22px; color: var(--gold); letter-spacing: 1px; }
+  a.choice .icon { font-size: 30px; display: block; margin-bottom: 8px; }
+  a.choice h2 { margin: 0 0 7px; font-size: 20px; color: var(--gold); letter-spacing: 1px; }
   a.choice p { margin: 0; color: var(--text-dim); font-size: 12.5px; line-height: 1.5; }
+  .standings {
+    margin: 30px auto 0;
+    max-width: 640px;
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px 12px;
+    text-align: left;
+  }
+  .standings h2 {
+    margin: 0 0 4px;
+    font-size: 17px;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .standings .asof { margin: 0 0 10px; text-align: center; color: var(--text-dim); font-size: 12px; }
+  .standings-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 30px; }
+  .srow {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 2px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14.5px;
+  }
+  .srow .rank { color: var(--gold); font-weight: 700; min-width: 22px; text-align: right; }
+  .srow .pname { flex: 1; }
+  .srow .amt { color: var(--accent); font-weight: 600; }
+  @media (max-width: 560px) {
+    .standings-grid { grid-template-columns: 1fr; }
+  }
   .staging {
     margin: 44px auto 0;
     max-width: 520px;
@@ -93,6 +126,29 @@
         <p>Current standings, season stats, and the league&rsquo;s historical records.</p>
       </a>
     </div>
+
+    <section class="standings" aria-label="Current PPOTN standings">
+      <h2>Current Standings</h2>
+      <p class="asof">2026 season &middot; snapshot as of Nov 24, 2026</p>
+      <div class="standings-grid">
+        <div>
+          <div class="srow"><span class="rank">1</span><span class="pname">Rob Harrison</span><span class="amt">$3,800</span></div>
+          <div class="srow"><span class="rank">2</span><span class="pname">James Whited</span><span class="amt">$3,489</span></div>
+          <div class="srow"><span class="rank">3</span><span class="pname">Tom Graham</span><span class="amt">$2,900</span></div>
+          <div class="srow"><span class="rank">4</span><span class="pname">Joe Hernandez</span><span class="amt">$2,086</span></div>
+          <div class="srow"><span class="rank">5</span><span class="pname">Dave Grissom</span><span class="amt">$1,760</span></div>
+          <div class="srow"><span class="rank">6</span><span class="pname">Stuart Jones</span><span class="amt">$1,448</span></div>
+        </div>
+        <div>
+          <div class="srow"><span class="rank">7</span><span class="pname">Mike Heins</span><span class="amt">$950</span></div>
+          <div class="srow"><span class="rank">8</span><span class="pname">Chris McDowell</span><span class="amt">$830</span></div>
+          <div class="srow"><span class="rank">9</span><span class="pname">James Klinect</span><span class="amt">$728</span></div>
+          <div class="srow"><span class="rank">10</span><span class="pname">Bryce Busby</span><span class="amt">$590</span></div>
+          <div class="srow"><span class="rank">11</span><span class="pname">Sam Smith</span><span class="amt">$450</span></div>
+          <div class="srow"><span class="rank">12</span><span class="pname">Maia Lustgarten</span><span class="amt">$200</span></div>
+        </div>
+      </div>
+    </section>
 
     <p class="staging">Staging preview &mdash; this landing page is not live yet. It is being built in the background for ppotn.com.</p>
   </main>

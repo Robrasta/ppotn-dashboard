@@ -9,7 +9,16 @@ affecting www.ppotn.com.
 ## What's here
 
 - `landing/index.html` — NEW simple PPOTN landing page: big PPOTN heading and
-  two options, "Historical" and "New Game".
+  two options, "Historical" and "New Game". Below the two cards it also shows
+  the **current standings** (Rob, Nov 24, 2026: the standings moved onto the
+  landing/splash screen, in a two-column block under the cards; the two cards
+  shrank slightly to fit). The figures are a **static snapshot** of the 2026
+  standings from `data/season.json` as of Nov 24, 2026 — they do not update
+  on this branch. **Go-live checklist item:** when the landing page goes
+  live at the root, wire this block to read `data/season.json` live (same
+  single fetch the dashboard uses) so the standings never go stale; until
+  then, refresh the snapshot by hand if the figures are refreshed for a
+  staging review.
 - `game/index.html` — the PPOTN Tournament clock app (exported from the Muse
   artifact `ppotn-tournament`), staged to sit alongside the existing site.
 - `historical/index.html` — a copy of the legacy dashboard, already moved
@@ -86,6 +95,10 @@ never as a side effect of staging work on this branch.
 6. Merge this branch to `main` (Pages only publishes `main`). Verify
    www.ppotn.com serves the landing page, and that Historical and New Game
    both load, before announcing it to the league.
+7. **Wire the landing-page standings block to live data.** The standings
+   block under the landing cards is a static snapshot while staged (see
+   "What's here"). At go-live, replace the snapshot with a live read of
+   `data/season.json` so the landing standings always match Historical.
 
 ## Historical page (staged Nov 24, 2026)
 
