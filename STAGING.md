@@ -38,6 +38,20 @@ During staging, the landing page links are relative to its staged location:
      prefixed with `../` (or the data/assets/docs/photos folders duplicated
      under `historical/`) or the dashboard will break — including the
      analytics, which fetch `data/season.json` the same way.
+   **Must-keep under Historical (Rob confirmed Nov 24, 2026):** everything
+   below carries over with the moved page — none of it is optional:
+   - **Past champions record** — the historical list of previous PPOTN
+     champions, driven by `config/history.json`.
+   - **Photo gallery** — all pictures under `photos/`, indexed by
+     `config/photos.json`, **including the ability to add new photos
+     later** (new photo files plus a `config/photos.json` entry must keep
+     working the same way after the move).
+   - **Analytics and finish-modeling** — the Scenario / What-if /
+     projected-finish tooling (see step 1 above).
+   - **The one exception:** the Easter egg that plays a MIDI music file
+     when the champions list is clicked is **optional — it may be dropped
+     if it's hard to carry over.** Everything else on this list is
+     must-keep.
 2. Move `landing/index.html` to the root as the new `index.html`.
 3. Update the landing links for the final layout:
    - Historical → `./historical/`
