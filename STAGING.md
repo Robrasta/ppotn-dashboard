@@ -48,10 +48,19 @@ During staging, the landing page links are relative to its staged location:
      working the same way after the move).
    - **Analytics and finish-modeling** — the Scenario / What-if /
      projected-finish tooling (see step 1 above).
-   - **The one exception:** the Easter egg that plays a MIDI music file
-     when the champions list is clicked is **optional — it may be dropped
-     if it's hard to carry over.** Everything else on this list is
-     must-keep.
+   - **The champions sound Easter egg** — clicking a champion's card in
+     the champions/dynasty list plays that champion's hidden sound clip.
+     Rob first said this could be dropped, then reversed himself on
+     Nov 24, 2026: **it is MUST-KEEP, same as everything else on this
+     list.** It should survive automatically because the page moves
+     whole, but make sure its assets come along: the clips live in
+     `assets/` (`assets/jones-sound.mp3`, `assets/harrison-sound.mp3`,
+     `assets/grissom-sound.mp3`, `assets/whited-sound.mp3`,
+     `assets/klinect-sound.mp3`, `assets/tawse-sound.mp3`,
+     `assets/hernandez-sound.mp3`, wired up in the page's SOUND_MAP), so
+     the `../assets/` path fix in step 1 must cover them — if the sound
+     stops working after the move, a path broke; fix the path, don't
+     drop the feature.
 2. Move `landing/index.html` to the root as the new `index.html`.
 3. Update the landing links for the final layout:
    - Historical → `./historical/`
