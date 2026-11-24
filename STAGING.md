@@ -127,6 +127,8 @@ with ONLY these changes:
   message banner. At go-live, step 1's move is already done — this file
   replaces the "move it whole" step; just verify it once more.
 
+- **Layout update (Rob, Nov 24, 2026):** the 2026 standings (Season Leaderboard) section was removed from this page — the standings now live on the landing splash screen; the Champions (League History) card moved to the top of the main content and the Photo Gallery to the very bottom of the page (last section); all other features verified intact after the change.
+
 **Banner message (Rob, Nov 24, 2026):** the page renders the scrolling
 banner from `data.message` inside `data/season.json` (the build folds
 `config/message.json` into it). The current banner text stays as-is.
