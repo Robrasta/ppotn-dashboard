@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PPOTY — Poker Player of the Year</title>
+<style>
+  :root {
+    --bg: #0a120c;
+    --felt: #14532d;
+    --felt-dark: #0b3d20;
+    --felt-edge: #082c16;
+    --panel: #16241a;
+    --panel-2: #1d2f21;
+    --border: #2c4230;
+    --text: #f2ecd9;
+    --text-dim: #a9b3a0;
+    --accent: #3ecf8e;
+    --accent-2: #f7e08a;
+    --red: #e0655a;
+    --gold: #f2c94c;
+    --gold-deep: #d4a017;
+    --silver: #c7ccd1;
+    --bronze: #cd8a4d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(ellipse 130% 620px at 50% -80px, var(--felt) 0%, var(--felt-dark) 52%, rgba(10,18,12,0) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 32px 20px 80px; }
+  body.locked .wrap, body.locked .bg-totem { display: none; }
+  #gateOverlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: radial-gradient(ellipse at center, var(--felt) 0%, var(--felt-dark) 55%, var(--bg) 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #gateOverlay.hidden { display: none; }
+  .gate-box {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+    padding: 32px 28px; max-width: 340px; width: 100%; text-align: center;
+  }
+  .gate-box h1 { font-size: 20px; margin: 0 0 6px; display: block; font-family: Georgia, "Times New Roman", serif; color: var(--gold); letter-spacing: 0.4px; }
+  .gate-box p { color: var(--text-dim); font-size: 13px; margin: 0 0 20px; }
+  .gate-box input {
+    width: 100%; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border);
+    background: var(--panel-2); color: var(--text); font-size: 15px; margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  .gate-box button {
+    width: 100%; padding: 10px 12px; border-radius: 12px; border: none;
+    background: linear-gradient(180deg, var(--gold), var(--gold-deep)); color: #241a00; font-weight: 600; font-size: 14px; cursor: pointer;
+  }
+  .gate-error { color: var(--red); font-size: 13px; margin: 10px 0 0; min-height: 16px; }
+  .ticker {
+    display: none;
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--panel-2);
+    border: 1px solid rgba(212,160,23,0.45);
+    border-radius: 12px;
+    padding: 8px 0;
+    margin: 14px 0 0;
+  }
+  .ticker-track {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-scroll 22s linear infinite;
+    color: var(--accent-2);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  h1 { font-size: 26px; margin: 0; letter-spacing: 0.2px; display: flex; align-items: center; font-family: Georgia, "Times New Roman", serif; color: var(--gold); }
+  h1 span { color: var(--accent); }
+  .chip-icon { width: 51px; height: 51px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.45); flex-shrink: 0; }
+  .chip-icon-left { margin-right: 12px; }
+  .chip-icon-right { margin-left: 12px; }
+  .meta { color: var(--text-dim); font-size: 13px; }
+  .subtitle { color: var(--text-dim); margin: 6px 0 28px; font-size: 14px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gold); font-family: Georgia, "Times New Roman", serif; margin: 0 0 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .card h2 .badge { text-transform: none; font-size: 12px; color: var(--accent); letter-spacing: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--text-dim); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  tbody tr:hover { background: var(--panel-2); }
+  tbody tr.clickable { cursor: pointer; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rank { width: 28px; text-align: center; font-weight: 700; color: var(--text-dim); }
+  .rank.g { color: var(--gold); }
+  .rank.s { color: var(--silver); }
+  .rank.b { color: var(--bronze); }
+  .player-name { font-weight: 600; }
+  .player-name .chevron { display: inline-block; color: var(--text-dim); font-size: 11px; margin-right: 6px; transition: transform 0.15s; }
+  .player-name .chevron.open { transform: rotate(90deg); }
+  .pos { color: var(--accent); }
+  .neg { color: var(--red); }
+  .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; background: var(--panel-2); color: var(--text-dim);
+  }
+  .pill.win { background: rgba(242,201,76,0.15); color: var(--gold); }
+  .pill.guest { background: rgba(138,151,163,0.15); color: var(--text-dim); }
+  canvas { max-height: 380px; }
+  .tourn-header { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .tourn-title { font-weight: 600; }
+  .tourn-host { font-weight: 600; font-size: 13px; margin-top: 2px; }
+  .tourn-sub { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
+  .empty { color: var(--text-dim); text-align: center; padding: 40px 0; }
+  .legend-note { color: var(--text-dim); font-size: 12px; margin-top: 10px; }
+  .table-scroll { overflow-x: auto; }
+  .drill-row td { background: var(--panel-2); padding: 16px 20px; }
+  .drill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .drill-stat { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 8px 10px; }
+  .drill-stat .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; }
+  .drill-stat .value { font-size: 18px; font-weight: 700; margin-top: 2px; }
+  .calc-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 16px; }
+  .calc-field label { display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .calc-field input {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 9px;
+    color: var(--text); padding: 8px 10px; font-size: 14px; width: 110px;
+  }
+  .calc-results { display: flex; gap: 12px; flex-wrap: wrap; }
+  .calc-pill { background: var(--panel-2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 16px; }
+  .calc-pill .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+  .calc-pill .value { font-size: 20px; font-weight: 700; }
+  .calc-pill.first .value { color: var(--gold); }
+  .calc-pill.second .value { color: var(--silver); }
+  .calc-pill.third .value { color: var(--bronze); }
+  .champion-tag { font-size: 15px; font-weight: 500; color: var(--text-dim); margin-left: 14px; white-space: nowrap; }
+  .champion-name {
+    color: var(--gold);
+    font-weight: 800;
+    margin-left: 4px;
+    display: inline-block;
+    animation: championGlow 1.8s ease-in-out infinite;
+  }
+  @keyframes championGlow {
+    0%, 100% { text-shadow: 0 0 4px rgba(242,201,76,0.35); opacity: 1; transform: scale(1); }
+    50% { text-shadow: 0 0 12px rgba(242,201,76,0.95), 0 0 24px rgba(242,201,76,0.6); opacity: 0.88; transform: scale(1.04); }
+  }
+  .layout { display: grid; grid-template-columns: 240px 1fr 280px; gap: 24px; align-items: start; }
+  @media (max-width: 1200px) {
+    .layout { grid-template-columns: 240px 1fr; }
+    .sidebar-right { grid-column: 1 / -1; }
+  }
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar-right { grid-column: auto; }
+  }
+  .sched-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .sched-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .sched-item:first-child { padding-top: 0; }
+  .sched-name { font-weight: 700; font-size: 14px; }
+  .sched-date { font-size: 13px; margin-top: 2px; }
+  .sched-place { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .sched-item.official .sched-name,
+  .sched-item.official .sched-date {
+    color: var(--gold);
+    animation: championGlow 1.8s ease-in-out infinite;
+  }
+  .sched-item.official .sched-place { color: var(--gold); opacity: 0.75; }
+  .sched-item.proposed .sched-name { color: var(--text); }
+  .sched-item.proposed .sched-date { color: var(--text-dim); }
+  .sched-item.proposed .sched-place { color: var(--text-dim); }
+
+  .gallery-group { margin-bottom: 20px; }
+  .gallery-group:last-child { margin-bottom: 0; }
+  .gallery-date-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .gallery-thumb {
+    position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 12px;
+    cursor: pointer; background: var(--panel-2); border: 1px solid var(--border);
+  }
+  .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s ease; }
+  .gallery-thumb:hover img { transform: scale(1.06); }
+  .lightbox-overlay {
+    position: fixed; inset: 0; background: rgba(4,10,6,0.94);
+    display: none; align-items: center; justify-content: center; z-index: 1000; padding: 24px;
+  }
+  .lightbox-overlay.open { display: flex; }
+  .lightbox-overlay img { max-width: 100%; max-height: 86vh; border-radius: 12px; box-shadow: 0 10px 50px rgba(0,0,0,0.6); }
+  .lightbox-close, .lightbox-nav {
+    position: absolute; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text); cursor: pointer; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-close { top: 18px; right: 18px; width: 40px; height: 40px; font-size: 20px; }
+  .lightbox-nav { top: 50%; transform: translateY(-50%); width: 48px; height: 48px; font-size: 22px; }
+  .lightbox-prev { left: 18px; }
+  .lightbox-next { right: 18px; }
+  .lightbox-close:hover, .lightbox-nav:hover { background: rgba(255,255,255,0.18); }
+  .lightbox-caption { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: var(--text-dim); font-size: 13px; }
+
+  .scatter-legend { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: -6px 0 14px; font-size: 12px; color: var(--text-dim); }
+  .scatter-legend span { display: flex; align-items: center; gap: 6px; }
+  .scatter-key-dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(62,207,142,0.35); border: 1.5px solid var(--accent); flex-shrink: 0; }
+  .scatter-key-tri { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 11px solid var(--red); flex-shrink: 0; }
+  .scatter-key-note { color: var(--text-dim); opacity: 0.75; }
+  #scatterWrap svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .scatter-pt { cursor: default; transition: opacity 0.12s; }
+  #scatterWrap svg:has(.scatter-pt:hover) .scatter-pt { opacity: 0.35; }
+  #scatterWrap svg .scatter-pt:hover { opacity: 1; }
+
+  .dynasty { margin-bottom: 26px; }
+  .dynasty-label { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .dynasty-strip { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; }
+  .dynasty-cell { display: flex; flex-direction: column; gap: 4px; cursor: default; }
+  .dynasty-block {
+    height: 62px; border-radius: 4px; position: relative; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.38); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);
+    transition: transform 0.12s, outline-color 0.12s; outline: 2px solid transparent;
+  }
+  .dynasty-cell:hover .dynasty-block { transform: scaleY(1.06); outline-color: var(--text); }
+  .dynasty-pip { position: absolute; font-size: 11px; color: rgba(0,0,0,0.62); line-height: 1; z-index: 2; }
+  .dynasty-pip.tl { top: 3px; left: 3px; }
+  .dynasty-pip.br { bottom: 3px; right: 3px; }
+  .dynasty-name {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-size: 8px; font-weight: 700; letter-spacing: 0.4px; color: rgba(0,0,0,0.78);
+  }
+  .dynasty-year { font-size: 11px; color: var(--text-dim); text-align: center; font-variant-numeric: tabular-nums; }
+  .dynasty-cell.is-open .dynasty-block { background: transparent; border: 1px dashed var(--accent); box-shadow: none; }
+  .dynasty-cell.is-open .dynasty-name { color: var(--accent); }
+  .dynasty-cell.is-open .dynasty-year { color: var(--accent); }
+  .dynasty-cell.is-gap .dynasty-block { background: repeating-linear-gradient(45deg, #2c4230, #2c4230 3px, transparent 3px, transparent 7px); border: 1px solid var(--border); box-shadow: none; }
+  .dynasty-cell.has-sound .dynasty-block,
+  .dynasty-cell.has-photo .dynasty-block { cursor: pointer; }
+  .dynasty-cell.has-sound:hover .dynasty-block,
+  .dynasty-cell.has-photo:hover .dynasty-block { transform: translateY(-3px) scaleY(1.04); }
+  .dynasty-cell.has-photo .dynasty-block.show-photo { outline-color: var(--accent); }
+  .card-photo-pop {
+    position: absolute; z-index: 900; width: 148px; padding: 4px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: 0 10px 34px rgba(0,0,0,0.65); line-height: 0;
+  }
+  .card-photo-pop img { width: 100%; height: auto; border-radius: 6px; display: block; }
+  .dynasty-block.is-playing { animation: card-pulse 0.9s ease-in-out infinite; }
+  @keyframes card-pulse {
+    0%, 100% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 4px rgba(255,255,255,0.15); }
+    50% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6), 0 0 16px rgba(255,255,255,0.55); }
+  }
+  .dynasty-legend { display: flex; flex-wrap: wrap; gap: 9px 16px; margin-top: 15px; font-size: 12px; color: var(--text-dim); }
+  .dynasty-legend span { display: flex; align-items: center; gap: 7px; }
+  .dynasty-swatch { width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; position: relative; border: 1px solid rgba(0,0,0,0.4); }
+  .dynasty-swatch::after { content: ''; position: absolute; inset: 2px; border-radius: 50%; border: 1.5px dashed rgba(255,255,255,0.85); }
+  @media (max-width: 720px) {
+    .dynasty-strip { grid-template-columns: repeat(10, 1fr); gap: 4px; }
+    .dynasty-block { height: 42px; }
+  }
+
+  .scenario-game { background: var(--panel-2); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+  .scenario-game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
+  .scenario-game-title { font-weight: 700; font-size: 14px; }
+  .scenario-game-config { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 14px; }
+  .scenario-game-config .calc-field input { width: 90px; }
+  .scenario-pot-preview { font-size: 12px; color: var(--text-dim); margin-bottom: 12px; }
+  .scenario-pot-preview b { color: var(--text); }
+  .scenario-players { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px 16px; }
+  .scenario-player-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .scenario-player-row label { display: flex; align-items: center; gap: 6px; flex: 1; cursor: pointer; }
+  .scenario-player-row input[type="number"] {
+    width: 56px; background: var(--panel); border: 1px solid var(--border); border-radius: 9px;
+    color: var(--text); padding: 5px 6px; font-size: 13px;
+  }
+  .scenario-player-row input[type="number"]:disabled { opacity: 0.35; }
+  .scenario-remove-btn {
+    background: none; border: 1px solid var(--border); color: var(--text-dim); border-radius: 9px;
+    padding: 4px 10px; font-size: 12px; cursor: pointer;
+  }
+  .scenario-remove-btn:hover { color: var(--red); border-color: var(--red); }
+  .scenario-btn {
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 12px; padding: 8px 16px; font-size: 13px; cursor: pointer; margin-right: 10px;
+  }
+  .scenario-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .scenario-btn-ghost { color: var(--text-dim); }
+  .scenario-warning { color: var(--accent-2); font-size: 12px; margin-top: 8px; }
+  .scenario-empty { color: var(--text-dim); font-size: 13px; padding: 8px 0 16px; }
+  .rank-change { font-size: 11px; margin-left: 6px; white-space: nowrap; }
+  .rank-change.up { color: var(--accent); }
+  .rank-change.down { color: var(--red); }
+  .rank-change.same { color: var(--text-dim); }
+
+  .bg-totem {
+    position: fixed;
+    right: -10px;
+    bottom: -30px;
+    width: 150px;
+    height: 423px;
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @media (max-width: 900px) {
+    .bg-totem { display: none; }
+  }
+</style>
+</head>
+<body class="locked">
+<div id="gateOverlay">
+  <div class="gate-box">
+    <h1>PPOTY Dashboard</h1>
+    <p>Enter the league passphrase to continue.</p>
+    <input type="password" id="gatePassword" placeholder="Passphrase" autocomplete="off">
+    <button id="gateSubmit">Enter</button>
+    <div class="gate-error" id="gateError"></div>
+  </div>
+</div>
+<div class="bg-totem" aria-hidden="true">
+  <svg viewBox="0 0 170 480" width="100%" height="100%">
+    <defs>
+      <symbol id="bgSpd" viewBox="0 0 100 100"><path d="M50 8 C20 35 8 55 8 70 C8 85 22 92 35 85 C40 82 45 76 47 70 C44 88 38 92 30 96 L70 96 C62 92 56 88 53 70 C55 76 60 82 65 85 C78 92 92 85 92 70 C92 55 80 35 50 8Z"/></symbol>
+      <symbol id="bgDmd" viewBox="0 0 100 100"><path d="M50 4 L92 50 L50 96 L8 50Z"/></symbol>
+      <symbol id="bgHrt" viewBox="0 0 100 100"><path d="M50 92 C10 62 4 40 18 24 C30 10 48 14 50 32 C52 14 70 10 82 24 C96 40 90 62 50 92Z"/></symbol>
+      <symbol id="bgClb" viewBox="0 0 100 100"><path d="M50 10 C62 10 71 19 71 31 C71 37 69 42 65 46 C77 44 87 53 87 65 C87 77 77 86 65 86 C58 86 52 83 48 78 C50 88 54 92 62 96 L38 96 C46 92 50 88 52 78 C48 83 42 86 35 86 C23 86 13 77 13 65 C13 53 23 44 35 46 C31 42 29 37 29 31 C29 19 38 10 50 10Z"/></symbol>
+      <pattern id="bgDotsDark" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.3" fill="#0f1419"/></pattern>
+      <pattern id="bgDotsStone" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1" fill="#2c2a26"/></pattern>
+    </defs>
+
+    <rect x="37" y="0" width="16" height="480" rx="6" fill="#3a2a1e"/>
+    <rect x="125" y="0" width="16" height="480" rx="6" fill="#3a2a1e"/>
+    <g fill="#241810">
+      <rect x="35" y="60" width="20" height="7" rx="2"/>
+      <rect x="35" y="240" width="20" height="7" rx="2"/>
+      <rect x="35" y="420" width="20" height="7" rx="2"/>
+      <rect x="123" y="60" width="20" height="7" rx="2"/>
+      <rect x="123" y="240" width="20" height="7" rx="2"/>
+      <rect x="123" y="420" width="20" height="7" rx="2"/>
+    </g>
+
+    <rect x="77" y="140" width="16" height="325" fill="#1a1410"/>
+
+    <ellipse cx="85" cy="420" rx="52" ry="40" fill="#3d6b52" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="420" rx="52" ry="40" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="404" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgClb" x="63" y="398" width="44" height="44" fill="#12181c"/>
+
+    <ellipse cx="85" cy="346" rx="52" ry="40" fill="#e0a83f" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="346" rx="52" ry="40" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="330" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgDmd" x="63" y="324" width="44" height="44" fill="#12181c"/>
+
+    <ellipse cx="85" cy="272" rx="52" ry="38" fill="#c9553f" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="272" rx="52" ry="38" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="257" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgHrt" x="63" y="251" width="44" height="44" fill="#12181c"/>
+
+    <ellipse cx="85" cy="200" rx="52" ry="38" fill="#3ecf8e" stroke="#12181c" stroke-width="5"/>
+    <ellipse cx="85" cy="200" rx="52" ry="38" fill="url(#bgDotsDark)" opacity="0.15"/>
+    <ellipse cx="85" cy="185" rx="52" ry="8" fill="#12181c" opacity="0.3"/>
+    <use href="#bgSpd" x="63" y="179" width="44" height="44" fill="#12181c"/>
+
+    <rect x="67" y="138" width="36" height="26" fill="#4a453e" stroke="#12181c" stroke-width="3"/>
+
+    <rect x="27" y="8" width="116" height="132" rx="18" fill="#635d52" stroke="#12181c" stroke-width="6"/>
+    <rect x="27" y="8" width="116" height="132" rx="18" fill="url(#bgDotsStone)" opacity="0.35"/>
+    <rect x="37" y="44" width="96" height="20" rx="6" fill="#12181c"/>
+    <rect x="47" y="62" width="26" height="18" rx="3" fill="#0a0d0f"/>
+    <rect x="97" y="62" width="26" height="18" rx="3" fill="#0a0d0f"/>
+    <rect x="77" y="44" width="16" height="46" fill="#4a453e" stroke="#12181c" stroke-width="3"/>
+    <rect x="53" y="96" width="64" height="8" rx="2" fill="#12181c"/>
+    <path d="M45 108 Q85 124 125 108 L121 126 Q85 138 49 126 Z" fill="#524d44" stroke="#12181c" stroke-width="3"/>
+    <rect x="15" y="56" width="14" height="30" rx="4" fill="#524d44" stroke="#12181c" stroke-width="3"/>
+    <rect x="141" y="56" width="14" height="30" rx="4" fill="#524d44" stroke="#12181c" stroke-width="3"/>
+    <path d="M41 20 L41 132 M49 14 L49 136" stroke="#12181c" stroke-width="1.5" opacity="0.4"/>
+  </svg>
+</div>
+<div class="wrap">
+  <header>
+    <h1><img src="../assets/chip-green-25.png" alt="" class="chip-icon chip-icon-left">PPOTY <span>&middot;</span> League Dashboard<span class="champion-tag">Champion: <span class="champion-name" id="championName">—</span></span><img src="../assets/chip-orange-1000.png" alt="" class="chip-icon chip-icon-right"></h1>
+    <div style="text-align:right;">
+      <div class="meta" id="lastUpdated">loading…</div>
+      <div class="meta"><a href="../docs/PPOTN-Constitution-and-Rules.pdf" id="constitutionLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">PPOTN Constitution &amp; Rules</a></div>
+      <div class="meta"><a href="../docs/site-help.html" id="siteHelpLink" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">Site Help</a></div>
+          <div class="meta"><a href="../docs/ff.html" id="ffLink" target="_blank" rel="noopener" style="color:var(--bg); text-decoration:none;">FF War Room</a></div>
+</div>
+  </header>
+  <div class="subtitle">Poker Player of the Year — season standings, pulled straight from Tournament Director exports.</div>
+  <div class="ticker" id="siteMessage"><div class="ticker-track" id="siteMessageText"></div></div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="card">
+        <h2>Scheduled Games</h2>
+        <div id="scheduledGames"><div class="empty">Loading…</div></div>
+      </div>
+    </aside>
+    <div id="content">
+      <div class="empty">Loading season data…</div>
+    </div>
+    <aside class="sidebar-right">
+      <div class="card">
+        <h2>Recent Games</h2>
+        <div id="tournaments"></div>
+      </div>
+      <div class="card" id="extraWinningsCard" style="display:none;">
+        <h2>Non-traditional PPOTN Earnings</h2>
+        <div id="extraWinnings"></div>
+        <div class="legend-note">Counts toward season winnings only &mdash; not toward games played, cash rate or the consistency chart.</div>
+      </div>
+    </aside>
+  </div>
+  <div class="card">
+    <h2>Photo Gallery <span class="badge"><a href="https://forms.gle/92GndzF5ByH8uup99" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline dotted;">+ Submit a photo</a></span></h2>
+    <div id="photoGallery"><div class="empty">Loading photos…</div></div>
+  </div>
+</div>
+
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose">&#10005;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+let SEASON_DATA = null;
+
+async function load() {
+  const el = document.getElementById('content');
+  let data;
+  try {
+    const res = await fetch('../data/season.json?_=' + Date.now());
+    if (!res.ok) throw new Error('no data file');
+    data = await res.json();
+  } catch (e) {
+    el.innerHTML = '<div class="card"><div class="empty">No season data yet. Once tournament files are added to <code>../data/tournaments/</code> and the build runs, standings will show up here.</div></div>';
+    const galleryEl = document.getElementById('photoGallery');
+    if (galleryEl) galleryEl.innerHTML = '<div class="empty">No photos yet.</div>';
+    document.getElementById('lastUpdated').textContent = '';
+    return;
+  }
+  SEASON_DATA = data;
+
+  const season = data.seasons[data.current_season_id] || null;
+
+  document.getElementById('lastUpdated').textContent = data.generated_at
+    ? `updated ${new Date(data.generated_at).toLocaleString()}`
+    : '';
+
+  el.innerHTML = `
+    <div class="card">
+      <h2>League History</h2>
+      <div class="dynasty">
+        <div class="dynasty-label">Champion by year</div>
+        <div class="dynasty-strip" id="dynastyStrip"></div>
+        <div class="dynasty-legend" id="dynastyLegend"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Consistency <span class="badge">Average finish vs. cash rate</span></h2>
+      <div class="scatter-legend">
+        <span><span class="scatter-key-dot"></span>Up on the season</span>
+        <span><span class="scatter-key-tri"></span>Down on the season</span>
+        <span class="scatter-key-note">Marker size = games played</span>
+      </div>
+      <div id="scatterWrap"></div>
+      <div class="legend-note">Strong players sit toward the upper right — good average finish and cashing often. Small markers mean few games played, so read those with caution.</div>
+    </div>
+    <div class="card">
+      <h2>Game Payout Calculator</h2>
+      <div class="calc-row">
+        <div class="calc-field">
+          <label>Buy-in ($)</label>
+          <input type="number" id="calcBuyin" value="250" min="0" step="5">
+        </div>
+        <div class="calc-field">
+          <label>Players</label>
+          <input type="number" id="calcPlayers" value="12" min="0" step="1">
+        </div>
+      </div>
+      <div class="calc-results" id="calcResults"></div>
+      <div class="legend-note">Standard split: 50% / 30% / 20% of the pool to 1st / 2nd / 3rd.</div>
+    </div>
+    <div class="card">
+      <h2>Scenario Builder <span class="badge">What-if standings</span></h2>
+      <div class="legend-note" style="margin-top:-8px; margin-bottom:16px;">Add hypothetical games below to see how they'd shift the season leaderboard. This is a live sandbox — nothing here is saved or affects the real standings.</div>
+      <div id="scenarioGames"></div>
+      <div style="margin-bottom:18px;">
+        <button class="scenario-btn" id="addScenarioGameBtn">+ Add hypothetical game</button>
+        <button class="scenario-btn scenario-btn-ghost" id="resetScenarioBtn">Reset all</button>
+      </div>
+      <div id="scenarioResults"></div>
+    </div>
+  `;
+
+  try { renderChampionBadge(data.history); } catch (e) { console.error('renderChampionBadge failed', e); }
+  try { renderSiteMessage(data.message); } catch (e) { console.error('renderSiteMessage failed', e); }
+  try { renderScheduledGames(data.scheduled_games); } catch (e) { console.error('renderScheduledGames failed', e); }
+  try { renderScatter(season); } catch (e) { console.error('renderScatter failed', e); }
+  try { renderExtraWinnings(data, season); } catch (e) { console.error('renderExtraWinnings failed', e); }
+  try { initScenarioBuilder(data); } catch (e) { console.error('initScenarioBuilder failed', e); }
+  try { renderHistory(data.history); } catch (e) { console.error('renderHistory failed', e); }
+  try { renderCalculator(); } catch (e) { console.error('renderCalculator failed', e); }
+  try { renderTournaments(data.tournaments, data.roster); } catch (e) { console.error('renderTournaments failed', e); }
+  try { renderPhotoGallery(data.photos); } catch (e) { console.error('renderPhotoGallery failed', e); }
+}
+
+function renderSiteMessage(message) {
+  const wrap = document.getElementById('siteMessage');
+  const track = document.getElementById('siteMessageText');
+  if (!wrap || !track) return;
+  const text = message && message.text ? String(message.text).trim() : '';
+  if (!text) {
+    wrap.style.display = 'none';
+    return;
+  }
+  track.textContent = text;
+  wrap.style.display = 'block';
+}
+
+function renderChampionBadge(history) {
+  const el = document.getElementById('championName');
+  if (!el) return;
+  const champs = (history && history.champions) || [];
+  const decided = champs.filter(c => c.name).sort((a, b) => a.year - b.year);
+  const latest = decided.length ? decided[decided.length - 1] : null;
+  el.textContent = latest ? `${latest.name} (${latest.year})` : '—';
+}
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function ordinal(n) {
+  const rem100 = n % 100;
+  if (rem100 >= 11 && rem100 <= 13) return n + 'th';
+  switch (n % 10) {
+    case 1: return n + 'st';
+    case 2: return n + 'nd';
+    case 3: return n + 'rd';
+    default: return n + 'th';
+  }
+}
+
+function fmtFullDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d.getTime())) return dateStr;
+  return `${MONTH_NAMES[d.getMonth()]} ${ordinal(d.getDate())}, ${d.getFullYear()}`;
+}
+
+function renderScheduledGames(events) {
+  const wrap = document.getElementById('scheduledGames');
+  if (!wrap) return;
+  if (!events || !events.length) {
+    wrap.innerHTML = '<div class="empty">No games on the books yet.</div>';
+    return;
+  }
+  const sorted = events.slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+  wrap.innerHTML = sorted.map(e => {
+    const official = (e.status || 'scheduled') === 'scheduled';
+    return `
+      <div class="sched-item ${official ? 'official' : 'proposed'}">
+        <div class="sched-name">${e.name}</div>
+        <div class="sched-date">${fmtFullDate(e.date)}${e.time ? ' &middot; ' + e.time : ''}</div>
+        <div class="sched-place">${e.place || 'TBD'}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function medalClass(i) {
+  return i === 0 ? 'g' : i === 1 ? 's' : i === 2 ? 'b' : '';
+}
+
+function fmtMoney(n, showSign) {
+  const v = Math.round(n);
+  const sign = showSign && v > 0 ? '+' : '';
+  return `${v < 0 ? '-' : sign}$${Math.abs(v)}`;
+}
+
+function svgEsc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function renderScatter(season) {
+  const wrap = document.getElementById('scatterWrap');
+  if (!wrap) return;
+  const players = ((season && season.players) || []).filter(p => (p.tournaments_played || 0) > 0);
+  if (players.length < 2) {
+    wrap.innerHTML = '<div class="empty">Not enough games played yet to compare.</div>';
+    return;
+  }
+
+  const W = 720, H = 380;
+  const L = 54, R = 20, T = 24, B = 48;
+  const pw = W - L - R, ph = H - T - B;
+
+  // X is average finish, drawn reversed so "better" reads to the right.
+  const places = players.map(p => p.avg_place || 0);
+  const xMin = Math.max(1, Math.floor(Math.min.apply(null, places) - 0.6));
+  const xMax = Math.ceil(Math.max.apply(null, places) + 0.6);
+  const xOf = v => L + pw - ((v - xMin) / (xMax - xMin)) * pw;
+  const yOf = v => T + ph - (v / 100) * ph;
+  const rOf = g => 5 + Math.min(g, 14) * 1.0;
+
+  let g = '';
+
+  for (let t = 0; t <= 100; t += 25) {
+    const y = yOf(t);
+    g += `<line x1="${L}" y1="${y.toFixed(1)}" x2="${L + pw}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`;
+    g += `<text x="${L - 9}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--text-dim)">${t}%</text>`;
+  }
+  for (let v = xMin; v <= xMax; v += 1) {
+    const x = xOf(v);
+    g += `<line x1="${x.toFixed(1)}" y1="${T}" x2="${x.toFixed(1)}" y2="${T + ph}" stroke="var(--border)" stroke-width="1" opacity="0.45"/>`;
+    g += `<text x="${x.toFixed(1)}" y="${T + ph + 19}" text-anchor="middle" font-size="11" fill="var(--text-dim)">${v}</text>`;
+  }
+
+  g += `<text x="${L + pw / 2}" y="${H - 8}" text-anchor="middle" font-size="12" fill="var(--text-dim)">Average finish  (better →)</text>`;
+  g += `<text x="14" y="${T + ph / 2}" text-anchor="middle" font-size="12" fill="var(--text-dim)" transform="rotate(-90 14 ${T + ph / 2})">In the money %</text>`;
+
+  const pts = players.map(p => {
+    const games = p.tournaments_played || 0;
+    const r = rOf(games);
+    return {
+      name: p.name,
+      cx: xOf(p.avg_place || 0),
+      cy: yOf((p.itm_pct || 0) * 100),
+      r: r,
+      games: games,
+      net: p.net || 0,
+      avg: p.avg_place || 0,
+      itm: (p.itm_pct || 0) * 100,
+      up: (p.net || 0) > 0,
+    };
+  }).sort((a, b) => b.r - a.r);
+
+  // Place each name near its marker, trying positions in order until one
+  // clears every marker and every label already placed.
+  const overlaps = (a, b) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 || a.y1 > b.y2);
+  const taken = pts.map(p => ({
+    x1: p.cx - p.r - 1, x2: p.cx + p.r + 1,
+    y1: p.cy - p.r - 1, y2: p.cy + p.r + 1,
+  }));
+
+  pts.forEach(pt => {
+    const halfW = Math.max(20, pt.name.length * 3.2);
+    const boxAt = (x, y) => ({ x1: x - halfW, x2: x + halfW, y1: y - 9, y2: y + 2 });
+    const tries = [
+      [pt.cx, pt.cy - pt.r - 6],
+      [pt.cx, pt.cy + pt.r + 14],
+      [pt.cx + pt.r + halfW + 4, pt.cy + 4],
+      [pt.cx - pt.r - halfW - 4, pt.cy + 4],
+      [pt.cx, pt.cy - pt.r - 19],
+      [pt.cx, pt.cy + pt.r + 27],
+    ];
+    let chosen = null;
+    for (let i = 0; i < tries.length; i++) {
+      const c = tries[i];
+      if (c[0] - halfW < 2 || c[0] + halfW > W - 2 || c[1] < T + 2 || c[1] > T + ph + 10) continue;
+      const box = boxAt(c[0], c[1]);
+      if (!taken.some(b => overlaps(box, b))) { chosen = { x: c[0], y: c[1], box: box }; break; }
+    }
+    if (!chosen) {
+      const c = tries[0];
+      chosen = { x: c[0], y: c[1], box: boxAt(c[0], c[1]) };
+    }
+    taken.push(chosen.box);
+    pt.lx = chosen.x;
+    pt.ly = chosen.y;
+  });
+
+  pts.forEach(pt => {
+    const col = pt.up ? 'var(--accent)' : 'var(--red)';
+    const fill = pt.up ? 'rgba(62,207,142,0.32)' : 'rgba(224,101,90,0.30)';
+    const mark = pt.up
+      ? `<circle class="scatter-mark" cx="${pt.cx.toFixed(1)}" cy="${pt.cy.toFixed(1)}" r="${pt.r.toFixed(1)}" fill="${fill}" stroke="${col}" stroke-width="1.6"/>`
+      : `<polygon class="scatter-mark" points="${pt.cx.toFixed(1)},${(pt.cy - pt.r).toFixed(1)} ${(pt.cx - pt.r * 0.92).toFixed(1)},${(pt.cy + pt.r * 0.72).toFixed(1)} ${(pt.cx + pt.r * 0.92).toFixed(1)},${(pt.cy + pt.r * 0.72).toFixed(1)}" fill="${fill}" stroke="${col}" stroke-width="1.6" stroke-linejoin="round"/>`;
+    const money = (pt.net < 0 ? '-$' : '+$') + Math.abs(Math.round(pt.net)).toLocaleString();
+    const tip = `${pt.name} — avg finish ${pt.avg.toFixed(2)}, ${pt.itm.toFixed(1)}% ITM, ${pt.games} games, ${money}`;
+    g += `<g class="scatter-pt"><title>${svgEsc(tip)}</title>${mark}`
+      + `<text x="${pt.lx.toFixed(1)}" y="${pt.ly.toFixed(1)}" text-anchor="middle" font-size="11" fill="var(--text-dim)">${svgEsc(pt.name)}</text></g>`;
+  });
+
+  wrap.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Average finish versus in-the-money percentage for each player, with marker size showing games played">${g}</svg>`;
+}
+
+// Non-champion placeholder values that may appear in ../config/history.json --
+// years the league didn't run. Rendered as a hatched gap, not as a person.
+const DYNASTY_GAP_NAMES = ['covid', 'none', 'no season', 'cancelled', 'canceled'];
+
+// Colors are keyed to the person, not to their rank, so adding a future
+// champion never repaints anyone else's history. Known names are pinned;
+// anything new hashes deterministically into the same palette.
+const DYNASTY_PALETTE = ['#3ecf8e', '#f2b84b', '#5aa9e6', '#e0655a', '#c48ee0', '#7ed6a5', '#f2994a', '#9db4c0'];
+const DYNASTY_PINNED = {
+  jones: '#3ecf8e', graham: '#f2b84b', whited: '#5aa9e6', tawse: '#e0655a',
+  harrison: '#c48ee0', hernandez: '#7ed6a5', grissom: '#f2994a', klinect: '#9db4c0',
+};
+
+// Each champion also gets a fixed suit, so the strip stays readable without
+// relying on color alone.
+const DYNASTY_SUITS = ['♠', '♥', '♦', '♣'];
+const DYNASTY_SUIT_PINNED = {
+  jones: '♠', graham: '♦', whited: '♥', tawse: '♣',
+  harrison: '♠', hernandez: '♥', grissom: '♦', klinect: '♣',
+};
+
+// Champions with a hidden sound clip on their cards. Add a name here (lower
+// case) plus the file in ../assets/ to give someone else one.
+const DYNASTY_SOUNDS = {
+  jones: '../assets/jones-sound.mp3',
+  harrison: '../assets/harrison-sound.mp3',
+  grissom: '../assets/grissom-sound.mp3',
+  whited: '../assets/whited-sound.mp3',
+  klinect: '../assets/klinect-sound.mp3',
+  tawse: '../assets/tawse-sound.mp3',
+  hernandez: '../assets/hernandez-sound.mp3',
+};
+
+// Champions whose cards pop out a photo instead of playing a clip. Click
+// once to show it, again (or anywhere else, or Escape) to dismiss.
+const DYNASTY_PHOTOS = {
+  graham: '../assets/graham-card.png',
+};
+
+const CardPhotoPop = (function () {
+  let pop = null;
+  let owner = null;
+
+  function close() {
+    if (pop) { pop.remove(); pop = null; }
+    if (owner) { owner.classList.remove('show-photo'); owner = null; }
+  }
+
+  function toggle(block, src) {
+    if (owner === block) { close(); return; }
+    close();
+    owner = block;
+    block.classList.add('show-photo');
+
+    pop = document.createElement('div');
+    pop.className = 'card-photo-pop';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    pop.appendChild(img);
+    pop.addEventListener('click', e => { e.stopPropagation(); close(); });
+    document.body.appendChild(pop);
+
+    // Anchor above the card, flipping below if there isn't room, and keep it
+    // inside the viewport horizontally.
+    const r = block.getBoundingClientRect();
+    const w = pop.offsetWidth, h = pop.offsetHeight;
+    let left = r.left + window.scrollX + (r.width / 2) - (w / 2);
+    left = Math.max(8 + window.scrollX, Math.min(left, window.scrollX + document.documentElement.clientWidth - w - 8));
+    let top = r.top + window.scrollY - h - 10;
+    if (r.top - h - 10 < 0) top = r.bottom + window.scrollY + 10;
+    pop.style.left = Math.round(left) + 'px';
+    pop.style.top = Math.round(top) + 'px';
+  }
+
+  document.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  window.addEventListener('resize', close);
+
+  return { toggle: toggle, close: close };
+})();
+
+function dynastyHash(name) {
+  const key = String(name || '').trim().toLowerCase();
+  let h = 0;
+  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+function dynastyColor(name) {
+  const key = String(name || '').trim().toLowerCase();
+  if (DYNASTY_PINNED[key]) return DYNASTY_PINNED[key];
+  return DYNASTY_PALETTE[dynastyHash(name) % DYNASTY_PALETTE.length];
+}
+
+function dynastySuit(name) {
+  const key = String(name || '').trim().toLowerCase();
+  if (DYNASTY_SUIT_PINNED[key]) return DYNASTY_SUIT_PINNED[key];
+  return DYNASTY_SUITS[dynastyHash(name) % DYNASTY_SUITS.length];
+}
+
+function renderDynasty(history) {
+  const strip = document.getElementById('dynastyStrip');
+  const legend = document.getElementById('dynastyLegend');
+  if (!strip || !legend) return;
+  strip.innerHTML = '';
+  legend.innerHTML = '';
+
+  const champions = (history.champions || []).slice().sort((a, b) => a.year - b.year);
+  champions.forEach(c => {
+    const name = c.name;
+    const isGap = name && DYNASTY_GAP_NAMES.indexOf(String(name).trim().toLowerCase()) !== -1;
+    const isOpen = !name;
+
+    const cell = document.createElement('div');
+    cell.className = 'dynasty-cell' + (isOpen ? ' is-open' : isGap ? ' is-gap' : '');
+    cell.title = c.year + ' — ' + (isOpen ? 'in progress' : isGap ? 'no season (' + name + ')' : name);
+
+    const block = document.createElement('div');
+    block.className = 'dynasty-block';
+    if (!isOpen && !isGap) {
+      block.style.background = dynastyColor(name);
+      const suit = dynastySuit(name);
+      ['tl', 'br'].forEach(corner => {
+        const pip = document.createElement('div');
+        pip.className = 'dynasty-pip ' + corner;
+        pip.textContent = suit;
+        block.appendChild(pip);
+      });
+      const label = document.createElement('div');
+      label.className = 'dynasty-name';
+      label.textContent = name;
+      block.appendChild(label);
+
+      const key = String(name).trim().toLowerCase();
+      const clip = DYNASTY_SOUNDS[key];
+      if (clip) {
+        cell.classList.add('has-sound');
+        block.addEventListener('click', () => {
+          SoundToggle.toggle(block, clip, 'is-playing');
+        });
+      }
+
+      const pic = DYNASTY_PHOTOS[key];
+      if (pic) {
+        cell.classList.add('has-photo');
+        new Image().src = pic; // warm the cache so the first click is instant
+        block.addEventListener('click', e => {
+          e.stopPropagation();
+          CardPhotoPop.toggle(block, pic);
+        });
+      }
+    } else if (isOpen) {
+      const label = document.createElement('div');
+      label.className = 'dynasty-name';
+      label.textContent = 'TBD';
+      block.appendChild(label);
+    }
+
+    const yr = document.createElement('div');
+    yr.className = 'dynasty-year';
+    yr.textContent = String(c.year).slice(2);
+
+    cell.appendChild(block);
+    cell.appendChild(yr);
+    strip.appendChild(cell);
+  });
+
+  (history.trophy_counts || [])
+    .filter(t => DYNASTY_GAP_NAMES.indexOf(String(t.name || '').trim().toLowerCase()) === -1)
+    .forEach(t => {
+      const s = document.createElement('span');
+      const sw = document.createElement('span');
+      sw.className = 'dynasty-swatch';
+      sw.style.background = dynastyColor(t.name);
+      s.appendChild(sw);
+      s.appendChild(document.createTextNode(t.name + ' · ' + t.count));
+      legend.appendChild(s);
+    });
+}
+
+function renderHistory(history) {
+  const strip = document.getElementById('dynastyStrip');
+  if (!history || !history.champions || !history.champions.length) {
+    if (strip) strip.innerHTML = '<div class="empty">No history recorded yet.</div>';
+    return;
+  }
+  renderDynasty(history);
+}
+
+function renderCalculator() {
+  const buyinEl = document.getElementById('calcBuyin');
+  const playersEl = document.getElementById('calcPlayers');
+  const resultsEl = document.getElementById('calcResults');
+
+  function update() {
+    const buyin = parseFloat(buyinEl.value) || 0;
+    const players = parseFloat(playersEl.value) || 0;
+    const pool = buyin * players;
+    resultsEl.innerHTML = `
+      <div class="calc-pill"><div class="label">Pool</div><div class="value">$${Math.round(pool)}</div></div>
+      <div class="calc-pill first"><div class="label">1st (50%)</div><div class="value">$${Math.round(pool * 0.5)}</div></div>
+      <div class="calc-pill second"><div class="label">2nd (30%)</div><div class="value">$${Math.round(pool * 0.3)}</div></div>
+      <div class="calc-pill third"><div class="label">3rd (20%)</div><div class="value">$${Math.round(pool * 0.2)}</div></div>
+    `;
+  }
+  buyinEl.addEventListener('input', update);
+  playersEl.addEventListener('input', update);
+  update();
+}
+
+// Per-player totals for the season\u0027s non-traditional earnings. Entries that
+// fall outside a tracked season are skipped, matching how they are scored.
+function renderExtraWinnings(data, season) {
+  var card = document.getElementById("extraWinningsCard");
+  var wrap = document.getElementById("extraWinnings");
+  if (!card || !wrap) return;
+  var seasonId = season && season.id;
+  var entries = (data.extra_winnings || []).filter(function (e) { return e.season_id && e.season_id === seasonId; });
+  if (!entries.length) { card.style.display = "none"; return; }
+  var totals = {};
+  entries.forEach(function (e) { totals[e.player] = (totals[e.player] || 0) + (e.amount || 0); });
+  var names = Object.keys(totals).sort(function (a, b) { return totals[b] - totals[a]; });
+  var rows = names.map(function (n) {
+    return "<tr><td class=" + "\u0027player-name\u0027" + ">" + n + "</td><td class=" + "\u0027num pos\u0027" + ">$" + Math.round(totals[n]).toLocaleString() + "</td></tr>";
+  }).join("");
+  var grand = names.reduce(function (t, n) { return t + totals[n]; }, 0);
+  card.style.display = "";
+  wrap.innerHTML = "<table><thead><tr><th>Player</th><th class=" + "\u0027num\u0027" + ">Earned</th></tr></thead><tbody>" + rows +
+    "</tbody><tfoot><tr><td class=" + "\u0027player-name\u0027" + ">Total</td><td class=" + "\u0027num\u0027" + ">$" + Math.round(grand).toLocaleString() + "</td></tr></tfoot></table>";
+}
+
+function renderTournaments(tournaments, roster) {
+  const container = document.getElementById('tournaments');
+  if (!tournaments.length) {
+    container.innerHTML = '<div class="empty">No completed tournaments yet.</div>';
+    return;
+  }
+  const sorted = tournaments.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const recent = sorted.slice(0, 2);
+  container.innerHTML = recent.map(t => {
+    const rows = t.results.slice(0, 3).map(r => `
+      <tr>
+        <td class="rank ${medalClass((r.place || 99) - 1)}">${r.place ?? '–'}</td>
+        <td>${r.name}${!r.is_roster ? ' <span class="pill guest">guest</span>' : ''}</td>
+        <td class="num ${r.prize_dollars > 0 ? 'pos' : ''}">$${Math.round(r.prize_dollars)}</td>
+      </tr>
+    `).join('');
+    return `
+      <div class="card" style="background: var(--panel-2); margin-bottom: 14px;">
+        <div class="tourn-header">
+          <div class="tourn-title">${t.title}</div>
+          ${t.host ? `<div class="tourn-host">Hosted by ${t.host}</div>` : ''}
+          <div class="tourn-sub">${t.date || ''} · ${t.num_players} players · $${Math.round(t.total_pot)} pot${t.season_id ? '' : ' · <span style="color:var(--text-dim)">outside tracked seasons</span>'}</div>
+        </div>
+        <table style="margin-top:10px;">
+          <thead><tr><th></th><th>Player</th><th class="num">Prize</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    `;
+  }).join('');
+}
+
+function monthLabel(dateStr) {
+  if (!dateStr) return 'Undated';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d.getTime())) return 'Undated';
+  return `${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+let GALLERY_PHOTOS = [];
+
+function renderPhotoGallery(photos) {
+  const wrap = document.getElementById('photoGallery');
+  if (!wrap) return;
+  if (!photos || !photos.length) {
+    wrap.innerHTML = '<div class="empty">No photos yet.</div>';
+    return;
+  }
+  GALLERY_PHOTOS = photos.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+  const groups = [];
+  let curLabel = null, curGroup = null;
+  GALLERY_PHOTOS.forEach((p) => {
+    const label = monthLabel(p.date);
+    if (label !== curLabel) {
+      curLabel = label;
+      curGroup = { label, photos: [] };
+      groups.push(curGroup);
+    }
+    curGroup.photos.push(p);
+  });
+
+  wrap.innerHTML = groups.map(g => `
+    <div class="gallery-group">
+      <div class="gallery-date-label">${g.label}</div>
+      <div class="gallery-grid">
+        ${g.photos.map(p => `
+          <div class="gallery-thumb" data-id="${p.id}">
+            <img src="../${p.thumb}" alt="" loading="lazy">
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('.gallery-thumb').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-id');
+      const idx = GALLERY_PHOTOS.findIndex(p => p.id === id);
+      openLightbox(idx);
+    });
+  });
+}
+
+let lightboxIndex = 0;
+
+function openLightbox(idx) {
+  lightboxIndex = idx;
+  showLightboxImage();
+  document.getElementById('lightboxOverlay').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('open');
+}
+
+function showLightboxImage() {
+  const p = GALLERY_PHOTOS[lightboxIndex];
+  if (!p) return;
+  document.getElementById('lightboxImg').src = '../' + p.full;
+  document.getElementById('lightboxCaption').textContent = fmtFullDate(p.date);
+}
+
+function lightboxStep(delta) {
+  if (!GALLERY_PHOTOS.length) return;
+  lightboxIndex = (lightboxIndex + delta + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+  showLightboxImage();
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', () => lightboxStep(-1));
+document.getElementById('lightboxNext').addEventListener('click', () => lightboxStep(1));
+document.getElementById('lightboxOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'lightboxOverlay') closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  const overlay = document.getElementById('lightboxOverlay');
+  if (!overlay.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxStep(-1);
+  if (e.key === 'ArrowRight') lightboxStep(1);
+});
+
+// --- Scenario builder ---------------------------------------------------
+
+let scenarioGames = [];
+let scenarioGameSeq = 0;
+
+function baselineScenarioPlayers(data) {
+  const season = data.seasons[data.current_season_id];
+  const roster = data.roster || [];
+  const byName = {};
+  ((season && season.players) || []).forEach(p => { byName[p.name] = p; });
+  return roster.map(name => {
+    const p = byName[name];
+    if (p) {
+      return {
+        name,
+        tournaments_played: p.tournaments_played,
+        wins: p.wins,
+        cashes: p.cashes,
+        total_winnings: p.total_winnings,
+        net: p.net,
+        sum_place: p.sum_place,
+        best_place: p.best_place,
+      };
+    }
+    return { name, tournaments_played: 0, wins: 0, cashes: 0, total_winnings: 0, net: 0, sum_place: 0, best_place: null };
+  });
+}
+
+function scenarioPayout(place, pot) {
+  if (place === 1) return pot * 0.5;
+  if (place === 2) return pot * 0.3;
+  if (place === 3) return pot * 0.2;
+  return 0;
+}
+
+function addScenarioGame() {
+  scenarioGameSeq += 1;
+  scenarioGames.push({
+    id: scenarioGameSeq,
+    buyin: 100,
+    guests: 0,
+    guestPlacesRaw: '',
+    entries: {},
+  });
+  renderScenarioGames();
+  renderScenarioResults();
+}
+
+function parseGuestPlaces(raw) {
+  return (raw || '')
+    .split(',')
+    .map(s => parseInt(s.trim(), 10))
+    .filter(n => !isNaN(n));
+}
+
+function removeScenarioGame(id) {
+  scenarioGames = scenarioGames.filter(g => g.id !== id);
+  renderScenarioGames();
+  renderScenarioResults();
+}
+
+function captureScenarioFocus() {
+  const el = document.activeElement;
+  if (!el || typeof el.closest !== 'function' || !el.closest('#scenarioGames')) return null;
+  return {
+    action: el.getAttribute('data-action'),
+    gid: el.getAttribute('data-gid'),
+    name: el.getAttribute('data-name'),
+    selectionStart: (typeof el.selectionStart === 'number') ? el.selectionStart : null,
+  };
+}
+
+function restoreScenarioFocus(key) {
+  if (!key) return;
+  let selector = `[data-action="${key.action}"][data-gid="${key.gid}"]`;
+  if (key.name) selector += `[data-name="${key.name}"]`;
+  const el = document.querySelector('#scenarioGames ' + selector);
+  if (!el) return;
+  el.focus();
+  if (key.selectionStart !== null && typeof el.setSelectionRange === 'function') {
+    try { el.setSelectionRange(key.selectionStart, key.selectionStart); } catch (e) { /* ignore */ }
+  }
+}
+
+function renderScenarioGames() {
+  const wrap = document.getElementById('scenarioGames');
+  if (!wrap) return;
+  const focusKey = captureScenarioFocus();
+  const roster = (SEASON_DATA && SEASON_DATA.roster) || [];
+
+  if (!scenarioGames.length) {
+    wrap.innerHTML = '<div class="scenario-empty">No hypothetical games yet — click "+ Add hypothetical game" below to start.</div>';
+    return;
+  }
+
+  wrap.innerHTML = scenarioGames.map((g, gi) => {
+    const rosterCount = Object.keys(g.entries).length;
+    const guestCount = g.guests || 0;
+    const totalPlayers = rosterCount + guestCount;
+    const pot = (g.buyin || 0) * totalPlayers;
+    const guestPlaces = parseGuestPlaces(g.guestPlacesRaw);
+    const rosterPlaces = Object.values(g.entries).filter(v => v !== undefined && v !== null && v !== '' && !isNaN(v));
+    const dupe = rosterPlaces.length !== new Set(rosterPlaces).size;
+    const guestOverlap = rosterPlaces.some(p => guestPlaces.includes(p));
+    const enteredCount = rosterPlaces.length + guestPlaces.length;
+    return `
+      <div class="scenario-game" data-gid="${g.id}">
+        <div class="scenario-game-header">
+          <div class="scenario-game-title">Hypothetical Game ${gi + 1}</div>
+          <button class="scenario-remove-btn" data-action="remove" data-gid="${g.id}">Remove</button>
+        </div>
+        <div class="scenario-game-config">
+          <div class="calc-field">
+            <label>Buy-in ($)</label>
+            <input type="number" min="0" step="5" value="${g.buyin}" data-action="buyin" data-gid="${g.id}">
+          </div>
+          <div class="calc-field">
+            <label>Guests in game</label>
+            <input type="number" min="0" step="1" value="${guestCount}" data-action="guests" data-gid="${g.id}">
+          </div>
+        </div>
+        <div class="scenario-pot-preview">
+          Pot: <b>$${Math.round(pot)}</b> (${rosterCount} roster + ${guestCount} guest${guestCount === 1 ? '' : 's'}) &middot; standard split &mdash; 1st <b>$${Math.round(pot * 0.5)}</b> / 2nd <b>$${Math.round(pot * 0.3)}</b> / 3rd <b>$${Math.round(pot * 0.2)}</b>
+          <br>Guest buy-ins count toward the pot; guests don't appear in the projected standings below.
+        </div>
+        <div class="scenario-players">
+          ${roster.map(name => {
+            const val = g.entries[name];
+            const checked = val !== undefined;
+            return `
+              <div class="scenario-player-row">
+                <label>
+                  <input type="checkbox" data-action="toggle" data-gid="${g.id}" data-name="${name}" ${checked ? 'checked' : ''}>
+                  ${name}
+                </label>
+                <input type="number" min="1" step="1" placeholder="place" data-action="place" data-gid="${g.id}" data-name="${name}"
+                  value="${checked && val !== '' ? val : ''}" ${checked ? '' : 'disabled'}>
+              </div>
+            `;
+          }).join('')}
+        </div>
+        ${guestCount > 0 ? `
+          <div class="calc-field" style="margin-top:12px;">
+            <label>Guest finishes (optional — places guests took, e.g. "1, 4")</label>
+            <input type="text" placeholder="e.g. 1, 4" value="${g.guestPlacesRaw || ''}" data-action="guestPlaces" data-gid="${g.id}" style="width:220px;">
+          </div>
+        ` : ''}
+        ${dupe ? '<div class="scenario-warning">Two roster players cannot finish in the same place — fix the duplicate finish above.</div>' : ''}
+        ${guestOverlap ? '<div class="scenario-warning">A roster player and a guest can’t both be listed for the same place.</div>' : ''}
+        ${enteredCount > totalPlayers ? '<div class="scenario-warning">More finishes entered than total players in this game.</div>' : ''}
+      </div>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('[data-action="remove"]').forEach(btn => {
+    btn.addEventListener('click', () => removeScenarioGame(parseInt(btn.getAttribute('data-gid'), 10)));
+  });
+  wrap.querySelectorAll('[data-action="buyin"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      if (!g) return;
+      g.buyin = parseFloat(inp.value) || 0;
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="guests"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      if (!g) return;
+      g.guests = parseInt(inp.value, 10) || 0;
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="guestPlaces"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      if (!g) return;
+      g.guestPlacesRaw = inp.value;
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="toggle"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(cb.getAttribute('data-gid'), 10));
+      const name = cb.getAttribute('data-name');
+      if (!g) return;
+      if (cb.checked) {
+        g.entries[name] = '';
+      } else {
+        delete g.entries[name];
+      }
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+  wrap.querySelectorAll('[data-action="place"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const g = scenarioGames.find(x => x.id === parseInt(inp.getAttribute('data-gid'), 10));
+      const name = inp.getAttribute('data-name');
+      if (!g) return;
+      g.entries[name] = inp.value === '' ? '' : parseInt(inp.value, 10);
+      renderScenarioGames();
+      renderScenarioResults();
+    });
+  });
+
+  restoreScenarioFocus(focusKey);
+}
+
+function computeScenarioStandings() {
+  const baseline = baselineScenarioPlayers(SEASON_DATA);
+  const byName = {};
+  baseline.forEach(p => { byName[p.name] = Object.assign({}, p); });
+
+  scenarioGames.forEach(g => {
+    const rosterCount = Object.keys(g.entries).length;
+    const totalPlayers = rosterCount + (g.guests || 0);
+    const pot = (g.buyin || 0) * totalPlayers;
+    Object.keys(g.entries).forEach(name => {
+      const place = g.entries[name];
+      if (place === '' || place === undefined || place === null || isNaN(place)) return;
+      const p = byName[name];
+      if (!p) return;
+      const prize = scenarioPayout(place, pot);
+      p.total_winnings += prize;
+      p.net += (prize - (g.buyin || 0));
+      p.tournaments_played += 1;
+      p.sum_place += place;
+      if (place === 1) p.wins += 1;
+      if (prize > 0) p.cashes += 1;
+      p.best_place = p.best_place === null ? place : Math.min(p.best_place, place);
+    });
+  });
+
+  const projected = Object.values(byName).sort((a, b) => b.total_winnings - a.total_winnings);
+  const leader = projected.length ? projected[0].total_winnings : 0;
+  projected.forEach(p => { p.diff = p.total_winnings - leader; });
+
+  const baselineSorted = baseline.slice().sort((a, b) => b.total_winnings - a.total_winnings);
+  const baselineRank = {};
+  baselineSorted.forEach((p, i) => { baselineRank[p.name] = i + 1; });
+
+  return { projected, baselineRank };
+}
+
+function renderScenarioResults() {
+  const wrap = document.getElementById('scenarioResults');
+  if (!wrap) return;
+  if (!scenarioGames.length) {
+    wrap.innerHTML = '';
+    return;
+  }
+
+  const { projected, baselineRank } = computeScenarioStandings();
+  const rows = projected.map((p, i) => {
+    const rank = i + 1;
+    const oldRank = baselineRank[p.name] || rank;
+    let arrow = '<span class="rank-change same">&ndash;</span>';
+    if (oldRank > rank) arrow = `<span class="rank-change up">&#9650; ${oldRank - rank}</span>`;
+    if (oldRank < rank) arrow = `<span class="rank-change down">&#9660; ${rank - oldRank}</span>`;
+    return `
+      <tr>
+        <td class="rank ${medalClass(i)}">${rank}</td>
+        <td class="player-name">${p.name} ${arrow}</td>
+        <td class="num">${p.tournaments_played}</td>
+        <td class="num ${p.total_winnings > 0 ? 'pos' : ''}">$${Math.round(p.total_winnings)}</td>
+        <td class="num ${p.diff === 0 ? '' : 'neg'}">${p.diff === 0 ? '—' : fmtMoney(p.diff)}</td>
+      </tr>
+    `;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="legend-note" style="margin-bottom:10px;">Projected standings if the hypothetical games above played out as entered:</div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th></th><th>Player</th><th class="num">Played</th><th class="num">Winnings</th><th class="num">Diff</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function initScenarioBuilder(data) {
+  scenarioGames = [];
+  renderScenarioGames();
+  renderScenarioResults();
+  const addBtn = document.getElementById('addScenarioGameBtn');
+  const resetBtn = document.getElementById('resetScenarioBtn');
+  if (addBtn) addBtn.addEventListener('click', addScenarioGame);
+  if (resetBtn) resetBtn.addEventListener('click', () => {
+    scenarioGames = [];
+    renderScenarioGames();
+    renderScenarioResults();
+  });
+}
+
+// --- access gate -----------------------------------------------------
+const GATE_HASH = '2ed05414d66b2afaf55503c4314e98fc6bd858fc543ecdc543210b23a75e573a';
+const GATE_KEY = 'ppotn_unlocked_v1';
+
+async function sha256Hex(text) {
+  const enc = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function unlockSite() {
+  document.body.classList.remove('locked');
+  document.getElementById('gateOverlay').classList.add('hidden');
+  load();
+}
+
+async function tryUnlock(pass) {
+  const hash = await sha256Hex((pass || '').trim().toLowerCase());
+  if (hash === GATE_HASH) {
+    localStorage.setItem(GATE_KEY, '1');
+    document.getElementById('gateError').textContent = '';
+    unlockSite();
+  } else {
+    document.getElementById('gateError').textContent = 'Incorrect passphrase.';
+    document.getElementById('gatePassword').value = '';
+    document.getElementById('gatePassword').focus();
+  }
+}
+
+// Hidden play buttons. Deliberately unlabelled -- no tooltip, no alt text,
+// no aria-label. Click once to play, again to stop. Only one clip plays at a
+// time, so starting a new one cuts off whatever was already running.
+const SoundToggle = (function () {
+  let audio = null;
+  let activeEl = null;
+  let activeClass = '';
+
+  function clear() {
+    if (activeEl) activeEl.classList.remove(activeClass);
+    activeEl = null;
+    activeClass = '';
+  }
+
+  function stop() {
+    if (audio) { audio.pause(); audio.currentTime = 0; }
+    clear();
+  }
+
+  function toggle(el, src, playingClass) {
+    if (activeEl === el && audio && !audio.paused) { stop(); return; }
+    stop();
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.addEventListener('ended', clear);
+      audio.addEventListener('error', clear);
+    }
+    if (audio.getAttribute('src') !== src) audio.setAttribute('src', src);
+    audio.currentTime = 0;
+    activeEl = el;
+    activeClass = playingClass;
+    el.classList.add(playingClass);
+    const p = audio.play();
+    if (p && p.catch) p.catch(clear);
+  }
+
+  return { toggle: toggle, stop: stop };
+})();
+
+if (localStorage.getItem(GATE_KEY) === '1') {
+  unlockSite();
+} else {
+  document.getElementById('gateSubmit').addEventListener('click', () => {
+    tryUnlock(document.getElementById('gatePassword').value);
+  });
+  document.getElementById('gatePassword').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') tryUnlock(document.getElementById('gatePassword').value);
+  });
+  document.getElementById('gatePassword').focus();
+}
+</script>
+</body>
+</html>
+
