@@ -165,3 +165,26 @@ step 1.**
 4. **The bot rebuilds the standings** — the build workflow regenerates
    `data/season.json` automatically.
 5. **Verify** www.ppotn.com shows the new standings before calling it done.
+
+## GO-LIVE EXECUTED (Nov 24, 2026 — Rob's explicit "go")
+
+Rob approved go-live on Nov 24, 2026. The new structure was merged to `main`:
+
+- Root `index.html` is now the new PPOTN app (landing splash with the
+  flashing message banner, New Game / Statistics / Historical cards, the
+  2026 standings panel with the "Detailed standings" link, and the Next Up
+  card), carrying the whole approved preview feature set (Game Setup,
+  seat draw, tournament clock, Statistics with Consistency + Scenario
+  Modeler + Bragging Rights, Detailed Standings, Historical record book).
+  The splash refreshes its banner, standings, and Next Up live from
+  `data/season.json`.
+- The site's existing passphrase gate (SHA-256 overlay from the old root
+  page, unchanged mechanism and hash) protects the new root entry.
+- `game/index.html` is the latest standalone tournament app.
+- `statistics/index.html` opens the same app on the Statistics view.
+- `historical/index.html` remains the restyled, data-driven legacy
+  dashboard (champions, gallery, analytics, scenario, sounds intact).
+- A pre-go-live snapshot of the live data files sits in
+  `archive/snapshots/2026-11-24-1555-before-golive/`.
+- Rollback: revert the go-live merge commit on `main` (or reset `main`
+  to ee0d191e, the pre-go-live head) and Pages republishes the old site.

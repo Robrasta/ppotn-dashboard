@@ -1,0 +1,3975 @@
+{
+  "generated_at": "2026-11-22T22:18:20.539866Z",
+  "current_season_id": "2026",
+  "roster": [
+    "Busby",
+    "Graham",
+    "Grissom",
+    "Harrison",
+    "Heins",
+    "Hernandez",
+    "Jones",
+    "Klinect",
+    "Lustgarten",
+    "McDowell",
+    "Smith",
+    "Whited"
+  ],
+  "seasons": {
+    "2026": {
+      "id": "2026",
+      "label": "PPOTY 2026",
+      "start": "2025-03-07",
+      "end": null,
+      "num_tournaments": 20,
+      "players": [
+        {
+          "uuid": "manual:Harrison",
+          "name": "Harrison",
+          "tournaments_played": 20,
+          "wins": 4,
+          "cashes": 9,
+          "total_winnings": 3800.0,
+          "total_fees": 2000.0,
+          "net": 1000.0,
+          "best_place": 1,
+          "sum_place": 91,
+          "history": [
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 2 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 250.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 150.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 50.0
+            },
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": -50.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 120.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 10,
+              "prize_dollars": 500,
+              "fee_paid": 100,
+              "net": 400,
+              "cumulative_winnings": 1220.0,
+              "cumulative_net": 520.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 10,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1220.0,
+              "cumulative_net": 420.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 1490.0,
+              "cumulative_net": 590.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1490.0,
+              "cumulative_net": 490.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 1940.0,
+              "cumulative_net": 840.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1940.0,
+              "cumulative_net": 740.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 3,
+              "num_players": 10,
+              "prize_dollars": 200,
+              "fee_paid": 100,
+              "net": 100,
+              "cumulative_winnings": 2140.0,
+              "cumulative_net": 840.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 9,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2140.0,
+              "cumulative_net": 740.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2140.0,
+              "cumulative_net": 640.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 1,
+              "num_players": 10,
+              "prize_dollars": 500,
+              "fee_paid": 100,
+              "net": 400,
+              "cumulative_winnings": 2640.0,
+              "cumulative_net": 1040.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2640.0,
+              "cumulative_net": 940.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2640.0,
+              "cumulative_net": 840.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 2820.0,
+              "cumulative_net": 920.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 3000.0,
+              "cumulative_net": 1000.0
+            }
+          ],
+          "avg_place": 4.55,
+          "itm_pct": 0.45,
+          "extra_winnings": 800.0,
+          "diff": 0.0
+        },
+        {
+          "uuid": "manual:Whited",
+          "name": "Whited",
+          "tournaments_played": 10,
+          "wins": 3,
+          "cashes": 9,
+          "total_winnings": 3489.0,
+          "total_fees": 1000.0,
+          "net": 1990.0,
+          "best_place": 1,
+          "sum_place": 24,
+          "history": [
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 350.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 520.0
+            },
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 420.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 1170.0,
+              "cumulative_net": 770.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 2,
+              "num_players": 10,
+              "prize_dollars": 300,
+              "fee_paid": 100,
+              "net": 200,
+              "cumulative_winnings": 1470.0,
+              "cumulative_net": 970.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 10,
+              "prize_dollars": 500,
+              "fee_paid": 100,
+              "net": 400,
+              "cumulative_winnings": 1970.0,
+              "cumulative_net": 1370.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 2150.0,
+              "cumulative_net": 1450.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 2420.0,
+              "cumulative_net": 1620.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 2690.0,
+              "cumulative_net": 1790.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 2,
+              "num_players": 10,
+              "prize_dollars": 300,
+              "fee_paid": 100,
+              "net": 200,
+              "cumulative_winnings": 2990.0,
+              "cumulative_net": 1990.0
+            }
+          ],
+          "avg_place": 2.4,
+          "itm_pct": 0.9,
+          "extra_winnings": 499.0,
+          "diff": -311.0
+        },
+        {
+          "uuid": "manual:Graham",
+          "name": "Graham",
+          "tournaments_played": 16,
+          "wins": 3,
+          "cashes": 7,
+          "total_winnings": 2900.0,
+          "total_fees": 1600.0,
+          "net": 820.0,
+          "best_place": 1,
+          "sum_place": 67,
+          "history": [
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 1 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 350.0
+            },
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 2 \u2014 hosted by Jones",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 250.0
+            },
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 420.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 320.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 5,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 220.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 9,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 120.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 20.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 900.0,
+              "cumulative_net": 100.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 1,
+              "num_players": 10,
+              "prize_dollars": 500,
+              "fee_paid": 100,
+              "net": 400,
+              "cumulative_winnings": 1400.0,
+              "cumulative_net": 500.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 2,
+              "num_players": 10,
+              "prize_dollars": 300,
+              "fee_paid": 100,
+              "net": 200,
+              "cumulative_winnings": 1700.0,
+              "cumulative_net": 700.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 2150.0,
+              "cumulative_net": 1050.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 7,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2150.0,
+              "cumulative_net": 950.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2150.0,
+              "cumulative_net": 850.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 2420.0,
+              "cumulative_net": 1020.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2420.0,
+              "cumulative_net": 920.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 2420.0,
+              "cumulative_net": 820.0
+            }
+          ],
+          "avg_place": 4.19,
+          "itm_pct": 0.4375,
+          "extra_winnings": 480.0,
+          "diff": -900.0
+        },
+        {
+          "uuid": "manual:Hernandez",
+          "name": "Hernandez",
+          "tournaments_played": 16,
+          "wins": 1,
+          "cashes": 5,
+          "total_winnings": 2086.0,
+          "total_fees": 1600.0,
+          "net": -310.0,
+          "best_place": 1,
+          "sum_place": 95,
+          "history": [
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 2 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -200.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -120.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -220.0
+            },
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -320.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 360.0,
+              "cumulative_net": -240.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 360.0,
+              "cumulative_net": -340.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 2,
+              "num_players": 10,
+              "prize_dollars": 300,
+              "fee_paid": 100,
+              "net": 200,
+              "cumulative_winnings": 660.0,
+              "cumulative_net": -140.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 660.0,
+              "cumulative_net": -240.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 660.0,
+              "cumulative_net": -340.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 660.0,
+              "cumulative_net": -440.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 10,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 660.0,
+              "cumulative_net": -540.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 660.0,
+              "cumulative_net": -640.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 840.0,
+              "cumulative_net": -560.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 1290.0,
+              "cumulative_net": -210.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1290.0,
+              "cumulative_net": -310.0
+            }
+          ],
+          "avg_place": 5.94,
+          "itm_pct": 0.3125,
+          "extra_winnings": 796.0,
+          "diff": -1714.0
+        },
+        {
+          "uuid": "manual:Grissom",
+          "name": "Grissom",
+          "tournaments_played": 18,
+          "wins": 2,
+          "cashes": 6,
+          "total_winnings": 1760.0,
+          "total_fees": 1800.0,
+          "net": -40.0,
+          "best_place": 1,
+          "sum_place": 89,
+          "history": [
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -20.0
+            },
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": 330.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": 230.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": 130.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": 30.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": -70.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": -170.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": -270.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 630.0,
+              "cumulative_net": -370.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 2,
+              "num_players": 10,
+              "prize_dollars": 300,
+              "fee_paid": 100,
+              "net": 200,
+              "cumulative_winnings": 930.0,
+              "cumulative_net": -170.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 3,
+              "num_players": 10,
+              "prize_dollars": 200,
+              "fee_paid": 100,
+              "net": 100,
+              "cumulative_winnings": 1130.0,
+              "cumulative_net": -70.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1130.0,
+              "cumulative_net": -170.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 6,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1130.0,
+              "cumulative_net": -270.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 1310.0,
+              "cumulative_net": -190.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 1760.0,
+              "cumulative_net": 160.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1760.0,
+              "cumulative_net": 60.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1760.0,
+              "cumulative_net": -40.0
+            }
+          ],
+          "avg_place": 4.94,
+          "itm_pct": 0.3333,
+          "extra_winnings": 0.0,
+          "diff": -2040.0
+        },
+        {
+          "uuid": "manual:Jones",
+          "name": "Jones",
+          "tournaments_played": 20,
+          "wins": 1,
+          "cashes": 4,
+          "total_winnings": 1448.0,
+          "total_fees": 2000.0,
+          "net": -830.0,
+          "best_place": 1,
+          "sum_place": 91,
+          "history": [
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 2 \u2014 hosted by Jones",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -200.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -30.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 320.0
+            },
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 220.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 120.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 7,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": 20.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 6,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -80.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -180.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -280.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -380.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -480.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 5,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -580.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 4,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 720.0,
+              "cumulative_net": -680.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 900.0,
+              "cumulative_net": -600.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 5,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 900.0,
+              "cumulative_net": -700.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 1170.0,
+              "cumulative_net": -530.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1170.0,
+              "cumulative_net": -630.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1170.0,
+              "cumulative_net": -730.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 1170.0,
+              "cumulative_net": -830.0
+            }
+          ],
+          "avg_place": 4.55,
+          "itm_pct": 0.2,
+          "extra_winnings": 278.0,
+          "diff": -2352.0
+        },
+        {
+          "uuid": "manual:Heins",
+          "name": "Heins",
+          "tournaments_played": 6,
+          "wins": 2,
+          "cashes": 2,
+          "total_winnings": 950.0,
+          "total_fees": 600.0,
+          "net": 350.0,
+          "best_place": 1,
+          "sum_place": 33,
+          "history": [
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -200.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -300.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": 50.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 8,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": -50.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 1,
+              "num_players": 10,
+              "prize_dollars": 500,
+              "fee_paid": 100,
+              "net": 400,
+              "cumulative_winnings": 950.0,
+              "cumulative_net": 350.0
+            }
+          ],
+          "avg_place": 5.5,
+          "itm_pct": 0.3333,
+          "extra_winnings": 0.0,
+          "diff": -2850.0
+        },
+        {
+          "uuid": "manual:McDowell",
+          "name": "McDowell",
+          "tournaments_played": 14,
+          "wins": 1,
+          "cashes": 3,
+          "total_winnings": 830.0,
+          "total_fees": 1400.0,
+          "net": -570.0,
+          "best_place": 1,
+          "sum_place": 72,
+          "history": [
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 2 \u2014 hosted by Jones",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -20.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -120.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -220.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 6,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -320.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -420.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -520.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -620.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 4,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -720.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 7,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -820.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -920.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 3,
+              "num_players": 10,
+              "prize_dollars": 200,
+              "fee_paid": 100,
+              "net": 100,
+              "cumulative_winnings": 380.0,
+              "cumulative_net": -820.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 830.0,
+              "cumulative_net": -470.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 830.0,
+              "cumulative_net": -570.0
+            }
+          ],
+          "avg_place": 5.14,
+          "itm_pct": 0.2143,
+          "extra_winnings": 0.0,
+          "diff": -2970.0
+        },
+        {
+          "uuid": "manual:Klinect",
+          "name": "Klinect",
+          "tournaments_played": 12,
+          "wins": 0,
+          "cashes": 1,
+          "total_winnings": 728.0,
+          "total_fees": 1200.0,
+          "net": -1020.0,
+          "best_place": 3,
+          "sum_place": 85,
+          "history": [
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 3,
+              "num_players": 9,
+              "prize_dollars": 180,
+              "fee_paid": 100,
+              "net": 80,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": 80.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -20.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -120.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -220.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 1 \u2014 hosted by Whited",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -320.0
+            },
+            {
+              "date": "2026-07-10",
+              "title": "Night 6 Game 2 \u2014 hosted by Whited",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -420.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 10,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -520.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 6,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -620.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -720.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -820.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -920.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 180.0,
+              "cumulative_net": -1020.0
+            }
+          ],
+          "avg_place": 7.08,
+          "itm_pct": 0.0833,
+          "extra_winnings": 548.0,
+          "diff": -3072.0
+        },
+        {
+          "uuid": "manual:Busby",
+          "name": "Busby",
+          "tournaments_played": 8,
+          "wins": 0,
+          "cashes": 1,
+          "total_winnings": 590.0,
+          "total_fees": 800.0,
+          "net": -530.0,
+          "best_place": 2,
+          "sum_place": 41,
+          "history": [
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 2,
+              "num_players": 9,
+              "prize_dollars": 270,
+              "fee_paid": 100,
+              "net": 170,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": 70.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 1",
+              "place": 6,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -30.0
+            },
+            {
+              "date": "2026-09-27",
+              "title": "09/27/2026 - Game 2",
+              "place": 4,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -130.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -230.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -330.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -430.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 270.0,
+              "cumulative_net": -530.0
+            }
+          ],
+          "avg_place": 5.12,
+          "itm_pct": 0.125,
+          "extra_winnings": 320.0,
+          "diff": -3210.0
+        },
+        {
+          "uuid": "manual:Smith",
+          "name": "Smith",
+          "tournaments_played": 8,
+          "wins": 1,
+          "cashes": 1,
+          "total_winnings": 450.0,
+          "total_fees": 800.0,
+          "net": -350.0,
+          "best_place": 1,
+          "sum_place": 48,
+          "history": [
+            {
+              "date": "2026-04-18",
+              "title": "Night 3 Game 1 \u2014 hosted by Jones",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2026-04-19",
+              "title": "Night 3 Game 2 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -200.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 9,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -300.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 5,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -400.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 7,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -500.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 10,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -600.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 2",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -700.0
+            },
+            {
+              "date": "2026-11-20",
+              "title": "11/20/2026 - Game 1",
+              "place": 1,
+              "num_players": 9,
+              "prize_dollars": 450,
+              "fee_paid": 100,
+              "net": 350,
+              "cumulative_winnings": 450.0,
+              "cumulative_net": -350.0
+            }
+          ],
+          "avg_place": 6.0,
+          "itm_pct": 0.125,
+          "extra_winnings": 0.0,
+          "diff": -3350.0
+        },
+        {
+          "uuid": "manual:Lustgarten",
+          "name": "Lustgarten",
+          "tournaments_played": 12,
+          "wins": 0,
+          "cashes": 1,
+          "total_winnings": 200.0,
+          "total_fees": 1200.0,
+          "net": -1000.0,
+          "best_place": 3,
+          "sum_place": 85,
+          "history": [
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 1 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -100.0
+            },
+            {
+              "date": "2025-03-07",
+              "title": "Night 1 Game 2 \u2014 hosted by Jones",
+              "place": 4,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -200.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 1 \u2014 hosted by Jones",
+              "place": 7,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -300.0
+            },
+            {
+              "date": "2026-04-03",
+              "title": "Night 2 Game 2 \u2014 hosted by Jones",
+              "place": 8,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -400.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 1 \u2014 hosted by Jones",
+              "place": 10,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 0.0,
+              "cumulative_net": -500.0
+            },
+            {
+              "date": "2026-06-19",
+              "title": "Night 4 Game 2 \u2014 hosted by Jones",
+              "place": 3,
+              "num_players": 10,
+              "prize_dollars": 200,
+              "fee_paid": 100,
+              "net": 100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -400.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -500.0
+            },
+            {
+              "date": "2026-06-27",
+              "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+              "place": 5,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -600.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 1",
+              "place": 9,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -700.0
+            },
+            {
+              "date": "2026-07-24",
+              "title": "07/24/2026 - Game 2",
+              "place": 8,
+              "num_players": 10,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -800.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 1",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -900.0
+            },
+            {
+              "date": "2026-10-17",
+              "title": "10/17/2026 - Game 2",
+              "place": 9,
+              "num_players": 9,
+              "prize_dollars": 0,
+              "fee_paid": 100,
+              "net": -100,
+              "cumulative_winnings": 200.0,
+              "cumulative_net": -1000.0
+            }
+          ],
+          "avg_place": 7.08,
+          "itm_pct": 0.0833,
+          "extra_winnings": 0.0,
+          "diff": -3600.0
+        }
+      ]
+    }
+  },
+  "extra_winnings": [
+    {
+      "date": "2026-08-29",
+      "player": "Harrison",
+      "amount": 800.0,
+      "note": null,
+      "season_id": "2026"
+    },
+    {
+      "date": "2026-08-29",
+      "player": "Graham",
+      "amount": 480.0,
+      "note": null,
+      "season_id": "2026"
+    },
+    {
+      "date": "2026-08-29",
+      "player": "Busby",
+      "amount": 320.0,
+      "note": null,
+      "season_id": "2026"
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Hernandez",
+      "amount": 796.0,
+      "note": null,
+      "season_id": "2026"
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Klinect",
+      "amount": 548.0,
+      "note": null,
+      "season_id": "2026"
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Whited",
+      "amount": 499.0,
+      "note": null,
+      "season_id": "2026"
+    },
+    {
+      "date": "2026-08-07",
+      "player": "Jones",
+      "amount": 278.0,
+      "note": null,
+      "season_id": "2026"
+    }
+  ],
+  "skipped_incomplete_files": [],
+  "tournaments": [
+    {
+      "title": "Night 1 Game 1 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2025-03-07",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Graham",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 1 Game 2 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2025-03-07",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Harrison",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 2 Game 1 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2026-04-03",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Whited",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Heins",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 2 Game 2 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2026-04-03",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Jones",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Heins",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 3 Game 1 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2026-04-18",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Grissom",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Smith",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 3 Game 2 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2026-04-19",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Whited",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Smith",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 4 Game 1 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2026-06-19",
+      "season_id": "2026",
+      "num_players": 10,
+      "total_pot": 1000,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Harrison",
+          "place": 1,
+          "prize_dollars": 500,
+          "net": 400,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 2,
+          "prize_dollars": 300,
+          "net": 200,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Smith",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 10,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 4 Game 2 \u2014 hosted by Jones",
+      "host": null,
+      "date": "2026-06-19",
+      "season_id": "2026",
+      "num_players": 10,
+      "total_pot": 1000,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Whited",
+          "place": 1,
+          "prize_dollars": 500,
+          "net": 400,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 2,
+          "prize_dollars": 300,
+          "net": 200,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 3,
+          "prize_dollars": 200,
+          "net": 100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Smith",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 10,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 5 Game 1 \u2014 hosted by Harrison",
+      "host": null,
+      "date": "2026-06-27",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Harrison",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 5 Game 2 \u2014 hosted by Harrison",
+      "host": null,
+      "date": "2026-06-27",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Busby",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 6 Game 1 \u2014 hosted by Whited",
+      "host": null,
+      "date": "2026-07-10",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Harrison",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Heins",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "Night 6 Game 2 \u2014 hosted by Whited",
+      "host": null,
+      "date": "2026-07-10",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "manual: PPOTY.2026.7.15.xlsx (Detailed Stats)",
+      "results": [
+        {
+          "name": "Heins",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "07/24/2026 - Game 1",
+      "host": "Jones",
+      "date": "2026-07-24",
+      "season_id": "2026",
+      "num_players": 10,
+      "total_pot": 1000,
+      "source_file": "email @ 2026-08-01T22:09:17.100Z",
+      "results": [
+        {
+          "name": "Graham",
+          "place": 1,
+          "prize_dollars": 500,
+          "net": 400,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 2,
+          "prize_dollars": 300,
+          "net": 200,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 3,
+          "prize_dollars": 200,
+          "net": 100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Kotwas",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": false
+        },
+        {
+          "name": "Smith",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Heins",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 10,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "07/24/2026 - Game 2",
+      "host": "Jones",
+      "date": "2026-07-24",
+      "season_id": "2026",
+      "num_players": 10,
+      "total_pot": 1000,
+      "source_file": "email @ 2026-08-01T22:01:16.710Z",
+      "results": [
+        {
+          "name": "Heins",
+          "place": 1,
+          "prize_dollars": 500,
+          "net": 400,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 2,
+          "prize_dollars": 300,
+          "net": 200,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 3,
+          "prize_dollars": 200,
+          "net": 100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Kotwas",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": false
+        },
+        {
+          "name": "Klinect",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Smith",
+          "place": 10,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "09/27/2026 - Game 1",
+      "host": null,
+      "date": "2026-09-27",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "email @ 2026-09-28T20:23:19.690Z",
+      "results": [
+        {
+          "name": "Graham",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Matt K",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": false
+        },
+        {
+          "name": "Hernandez",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "09/27/2026 - Game 2",
+      "host": null,
+      "date": "2026-09-27",
+      "season_id": "2026",
+      "num_players": 10,
+      "total_pot": 1000,
+      "source_file": "email @ 2026-09-28T20:26:20.521Z",
+      "results": [
+        {
+          "name": "Harrison",
+          "place": 1,
+          "prize_dollars": 500,
+          "net": 400,
+          "is_roster": true
+        },
+        {
+          "name": "Whited",
+          "place": 2,
+          "prize_dollars": 300,
+          "net": 200,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 3,
+          "prize_dollars": 200,
+          "net": 100,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Matt K",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": false
+        },
+        {
+          "name": "Lynae",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": false
+        },
+        {
+          "name": "Hernandez",
+          "place": 10,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "10/17/2026 - Game 1",
+      "host": "Jones",
+      "date": "2026-10-17",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "email @ 2026-11-17T04:30:17.758Z",
+      "results": [
+        {
+          "name": "McDowell",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "10/17/2026 - Game 2",
+      "host": "Jones",
+      "date": "2026-10-17",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "email @ 2026-11-17T04:33:21.567Z",
+      "results": [
+        {
+          "name": "Grissom",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "McDowell",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Harrison",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Lustgarten",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "11/20/2026 - Game 2",
+      "host": "Stuart Jones",
+      "date": "2026-11-20",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "email @ 2026-11-22T22:07:26.069Z",
+      "results": [
+        {
+          "name": "Hernandez",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Kotwas",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": false
+        },
+        {
+          "name": "Harrison",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Smith",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    },
+    {
+      "title": "11/20/2026 - Game 1",
+      "host": "Jones",
+      "date": "2026-11-20",
+      "season_id": "2026",
+      "num_players": 9,
+      "total_pot": 900,
+      "source_file": "email @ 2026-11-22T22:07:19.572Z",
+      "results": [
+        {
+          "name": "Smith",
+          "place": 1,
+          "prize_dollars": 450,
+          "net": 350,
+          "is_roster": true
+        },
+        {
+          "name": "Kotwas",
+          "place": 2,
+          "prize_dollars": 270,
+          "net": 170,
+          "is_roster": false
+        },
+        {
+          "name": "Harrison",
+          "place": 3,
+          "prize_dollars": 180,
+          "net": 80,
+          "is_roster": true
+        },
+        {
+          "name": "Graham",
+          "place": 4,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Grissom",
+          "place": 5,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Jones",
+          "place": 6,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Hernandez",
+          "place": 7,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Busby",
+          "place": 8,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        },
+        {
+          "name": "Klinect",
+          "place": 9,
+          "prize_dollars": 0,
+          "net": -100,
+          "is_roster": true
+        }
+      ]
+    }
+  ],
+  "history": {
+    "champions": [
+      {
+        "year": 2007,
+        "name": "Tawse"
+      },
+      {
+        "year": 2008,
+        "name": "Graham"
+      },
+      {
+        "year": 2009,
+        "name": "Tawse"
+      },
+      {
+        "year": 2010,
+        "name": "Graham"
+      },
+      {
+        "year": 2011,
+        "name": "Graham"
+      },
+      {
+        "year": 2012,
+        "name": "Harrison"
+      },
+      {
+        "year": 2013,
+        "name": "Whited"
+      },
+      {
+        "year": 2014,
+        "name": "Grissom"
+      },
+      {
+        "year": 2015,
+        "name": "Jones"
+      },
+      {
+        "year": 2016,
+        "name": "Jones"
+      },
+      {
+        "year": 2017,
+        "name": "Jones"
+      },
+      {
+        "year": 2018,
+        "name": "Hernandez"
+      },
+      {
+        "year": 2019,
+        "name": "Jones"
+      },
+      {
+        "year": 2020,
+        "name": "COVID"
+      },
+      {
+        "year": 2021,
+        "name": "Klinect"
+      },
+      {
+        "year": 2022,
+        "name": "Hernandez"
+      },
+      {
+        "year": 2023,
+        "name": "Whited"
+      },
+      {
+        "year": 2024,
+        "name": "Whited"
+      },
+      {
+        "year": 2025,
+        "name": "Harrison"
+      },
+      {
+        "year": 2026,
+        "name": null
+      }
+    ],
+    "trophy_counts": [
+      {
+        "name": "Jones",
+        "count": 4
+      },
+      {
+        "name": "Graham",
+        "count": 3
+      },
+      {
+        "name": "Whited",
+        "count": 3
+      },
+      {
+        "name": "Tawse",
+        "count": 2
+      },
+      {
+        "name": "Harrison",
+        "count": 2
+      },
+      {
+        "name": "Hernandez",
+        "count": 2
+      },
+      {
+        "name": "Grissom",
+        "count": 1
+      },
+      {
+        "name": "COVID",
+        "count": 1
+      },
+      {
+        "name": "Klinect",
+        "count": 1
+      }
+    ],
+    "years_tracked": 19
+  },
+  "scheduled_games": [
+    {
+      "name": "Vegas Game",
+      "date": "2027-01-16",
+      "place": "Las Vegas",
+      "status": "scheduled"
+    },
+    {
+      "name": "PPOTN FINAL",
+      "date": "2027-02-06",
+      "place": "TBD",
+      "status": "scheduled"
+    }
+  ],
+  "photos": [
+    {
+      "id": "email_1792454060474",
+      "date": "2026-10-19",
+      "thumb": "photos/thumbs/email_1792454060474.jpg",
+      "full": "photos/full/email_1792454060474.jpg"
+    },
+    {
+      "id": "email_1792454058690",
+      "date": "2026-10-19",
+      "thumb": "photos/thumbs/email_1792454058690.jpg",
+      "full": "photos/full/email_1792454058690.jpg"
+    },
+    {
+      "id": "email_1785361872714",
+      "date": "2026-07-29",
+      "thumb": "photos/thumbs/email_1785361872714.jpg",
+      "full": "photos/full/email_1785361872714.jpg"
+    },
+    {
+      "id": "20260118_103408-1",
+      "date": "2026-01-18",
+      "thumb": "photos/thumbs/20260118_103408-1.jpg",
+      "full": "photos/full/20260118_103408-1.jpg"
+    },
+    {
+      "id": "20260118_103427",
+      "date": "2026-01-18",
+      "thumb": "photos/thumbs/20260118_103427.jpg",
+      "full": "photos/full/20260118_103427.jpg"
+    },
+    {
+      "id": "20260117_102332_6204ad42",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_102332_6204ad42.jpg",
+      "full": "photos/full/20260117_102332_6204ad42.jpg"
+    },
+    {
+      "id": "20260117_131257",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_131257.jpg",
+      "full": "photos/full/20260117_131257.jpg"
+    },
+    {
+      "id": "20260117_131340-1",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_131340-1.jpg",
+      "full": "photos/full/20260117_131340-1.jpg"
+    },
+    {
+      "id": "20260117_220609",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_220609.jpg",
+      "full": "photos/full/20260117_220609.jpg"
+    },
+    {
+      "id": "20260117_220614",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/20260117_220614.jpg",
+      "full": "photos/full/20260117_220614.jpg"
+    },
+    {
+      "id": "img_6354-1",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/img_6354-1.jpg",
+      "full": "photos/full/img_6354-1.jpg"
+    },
+    {
+      "id": "img_6354",
+      "date": "2026-01-17",
+      "thumb": "photos/thumbs/img_6354.jpg",
+      "full": "photos/full/img_6354.jpg"
+    },
+    {
+      "id": "20260116_091740-0-1",
+      "date": "2026-01-16",
+      "thumb": "photos/thumbs/20260116_091740-0-1.jpg",
+      "full": "photos/full/20260116_091740-0-1.jpg"
+    },
+    {
+      "id": "20260116_102923-1",
+      "date": "2026-01-16",
+      "thumb": "photos/thumbs/20260116_102923-1.jpg",
+      "full": "photos/full/20260116_102923-1.jpg"
+    },
+    {
+      "id": "img_20260116_190317",
+      "date": "2026-01-16",
+      "thumb": "photos/thumbs/img_20260116_190317.jpg",
+      "full": "photos/full/img_20260116_190317.jpg"
+    },
+    {
+      "id": "20260115_204608",
+      "date": "2026-01-15",
+      "thumb": "photos/thumbs/20260115_204608.jpg",
+      "full": "photos/full/20260115_204608.jpg"
+    },
+    {
+      "id": "20240810_203602",
+      "date": "2024-08-10",
+      "thumb": "photos/thumbs/20240810_203602.jpg",
+      "full": "photos/full/20240810_203602.jpg"
+    },
+    {
+      "id": "20240114_004643",
+      "date": "2024-01-14",
+      "thumb": "photos/thumbs/20240114_004643.jpg",
+      "full": "photos/full/20240114_004643.jpg"
+    },
+    {
+      "id": "20240113_064631",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_064631.jpg",
+      "full": "photos/full/20240113_064631.jpg"
+    },
+    {
+      "id": "20240113_092057",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_092057.jpg",
+      "full": "photos/full/20240113_092057.jpg"
+    },
+    {
+      "id": "20240113_092129",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_092129.jpg",
+      "full": "photos/full/20240113_092129.jpg"
+    },
+    {
+      "id": "20240113_224419",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_224419.jpg",
+      "full": "photos/full/20240113_224419.jpg"
+    },
+    {
+      "id": "20240113_224455",
+      "date": "2024-01-13",
+      "thumb": "photos/thumbs/20240113_224455.jpg",
+      "full": "photos/full/20240113_224455.jpg"
+    },
+    {
+      "id": "20230826_171759",
+      "date": "2023-08-26",
+      "thumb": "photos/thumbs/20230826_171759.jpg",
+      "full": "photos/full/20230826_171759.jpg"
+    },
+    {
+      "id": "20230409_142958",
+      "date": "2023-04-09",
+      "thumb": "photos/thumbs/20230409_142958.jpg",
+      "full": "photos/full/20230409_142958.jpg"
+    },
+    {
+      "id": "20230114_083620",
+      "date": "2023-01-14",
+      "thumb": "photos/thumbs/20230114_083620.jpg",
+      "full": "photos/full/20230114_083620.jpg"
+    },
+    {
+      "id": "20230114_100223",
+      "date": "2023-01-14",
+      "thumb": "photos/thumbs/20230114_100223.jpg",
+      "full": "photos/full/20230114_100223.jpg"
+    },
+    {
+      "id": "20230114_120929",
+      "date": "2023-01-14",
+      "thumb": "photos/thumbs/20230114_120929.jpg",
+      "full": "photos/full/20230114_120929.jpg"
+    },
+    {
+      "id": "20230113_202709",
+      "date": "2023-01-13",
+      "thumb": "photos/thumbs/20230113_202709.jpg",
+      "full": "photos/full/20230113_202709.jpg"
+    },
+    {
+      "id": "20221015_171012",
+      "date": "2022-10-15",
+      "thumb": "photos/thumbs/20221015_171012.jpg",
+      "full": "photos/full/20221015_171012.jpg"
+    },
+    {
+      "id": "20220925_142441",
+      "date": "2022-09-25",
+      "thumb": "photos/thumbs/20220925_142441.jpg",
+      "full": "photos/full/20220925_142441.jpg"
+    },
+    {
+      "id": "20220628_195435",
+      "date": "2022-06-28",
+      "thumb": "photos/thumbs/20220628_195435.jpg",
+      "full": "photos/full/20220628_195435.jpg"
+    },
+    {
+      "id": "20220121_143837",
+      "date": "2022-01-21",
+      "thumb": "photos/thumbs/20220121_143837.jpg",
+      "full": "photos/full/20220121_143837.jpg"
+    },
+    {
+      "id": "20211106_195731",
+      "date": "2021-11-06",
+      "thumb": "photos/thumbs/20211106_195731.jpg",
+      "full": "photos/full/20211106_195731.jpg"
+    },
+    {
+      "id": "20210828_165244",
+      "date": "2021-08-28",
+      "thumb": "photos/thumbs/20210828_165244.jpg",
+      "full": "photos/full/20210828_165244.jpg"
+    },
+    {
+      "id": "20210828_171257",
+      "date": "2021-08-28",
+      "thumb": "photos/thumbs/20210828_171257.jpg",
+      "full": "photos/full/20210828_171257.jpg"
+    },
+    {
+      "id": "20210212_085424",
+      "date": "2021-02-12",
+      "thumb": "photos/thumbs/20210212_085424.jpg",
+      "full": "photos/full/20210212_085424.jpg"
+    },
+    {
+      "id": "20200111_110206-0",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_110206-0.jpg",
+      "full": "photos/full/20200111_110206-0.jpg"
+    },
+    {
+      "id": "20200111_110313",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_110313.jpg",
+      "full": "photos/full/20200111_110313.jpg"
+    },
+    {
+      "id": "20200111_185410",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_185410.jpg",
+      "full": "photos/full/20200111_185410.jpg"
+    },
+    {
+      "id": "20200111_191852",
+      "date": "2020-01-11",
+      "thumb": "photos/thumbs/20200111_191852.jpg",
+      "full": "photos/full/20200111_191852.jpg"
+    },
+    {
+      "id": "20200110_103755",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_103755.jpg",
+      "full": "photos/full/20200110_103755.jpg"
+    },
+    {
+      "id": "20200110_143436",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_143436.jpg",
+      "full": "photos/full/20200110_143436.jpg"
+    },
+    {
+      "id": "20200110_155516",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_155516.jpg",
+      "full": "photos/full/20200110_155516.jpg"
+    },
+    {
+      "id": "20200110_165714-0",
+      "date": "2020-01-10",
+      "thumb": "photos/thumbs/20200110_165714-0.jpg",
+      "full": "photos/full/20200110_165714-0.jpg"
+    },
+    {
+      "id": "20191026_151304",
+      "date": "2019-10-26",
+      "thumb": "photos/thumbs/20191026_151304.jpg",
+      "full": "photos/full/20191026_151304.jpg"
+    },
+    {
+      "id": "20191026_184920",
+      "date": "2019-10-26",
+      "thumb": "photos/thumbs/20191026_184920.jpg",
+      "full": "photos/full/20191026_184920.jpg"
+    },
+    {
+      "id": "20191026_194609",
+      "date": "2019-10-26",
+      "thumb": "photos/thumbs/20191026_194609.jpg",
+      "full": "photos/full/20191026_194609.jpg"
+    },
+    {
+      "id": "20190125_192627",
+      "date": "2019-01-25",
+      "thumb": "photos/thumbs/20190125_192627.jpg",
+      "full": "photos/full/20190125_192627.jpg"
+    },
+    {
+      "id": "20190112_175121",
+      "date": "2019-01-12",
+      "thumb": "photos/thumbs/20190112_175121.jpg",
+      "full": "photos/full/20190112_175121.jpg"
+    },
+    {
+      "id": "20190112_182552",
+      "date": "2019-01-12",
+      "thumb": "photos/thumbs/20190112_182552.jpg",
+      "full": "photos/full/20190112_182552.jpg"
+    },
+    {
+      "id": "img_3237_20190112_124253",
+      "date": "2019-01-12",
+      "thumb": "photos/thumbs/img_3237_20190112_124253.jpg",
+      "full": "photos/full/img_3237_20190112_124253.jpg"
+    },
+    {
+      "id": "20160116_112032",
+      "date": "2016-01-16",
+      "thumb": "photos/thumbs/20160116_112032.jpg",
+      "full": "photos/full/20160116_112032.jpg"
+    },
+    {
+      "id": "20160116_112114",
+      "date": "2016-01-16",
+      "thumb": "photos/thumbs/20160116_112114.jpg",
+      "full": "photos/full/20160116_112114.jpg"
+    },
+    {
+      "id": "20160115_084111",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_084111.jpg",
+      "full": "photos/full/20160115_084111.jpg"
+    },
+    {
+      "id": "20160115_084733",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_084733.jpg",
+      "full": "photos/full/20160115_084733.jpg"
+    },
+    {
+      "id": "20160115_085138",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_085138.jpg",
+      "full": "photos/full/20160115_085138.jpg"
+    },
+    {
+      "id": "20160115_085142",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_085142.jpg",
+      "full": "photos/full/20160115_085142.jpg"
+    },
+    {
+      "id": "20160115_182106",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_182106.jpg",
+      "full": "photos/full/20160115_182106.jpg"
+    },
+    {
+      "id": "20160115_182309",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_182309.jpg",
+      "full": "photos/full/20160115_182309.jpg"
+    },
+    {
+      "id": "20160115_190055",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_190055.jpg",
+      "full": "photos/full/20160115_190055.jpg"
+    },
+    {
+      "id": "20160115_195253",
+      "date": "2016-01-15",
+      "thumb": "photos/thumbs/20160115_195253.jpg",
+      "full": "photos/full/20160115_195253.jpg"
+    },
+    {
+      "id": "20130525_232318",
+      "date": "2013-05-25",
+      "thumb": "photos/thumbs/20130525_232318.jpg",
+      "full": "photos/full/20130525_232318.jpg"
+    },
+    {
+      "id": "20130525_232446-motion",
+      "date": "2013-05-25",
+      "thumb": "photos/thumbs/20130525_232446-motion.jpg",
+      "full": "photos/full/20130525_232446-motion.jpg"
+    }
+  ],
+  "message": {
+    "text": "Message: Book your stay for Vegas Big Game with Hosting at Aria.",
+    "updated": "2026-08-03T19:54:13.351Z"
+  }
+}

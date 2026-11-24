@@ -55,35 +55,17 @@
   .chip-stat b{color:var(--gold);font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:.06em;margin-right:4px}
 
   /* ---------- Layout ---------- */
-  .grid{display:grid;grid-template-columns:400px 1fr;gap:20px;margin-top:18px;align-items:start}
-  @media (max-width:920px){.grid{grid-template-columns:1fr}}
+  .grid{display:grid;grid-template-columns:1fr;gap:20px;margin:18px auto 0;align-items:start;max-width:980px}
   .panel{background:var(--card);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
   .panel-head{padding:16px 20px 10px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
   .panel-head h2{font-family:"Cinzel",serif;font-size:19px;margin:0;letter-spacing:.03em}
   .panel-head span{font-size:12.5px;color:var(--muted)}
   .panel-body{padding:6px 20px 20px}
 
-  /* ---------- Standings ---------- */
-  table.standings{width:100%;border-collapse:collapse;font-size:15px}
-  table.standings th{font-size:11.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);text-align:left;padding:8px 6px;border-bottom:2px solid var(--card-line)}
-  table.standings th.num,table.standings td.num{text-align:right}
-  table.standings td{padding:9px 6px;border-bottom:1px solid var(--card-line);vertical-align:middle}
-  table.standings tr:last-child td{border-bottom:none}
-  table.standings tr.leader td{background:linear-gradient(90deg, rgba(212,160,23,.16), transparent);font-weight:700}
+  /* ---------- Shared standings bits (Updated PPOTN Standings modal) ---------- */
   .rank{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--felt);color:#fff;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.03em}
-  tr.leader .rank{background:var(--gold);color:#231a00}
   .money{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
   .crown{color:var(--gold);font-size:14px}
-  .source-note{font-size:12px;color:var(--muted);line-height:1.5;margin:14px 0 0}
-  /* Clean, separated blocks under the standings table */
-  .info-block{margin-top:14px;border-top:1px dashed var(--card-line);padding-top:12px}
-  .info-title{font-family:"Cinzel",serif;font-size:14.5px;margin:0 0 8px;letter-spacing:.02em}
-  .clean-list{list-style:none;margin:0;padding:0;font-size:14px;line-height:1.45}
-  .clean-list li{position:relative;padding:5px 0 5px 18px;border-bottom:1px solid var(--card-line)}
-  .clean-list li:last-child{border-bottom:none}
-  .clean-list li::before{content:"";position:absolute;left:2px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
-  .clean-list .win{font-weight:800}
-  .clean-list .amt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 
   /* ---------- Setup wizard ---------- */
   .step-label{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px}
@@ -178,11 +160,16 @@
 
   /* ---------- Tournament screen — fits the viewport, no page scroll in game ---------- */
   body.in-game{overflow:hidden}
-  #view-game{max-width:1440px;height:100vh;height:100dvh;display:flex;flex-direction:column;padding:12px 14px 10px;margin:0 auto;width:100%}
+  #view-game{max-width:1440px;height:100vh;height:100dvh;display:flex;flex-direction:column;padding:12px 14px 10px;margin:0 auto;width:100%;position:relative}
   #view-game:fullscreen{max-width:none;width:100%;height:100%;background:var(--bg);padding:14px}
   #view-game:-webkit-full-screen{max-width:none;width:100%;height:100%;background:var(--bg);padding:14px}
   #view-game .game-grid{flex:1;min-height:0}
-  #view-game footer{margin-top:8px;flex:0 0 auto}
+  /* Normal view: a couple of lines of breathing room between the bottom
+     control bar and the hint/footer line below it, so the controls don't
+     crowd the text. In fullscreen / focus mode that line is display:none
+     (see the :fullscreen / .focus-mode rules below), so fullscreen
+     spacing is unchanged by this margin. */
+  #view-game footer{margin-top:32px;flex:0 0 auto}
   /* ---------- Timer-focus / fullscreen mode ----------
      One big screen: countdown and current / next blinds only —
      no blind structure cards. "Still at the Table" and Payouts
@@ -205,7 +192,7 @@
   #view-game.focus-mode .round-line{font-size:clamp(17px,2.6vw,26px)}
   #view-game:fullscreen .timer,
   #view-game:-webkit-full-screen .timer,
-  #view-game.focus-mode .timer{font-size:clamp(88px,min(27vw,34vh),320px)}
+  #view-game.focus-mode .timer{font-size:clamp(106px,min(32.4vw,40.8vh),384px)}
   #view-game:fullscreen .blinds-value,
   #view-game:-webkit-full-screen .blinds-value,
   #view-game.focus-mode .blinds-value{font-size:clamp(52px,min(11vw,13vh),120px)}
@@ -215,20 +202,18 @@
   #view-game:fullscreen .blinds-next b,
   #view-game:-webkit-full-screen .blinds-next b,
   #view-game.focus-mode .blinds-next b{font-size:clamp(26px,4.2vh,40px)}
-  /* Busted Players card — fullscreen / focus mode only, top-right of
-     the felt. It and its panel live inside #view-game because the
-     browser only renders the fullscreen element's subtree: overlays
+  /* Busted Players button — lives in the bottom control row (moved
+     down from the old top-right fullscreen card), skull and all.
+     It and its panel live inside #view-game because the browser
+     only renders the fullscreen element's subtree: overlays
      outside it (like the normal hitman modal) never appear. */
-  .fs-bust-card{display:none;position:absolute;top:14px;right:14px;z-index:6;align-items:center;gap:8px;background:var(--card);color:var(--ink);border:2px solid var(--gold);border-radius:12px;padding:8px 12px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.35);min-height:40px}
+  /* Busted Players sits on its own line under the four main buttons,
+     ~30% bigger than the main buttons' original half size — an easy tap target */
+  .fs-bust-card{display:inline-flex;align-items:center;gap:7px;border-radius:9px;border:1.5px solid rgba(255,255,255,.35);background:rgba(0,0,0,.28);color:#fff;font-family:inherit;font-weight:700;font-size:13px;padding:4px 11px;cursor:pointer;min-height:32px;line-height:1.2}
   .fs-bust-card:hover{border-color:var(--gold-bright)}
-  #view-game:fullscreen .fs-bust-card,
-  #view-game:-webkit-full-screen .fs-bust-card,
-  #view-game.focus-mode .fs-bust-card{display:inline-flex}
-  .fs-bust-count{background:var(--felt);color:#fff;border-radius:999px;padding:1px 9px;font-size:12.5px;font-weight:800;white-space:nowrap}
-  .fs-bust-panel{display:none;position:absolute;top:62px;right:14px;z-index:7;width:min(350px,calc(100% - 28px));max-height:calc(100% - 80px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--card-line);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.45);padding:14px;text-align:left}
-  #view-game:fullscreen .fs-bust-panel:not(.hidden),
-  #view-game:-webkit-full-screen .fs-bust-panel:not(.hidden),
-  #view-game.focus-mode .fs-bust-panel:not(.hidden){display:block}
+  .fs-bust-count{background:var(--gold);color:#241a00;border-radius:999px;padding:1px 8px;font-size:13px;font-weight:800;white-space:nowrap}
+  .fs-bust-panel{display:none;position:absolute;bottom:12px;right:12px;z-index:40;width:min(350px,calc(100% - 24px));max-height:calc(100% - 84px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--card-line);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.45);padding:14px;text-align:left}
+  .fs-bust-panel:not(.hidden){display:block}
   .fs-bust-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
   .fs-bust-panel h3{font-family:"Cinzel",serif;font-size:18px;margin:0;line-height:1.25}
   .fs-bust-panel h3 .victim{color:var(--red)}
@@ -270,7 +255,7 @@
   .round-line .dot{color:var(--gold-bright);margin:0 10px}
   .timer{
     font-family:"Bebas Neue",sans-serif;
-    font-size:clamp(64px,min(20vw,26vh),210px);
+    font-size:clamp(77px,min(24vw,31.2vh),252px);
     line-height:.92;letter-spacing:.015em;margin:0;
     color:#fff;text-shadow:0 6px 0 rgba(0,0,0,.22), 0 22px 60px rgba(0,0,0,.45);
     font-variant-numeric:tabular-nums;
@@ -286,13 +271,26 @@
   .blinds-next{margin-top:6px;color:#e9e2c8;font-size:clamp(15px,2.2vh,21px)}
   .blinds-next b{font-family:"Bebas Neue",sans-serif;font-size:clamp(22px,3.6vh,34px);letter-spacing:.04em;color:#fff;margin-left:8px}
   .blinds-next .up{color:var(--gold-bright);font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase}
-  .game-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
-  .gbtn{border-radius:11px;border:2px solid rgba(255,255,255,.35);background:rgba(0,0,0,.28);color:#fff;font-family:inherit;font-weight:800;font-size:14px;padding:9px 13px;cursor:pointer;min-height:44px}
+  /* Bottom control row — anchored at the very bottom of the game
+     screen, buttons at half their original size so the timer and
+     blinds stand out. Stays visible in fullscreen / focus mode. */
+  .bottom-bar{display:flex;flex-direction:column;gap:5px;justify-content:center;align-items:center;flex:0 0 auto;margin-top:8px;background:linear-gradient(180deg,var(--felt),var(--felt-deep));border-radius:12px;padding:5px 7px;box-shadow:inset 0 0 0 2px rgba(242,201,76,.35), var(--shadow);position:relative;z-index:5}
+  /* The four main controls stay on one line, in order */
+  .bottom-row{display:flex;gap:5px;justify-content:center;align-items:center;flex-wrap:nowrap}
+  @media (max-width:520px){
+    .bottom-row{gap:4px}
+    .bottom-row .gbtn{font-size:9.5px;padding:3px 5px;white-space:nowrap}
+    .bottom-row .gbtn.primary{min-width:0;font-size:10px}
+  }
+  #view-game:fullscreen .bottom-bar,
+  #view-game:-webkit-full-screen .bottom-bar,
+  #view-game.focus-mode .bottom-bar{display:flex}
+  .gbtn{border-radius:8px;border:1.5px solid rgba(255,255,255,.35);background:rgba(0,0,0,.28);color:#fff;font-family:inherit;font-weight:700;font-size:11px;padding:4px 9px;cursor:pointer;min-height:27px;line-height:1.2}
   .gbtn:hover{border-color:var(--gold-bright)}
-  .gbtn.primary{background:linear-gradient(180deg,var(--gold-bright),var(--gold));color:#241a00;border-color:transparent;min-width:170px;font-size:16px}
+  .gbtn.primary{background:linear-gradient(180deg,var(--gold-bright),var(--gold));color:#241a00;border-color:transparent;min-width:106px;font-size:11.5px;padding:4px 10px}
   .gbtn[aria-pressed="true"]{border-color:var(--gold-bright);background:rgba(212,160,23,.25)}
-  .space-hint{margin:8px 0 0;font-size:12.5px;color:rgba(253,248,236,.75)}
-  .space-hint kbd{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-bottom-width:3px;border-radius:6px;padding:1px 9px;font-family:inherit;font-weight:700;color:#fff}
+  .space-hint{margin:6px 0 0;font-size:11px;color:rgba(253,248,236,.75)}
+  .space-hint kbd{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-family:inherit;font-weight:700;color:#fff}
   .side-stack{display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0;height:100%}
   .side-panel{background:var(--card);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 14px;min-height:0;display:flex;flex-direction:column}
   .side-panel.grow{flex:1 1 auto}
@@ -365,6 +363,74 @@
   table.results tr:last-child td{border-bottom:none}
   table.results tr.champ td{background:linear-gradient(90deg, rgba(212,160,23,.18), transparent);font-weight:800}
   .upload-note{margin-top:12px;font-size:13.5px;line-height:1.5;color:var(--muted);border:1px dashed var(--card-line);border-radius:12px;padding:10px 12px}
+  /* ---------- Pending approval flow (Upload Results) ---------- */
+  .pending-box{margin-top:12px;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.55;text-align:left}
+  .pending-box.pending{border:2px solid var(--gold);background:linear-gradient(180deg, rgba(212,160,23,.16), rgba(212,160,23,.05))}
+  .pending-box.official{border:2px solid var(--green-ok);background:linear-gradient(180deg, rgba(26,127,75,.14), rgba(26,127,75,.04))}
+  .pending-box.rejected{border:2px solid var(--red);background:linear-gradient(180deg, rgba(180,35,24,.12), rgba(180,35,24,.04))}
+  .pending-box .pb-title{font-weight:800;font-size:15px}
+  .pending-box .pb-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .pending-box .pb-actions .btn{min-height:40px;padding:8px 14px;font-size:13.5px;flex:1 1 140px}
+  .status-pill{display:inline-block;border-radius:999px;padding:3px 11px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .status-pill.pending{background:var(--gold);color:#241a00}
+  .status-pill.official{background:var(--green-ok);color:#fff}
+  .status-pill.rejected{background:var(--red);color:#fff}
+  .btn-rejected{background:var(--red);color:#fff}
+  /* Rejected Results Archive — rejected games kept for the record, never applied */
+  .archive-entry{border:1px solid var(--card-line);border-radius:14px;padding:12px 14px;margin-top:12px;text-align:left}
+  .archive-entry h4{font-family:"Cinzel",serif;font-size:16px;margin:0;line-height:1.3}
+  .archive-entry h4 .rej-x{color:var(--red)}
+  .archive-meta{font-size:13px;color:var(--muted);line-height:1.55;margin-top:4px}
+  .archive-meta b{color:var(--ink)}
+  .archive-results{list-style:none;margin:10px 0 0;padding:0;font-size:14px;line-height:1.5}
+  .archive-results li{padding:5px 0;border-bottom:1px solid var(--card-line);display:flex;justify-content:space-between;gap:10px}
+  .archive-results li:last-child{border-bottom:none}
+  .archive-results .ar-who{min-width:0}
+  .archive-results .ar-pay{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .archive-note-line{font-size:12.5px;color:var(--red);font-weight:700;margin-top:9px;line-height:1.5}
+  .btn-pending{background:linear-gradient(180deg,var(--gold-bright),var(--gold));color:#241a00;box-shadow:0 8px 22px rgba(212,160,23,.35)}
+  .btn-official{background:var(--green-ok);color:#fff}
+  .approval-card{max-width:760px}
+  .approval-title{font-family:"Cinzel",serif;font-weight:800;font-size:clamp(24px,4.4vw,34px);text-align:center;letter-spacing:.03em;line-height:1.1}
+  .approval-title .gold{color:var(--gold)}
+  .approval-meta{font-size:14px;line-height:1.6;color:var(--muted);margin-top:8px;text-align:center}
+  .approval-meta b{color:var(--ink)}
+  .approval-h{font-family:"Cinzel",serif;font-size:16px;margin:18px 0 4px;letter-spacing:.03em}
+  .email-preview{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;background:var(--bg);color:var(--ink);border:1px solid var(--card-line);border-radius:12px;padding:12px 14px;max-height:300px;overflow:auto;margin-top:8px;text-align:left}
+  .approval-note{margin-top:12px;font-size:13px;line-height:1.55;color:var(--muted);border:1px dashed var(--card-line);border-radius:12px;padding:10px 12px;text-align:left}
+  .copy-ok{font-size:13px;font-weight:700;color:var(--green-ok);align-self:center}
+  /* Updated PPOTN Standings — live recomputation after a game */
+  .btn-standings{background:var(--card);border:2px solid var(--gold);color:var(--ink);box-shadow:0 8px 22px rgba(212,160,23,.22)}
+  .btn-standings:hover{border-color:var(--gold-bright);background:linear-gradient(180deg, rgba(212,160,23,.16), rgba(212,160,23,.05))}
+  .standings-card{max-width:760px}
+  .standings-title{font-family:"Cinzel",serif;font-weight:800;font-size:clamp(24px,4.4vw,36px);text-align:center;letter-spacing:.03em;line-height:1.1}
+  .standings-title .gold{color:var(--gold)}
+  .standings-sub{text-align:center;color:var(--muted);font-size:14px;margin-top:8px;line-height:1.55}
+  .standings-sub b{color:var(--ink)}
+  .updated-wrap{overflow:auto;margin-top:16px;border:1px solid var(--card-line);border-radius:14px}
+  table.updated{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+  table.updated th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:left;padding:9px 10px;border-bottom:2px solid var(--card-line);background:var(--bg)}
+  table.updated th.num,table.updated td.num{text-align:right}
+  table.updated td{padding:9px 10px;border-bottom:1px solid var(--card-line);vertical-align:middle;white-space:nowrap}
+  table.updated tr:last-child td{border-bottom:none}
+  table.updated tr.new-leader td{background:linear-gradient(90deg, rgba(212,160,23,.18), transparent);font-weight:700}
+  table.updated tr.tonight-winner td{background:linear-gradient(90deg, rgba(20,83,45,.14), transparent)}
+  table.updated tr.new-leader.tonight-winner td{background:linear-gradient(90deg, rgba(212,160,23,.22), rgba(20,83,45,.08))}
+  .move{font-weight:800;font-size:13.5px;white-space:nowrap}
+  .move.up{color:var(--green-ok)}
+  .move.down{color:var(--red)}
+  .move.same{color:var(--muted)}
+  .move.new{color:var(--gold)}
+  .tonight-net{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tonight-net.pos{color:var(--green-ok)}
+  .tonight-net.neg{color:var(--red)}
+  .tonight-prize{display:block;font-size:12px;color:var(--muted);font-weight:600}
+  .standings-note{margin-top:12px;font-size:13px;line-height:1.55;color:var(--muted);border:1px dashed var(--card-line);border-radius:12px;padding:10px 12px}
+  @media (max-width:560px){
+    table.updated{min-width:0;font-size:14px}
+    table.updated th,table.updated td{padding:8px 7px}
+    .tonight-prize{display:none}
+  }
   /* Hitman picker modal */
   .modal-overlay{position:fixed;inset:0;background:rgba(6,18,10,.62);backdrop-filter:blur(3px);z-index:60;display:grid;place-items:center;padding:18px}
   .modal-card{background:var(--card);color:var(--ink);border:1px solid var(--card-line);border-radius:20px;box-shadow:0 28px 80px rgba(0,0,0,.45);width:100%;max-width:520px;max-height:88vh;overflow:auto;padding:22px}
@@ -383,7 +449,7 @@
 </head>
 <body>
 
-<!-- ================= SETUP / SPLASH ================= -->
+<!-- ================= SETUP ================= -->
 <div class="wrap" id="view-setup">
   <div class="brand">
     <div class="suit">♠</div>
@@ -399,35 +465,10 @@
   </div>
 
   <div class="grid">
-    <!-- Standings splash -->
-    <section class="panel" aria-label="2026 standings">
-      <div class="panel-head"><h2>2026 Standings</h2><span>PPOTY race</span></div>
-      <div class="panel-body">
-        <table class="standings">
-          <thead><tr><th>#</th><th>Player</th><th class="num">Winnings</th></tr></thead>
-          <tbody id="standingsBody"></tbody>
-        </table>
-        <div class="info-block">
-          <h3 class="info-title">Last PPOTN Night — Nov 20 at Stuart's</h3>
-          <ul class="clean-list">
-            <li><span class="win">🏆 Game 1 winner:</span> Sam Smith — <span class="amt">$450</span></li>
-            <li><span class="win">🏆 Game 2 winner:</span> Joe Hernandez — <span class="amt">$450</span></li>
-            <li>Rob Harrison — 3rd in both games (<span class="amt">$180 × 2</span>)</li>
-          </ul>
-        </div>
-        <div class="info-block">
-          <h3 class="info-title">Next Up</h3>
-          <ul class="clean-list">
-            <li><b>Vegas Game</b> — Jan 16, 2027</li>
-            <li><b>PPOTN Final</b> — Feb 6, 2027</li>
-            <li>Defending champion: <b>Rob Harrison (2025)</b></li>
-          </ul>
-        </div>
-        <p class="source-note">Standings from ppotn.com — updated Nov 24, 2026.</p>
-      </div>
-    </section>
-
-    <!-- Setup wizard -->
+    <!-- Setup wizard — shown directly on open / New Game; the current
+         standings now live on the landing splash screen, not here. The
+         ROSTER data is still kept in the script below because the
+         Updated PPOTN Standings view computes from it after a game. -->
     <section class="panel" aria-label="Tournament setup">
       <div class="panel-head"><h2>Game Setup</h2></div>
       <div class="panel-body">
@@ -518,6 +559,7 @@
     <div style="margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <button type="button" class="btn btn-felt" id="winnerResultsBtn">View Results</button>
       <button type="button" class="btn btn-ghost" id="winnerUploadBtn" style="background:rgba(255,255,255,.55)">Upload Results</button>
+      <button type="button" class="btn btn-standings" id="winnerStandingsBtn">📊 Updated PPOTN Standings</button>
     </div>
   </div>
   <div class="game-grid">
@@ -531,23 +573,13 @@
         <div class="blinds-value"><span id="sbNow">100</span><span class="slash">/</span><span id="bbNow">200</span></div>
       </div>
       <div class="blinds-next"><span class="up">Next Level ↑</span><b><span id="sbNext">200</span> / <span id="bbNext">400</span></b></div>
-      <button type="button" class="fs-bust-card" id="fsBustBtn" aria-haspopup="true" aria-expanded="false">💀 Busted Players <span class="fs-bust-count" id="fsBustCount"></span></button>
-      <div class="fs-bust-panel hidden" id="fsBustPanel" role="dialog" aria-label="Busted Players">
+      <div class="fs-bust-panel hidden" id="fsBustPanel" role="dialog" aria-label="Bust Out Players">
         <div class="fs-bust-head">
-          <h3 id="fsBustTitle">Busted Players</h3>
-          <button type="button" class="fs-bust-close" id="fsBustCloseBtn" aria-label="Close Busted Players">✕</button>
+          <h3 id="fsBustTitle">Bust Out Players</h3>
+          <button type="button" class="fs-bust-close" id="fsBustCloseBtn" aria-label="Close Bust Out Players">✕</button>
         </div>
         <p class="fs-bust-sub" id="fsBustSub">Tap Bust to knock a player out — you'll pick who busted them out.</p>
         <div id="fsBustBody"></div>
-      </div>
-      <div class="game-controls">
-        <button type="button" class="gbtn" id="prevLevelBtn">← Prev Level</button>
-        <button type="button" class="gbtn primary" id="toggleBtn">▶ START CLOCK</button>
-        <button type="button" class="gbtn" id="nextLevelBtn">Next Level →</button>
-        <button type="button" class="gbtn" id="resetBtn">↺ Reset Level</button>
-        <button type="button" class="gbtn" id="soundBtn">🔊 Sound On</button>
-        <button type="button" class="gbtn" id="fsBtn">⛶ Fullscreen — Timer Only</button>
-        <button type="button" class="gbtn" id="newGameBtn">New Game</button>
       </div>
       <p class="space-hint">Press <kbd>SPACE</kbd> to start / pause · <kbd>ESC</kbd> exits fullscreen and brings back the table &amp; payouts · The clock stops on its own at the end of every level.</p>
     </div>
@@ -572,6 +604,15 @@
       </div>
     </div>
   </div>
+  <div class="bottom-bar" role="group" aria-label="Game controls">
+    <div class="bottom-row">
+      <button type="button" class="gbtn primary" id="toggleBtn">▶ START CLOCK</button>
+      <button type="button" class="gbtn" id="nextLevelBtn">Next Level →</button>
+      <button type="button" class="gbtn" id="fsBtn">Fullscreen</button>
+      <button type="button" class="gbtn" id="newGameBtn">New Game</button>
+    </div>
+    <button type="button" class="fs-bust-card" id="fsBustBtn" aria-haspopup="true" aria-expanded="false">💀 Bust Out Players <span class="fs-bust-count" id="fsBustCount"></span></button>
+  </div>
   <footer>PPOTN Tournament Clock · Blinds: 100/200 → 200/400 → 500/1,000 → doubling from there · 20-minute levels</footer>
 </div>
 
@@ -587,11 +628,77 @@
         <tbody id="resultsBody"></tbody>
       </table>
     </div>
-    <p class="upload-note hidden" id="uploadNote">Upload isn't connected yet — this button is a placeholder for when the PPOTN site moves under Amber's purview. The results record above was captured in real time as each player was knocked out and stays on this screen until you start a new game.</p>
+    <div class="pending-box hidden" id="uploadStatusBox" role="status"></div>
     <div class="modal-actions">
       <button type="button" class="btn btn-gold" id="uploadResultsBtn">Upload Results</button>
+      <button type="button" class="btn btn-standings" id="updatedStandingsBtn">📊 Updated PPOTN Standings</button>
       <button type="button" class="btn btn-ghost" id="closeResultsBtn">Back to Table</button>
       <button type="button" class="btn btn-felt" id="resultsNewGameBtn">New Game</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= UPDATED PPOTN STANDINGS ================= -->
+<div class="modal-overlay hidden" id="updatedStandingsModal" role="dialog" aria-modal="true" aria-labelledby="updatedStandingsTitle">
+  <div class="modal-card standings-card">
+    <div class="standings-title" id="updatedStandingsTitle">📊 Updated <span class="gold">PPOTN</span> Standings</div>
+    <p class="standings-sub" id="updatedStandingsSub">The newest 2026 standings, figured live from the game that just finished.</p>
+    <div class="updated-wrap">
+      <table class="updated" aria-label="Updated 2026 PPOTN standings">
+        <thead><tr><th>#</th><th>Player</th><th>Move</th><th class="num">Tonight</th><th class="num">New Total</th></tr></thead>
+        <tbody id="updatedStandingsBody"></tbody>
+      </table>
+    </div>
+    <p class="standings-note" id="updatedStandingsNote"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-gold" id="standingsBackBtn">← Back to Game Over</button>
+      <button type="button" class="btn btn-felt" id="standingsNewGameBtn">New Game</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PENDING APPROVAL ================= -->
+<div class="modal-overlay hidden" id="approvalModal" role="dialog" aria-modal="true" aria-labelledby="approvalTitle">
+  <div class="modal-card approval-card">
+    <div class="approval-title" id="approvalTitle">⏳ Results <span class="gold">Pending Approval</span></div>
+    <p class="approval-meta" id="approvalMeta"></p>
+    <p class="approval-meta" id="approvalStatusLine"></p>
+    <h3 class="approval-h">New 2026 standings if approved</h3>
+    <div class="updated-wrap" style="margin-top:8px">
+      <table class="updated" aria-label="Proposed new PPOTN standings pending approval">
+        <thead><tr><th>#</th><th>Player</th><th>Move</th><th class="num">Tonight</th><th class="num">New Total</th></tr></thead>
+        <tbody id="approvalStandingsBody"></tbody>
+      </table>
+    </div>
+    <h3 class="approval-h">Approval email — ready to send</h3>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.5;margin:4px 0 0">To: <b style="color:var(--ink)">Rob Harrison &lt;roblharrison@gmail.com&gt;</b> and <b style="color:var(--ink)">James Klinect, Commish &lt;JKLin21@gmail.com&gt;</b>. The email includes the full game stats and the new standings above. <b style="color:var(--ink)">One approval is enough</b> — a reply of APPROVE from either Rob or James K makes the results official.</p>
+    <div class="email-preview" id="approvalEmailPreview"></div>
+    <p class="approval-note">How approval works: tap <b>Send Approval Email</b> and your mail app opens with the email addressed and filled in — send it from there. When an APPROVE reply comes back from <b>either</b> approver, tap <b>Mark Approved</b> below: the pending flag comes off and this game shows as <b>Official</b>. If a reply says <b>REJECT</b> or <b>REJECTED</b>, tap <b>Reject</b> instead: the results are <b>saved to the Rejected Results Archive</b> — kept just in case they're needed later — but <b>not applied</b>: the standings and official records do not change.</p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-gold" id="approvalSendBtn">✉ Send Approval Email</button>
+      <button type="button" class="btn btn-ghost" id="approvalCopyBtn">Copy Email Text</button>
+      <span class="copy-ok hidden" id="approvalCopyOk">Copied ✓</span>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-felt" id="approvalApproveBtn">✓ Mark Approved — Make Official</button>
+      <button type="button" class="btn btn-ghost" id="approvalRejectBtn">Reject — Archive, Don't Apply</button>
+      <button type="button" class="btn btn-ghost" id="approvalCloseBtn">Close</button>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-gold hidden" id="approvalResubmitBtn">↻ Re-submit for Approval</button>
+      <button type="button" class="btn btn-ghost" id="approvalArchiveBtn">🗂 Rejected Results Archive</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= REJECTED RESULTS ARCHIVE ================= -->
+<div class="modal-overlay hidden" id="archiveModal" role="dialog" aria-modal="true" aria-labelledby="archiveTitle">
+  <div class="modal-card approval-card">
+    <div class="approval-title" id="archiveTitle">🗂 Rejected <span class="gold">Results Archive</span></div>
+    <p class="approval-meta">Games whose results were <b>rejected</b> by Rob or James K. They are <b>saved here for the record only — never applied</b>: the standings and official records were not changed by any game in this list.</p>
+    <div id="archiveList"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-gold" id="archiveCloseBtn">Close</button>
     </div>
   </div>
 </div>
@@ -646,14 +753,13 @@
   function money(n){ return "$" + n.toLocaleString("en-US"); }
   function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
-  /* ---------- Standings ---------- */
-  var sb = document.getElementById("standingsBody");
-  ROSTER.forEach(function(p,i){
-    var tr = document.createElement("tr");
-    if(i===0) tr.className = "leader";
-    tr.innerHTML = '<td><span class="rank">'+(i+1)+'</span></td><td>'+esc(p.name)+(i===0?' <span class="crown">👑</span>':"")+'</td><td class="num money">'+money(p.winnings)+'</td>';
-    sb.appendChild(tr);
-  });
+  /* ---------- Standings data ----------
+     ROSTER above is the current 2026 standings. It is intentionally NOT
+     displayed at startup anymore — opening the app / tapping New Game
+     goes straight into Game Setup, and the standings are shown on the
+     landing splash screen instead. ROSTER is still kept here because
+     the Updated PPOTN Standings view on the game-over screen computes
+     the new totals from it. */
 
   /* ---------- Setup state ---------- */
   var isStandard = true;
@@ -694,6 +800,7 @@
      records for the same date at the same host's place */
   var selectedGameNumber = 1;
   var completedGames = []; // filed records for tonight, in memory: {nightKey, gameNumber, title, host, dateLabel, standings, knockouts, ppotn}
+  var rejectedResults = []; // Rejected-results archive/log, in memory: full snapshots of games an approver rejected — saved for the record, NEVER applied to standings or official records
   var gameNumGrid = document.getElementById("gameNumGrid");
   function syncStartBtnLabel(){
     var btn = document.getElementById("toPayoutsBtn");
@@ -1106,9 +1213,12 @@
     document.getElementById("sidePay3").textContent = money(T.payouts.third);
     document.getElementById("winnerBanner").classList.remove("show");
     document.getElementById("gameOverModal").classList.add("hidden");
+    document.getElementById("approvalModal").classList.add("hidden");
+    lastApprovalEmail = null;
     document.getElementById("ppotnModal").classList.add("hidden");
     document.getElementById("gameTitleLabel").textContent = T.gameTitle;
     renderAlive(); renderSchedule(); renderClock();
+    syncUploadUI();
     show("game");
   }
   /* Final standings: 1 = winner, then reverse order of knockout down to the first player out */
@@ -1322,7 +1432,7 @@
       }
       fsBustStep = "list"; fsBustVictimIdx = null;
     }
-    title.textContent = "Busted Players";
+    title.textContent = "Bust Out Players";
     sub.textContent = "Tap Bust to knock a player out — you'll pick who busted them out.";
     var list = document.createElement("div");
     list.className = "fs-bust-list";
@@ -1436,6 +1546,7 @@
           renderGameNums();
         }
         renderResults();
+        syncUploadUI();
         openGameOver();
         if(T.ppotn) openPpotn();
       } else {
@@ -1446,24 +1557,488 @@
       T.gameOver = false;
       T.endedAt = null;
       T.ppotn = null;
+      /* Results changed (a player was restored) — any pending/official
+         upload state was for the old result, so clear it */
+      T.uploadStatus = null;
+      T.approvedBy = null;
+      T.pendingSince = null;
+      lastApprovalEmail = null;
+      closeApproval();
+      syncUploadUI();
       T.players.forEach(function(p){ if(p.finishPlace === 1 && !p.out) p.finishPlace = null; });
       wb.classList.remove("show");
       closeGameOver();
       closePpotn();
     }
   }
-  /* Upload Results — placeholder for now */
-  function showUploadNote(){
-    if(!isGameOverOpen()) openGameOver();
-    document.getElementById("uploadNote").classList.remove("hidden");
+  /* ---------- Upload Results — PENDING approval route ----------
+     Tapping Upload Results files the game as PENDING (never official)
+     and prepares an approval email to BOTH approvers — Rob Harrison
+     <roblharrison@gmail.com> and the commish, James Klinect
+     <JKLin21@gmail.com> — containing the full game stats and the new
+     standings. ONE approval is enough: an APPROVE reply from either
+     Rob or James K makes the game official (Mark Approved below);
+     a REJECT / REJECTED reply saves the results to the Rejected
+     Results Archive — kept for the record, never applied — and the
+     game is marked rejected, not official. This page has no inbox of
+     its own, so the email goes out through the device's mail app and
+     the approval is confirmed here when the reply arrives. */
+  var APPROVERS = [
+    {name:"Rob Harrison", email:"roblharrison@gmail.com"},
+    {name:"James Klinect (Commish)", email:"JKLin21@gmail.com"}
+  ];
+  var lastApprovalEmail = null; // {subject, body} for the current pending game
+  function knockoutCounts(){
+    var counts = {};
+    if(!T) return counts;
+    T.knockouts.forEach(function(k){ counts[k.bustedBy] = (counts[k.bustedBy] || 0) + 1; });
+    return counts;
   }
-  document.getElementById("uploadResultsBtn").addEventListener("click", showUploadNote);
-  document.getElementById("winnerUploadBtn").addEventListener("click", showUploadNote);
+  function buildApprovalEmail(){
+    if(!T) return null;
+    var standings = finalStandings();
+    var winner = standings.filter(function(p){ return p.finishPlace === 1; })[0];
+    var data = computeUpdatedStandings();
+    var dateLabel = fmtDate(T.startedAt);
+    var subject = "PPOTN Results PENDING APPROVAL — " + T.gameTitle + " at " + T.host + "'s, " + dateLabel;
+    var lines = [];
+    lines.push("PPOTN RESULTS — PENDING APPROVAL");
+    lines.push("");
+    lines.push("These results are PENDING. They are not official yet.");
+    lines.push("ONE approval is enough: reply APPROVE from either Rob or James K and the results become official. Reply REJECT with what needs fixing and they stay out.");
+    lines.push("");
+    lines.push("GAME");
+    lines.push(T.gameTitle + " · Host: " + T.host + " · " + dateLabel);
+    lines.push("Players: " + T.players.length + " · Buy-in: " + money(T.buyin || 100) + " · Pot: " + money(T.payouts.first + T.payouts.second + T.payouts.third));
+    lines.push("Payouts: 1st " + money(T.payouts.first) + " · 2nd " + money(T.payouts.second) + " · 3rd " + money(T.payouts.third));
+    if(T.bounty) lines.push("Bounty: " + T.bounty);
+    if(winner) lines.push("Winner: " + winner.name);
+    if(T.ppotn) lines.push("PPOTN Player of the Night: " + T.ppotn.winners.map(function(w){ return w.name; }).join(" & ") + " (combined total " + T.ppotn.bestTotal + (T.ppotn.split ? ", split title" : "") + ")");
+    lines.push("");
+    lines.push("RESULTS & STATS");
+    standings.forEach(function(p){
+      var pay = payoutForPlace(p.finishPlace);
+      lines.push(fmtPlace(p.finishPlace) + " — " + p.name +
+        (pay !== null ? " — " + money(pay) : " — no prize") +
+        (p.bustedBy ? " — busted by " + p.bustedBy : " — winner") +
+        (p.bustedAtLabel ? " at " + p.bustedAtLabel : ""));
+    });
+    var counts = knockoutCounts();
+    var koNames = Object.keys(counts).sort(function(a,b){ return counts[b] - counts[a]; });
+    if(koNames.length){
+      lines.push("");
+      lines.push("Knockouts: " + koNames.map(function(n){ return n + " — " + counts[n]; }).join(" · "));
+    }
+    if(data){
+      lines.push("");
+      lines.push("NEW 2026 STANDINGS IF APPROVED (after " + data.gamesApplied.map(function(n){ return "Game " + n; }).join(" & ") + " tonight)");
+      data.rows.forEach(function(r){
+        var moveTxt = r.isNew ? "new" : (r.move > 0 ? "up " + r.move : (r.move < 0 ? "down " + (-r.move) : "no move"));
+        lines.push(r.newRank + ". " + r.name + " — " + money(r.total) + " (" + moveTxt + (r.played ? ", tonight " + fmtSignedMoney(r.net) + " net" : ", did not play tonight") + ")");
+      });
+    }
+    lines.push("");
+    lines.push("Reply APPROVE (either approver) to make these results official, or REJECT with the correction needed. Rejected results are saved to the rejected-results archive for the record — they are NOT applied, and the standings do not change.");
+    lines.push("— PPOTN Tournament app");
+    return { subject: subject, body: lines.join("\n") };
+  }
+  function syncUploadUI(){
+    if(!T) return;
+    var status = T.uploadStatus || null;
+    var upBtn = document.getElementById("uploadResultsBtn");
+    var winBtn = document.getElementById("winnerUploadBtn");
+    [upBtn, winBtn].forEach(function(b){
+      if(!b) return;
+      b.classList.remove("btn-pending","btn-official","btn-rejected");
+      if(status === "pending"){ b.textContent = "⏳ Pending Approval — View"; b.classList.add("btn-pending"); }
+      else if(status === "official"){ b.textContent = "✓ Official — Approved"; b.classList.add("btn-official"); }
+      else if(status === "rejected"){ b.textContent = "✕ Rejected — Archived"; b.classList.add("btn-rejected"); }
+      else { b.textContent = "Upload Results"; }
+    });
+    var box = document.getElementById("uploadStatusBox");
+    if(!box) return;
+    if(status === "pending"){
+      box.className = "pending-box pending";
+      box.innerHTML = '<span class="status-pill pending">⏳ Pending</span> <span class="pb-title">Waiting on approval</span><br>' +
+        'Sent for approval to <b>Rob Harrison</b> and <b>James Klinect (Commish)</b>. These results are <b>not official</b> yet — <b>one</b> APPROVE reply from either of them makes them official.' +
+        '<div class="pb-actions"><button type="button" class="btn btn-gold" id="boxApprovalBtn">View / Send Approval Email</button></div>';
+      var bb = document.getElementById("boxApprovalBtn");
+      if(bb) bb.addEventListener("click", openApproval);
+    } else if(status === "official"){
+      box.className = "pending-box official";
+      box.innerHTML = '<span class="status-pill official">✓ Official</span> <span class="pb-title">Approved — results are official</span><br>' +
+        'Approved by ' + esc(T.approvedBy || "an approver") + '. The pending flag is off and this game counts as final.';
+    } else if(status === "rejected"){
+      box.className = "pending-box rejected";
+      box.innerHTML = '<span class="status-pill rejected">✕ Rejected</span> <span class="pb-title">Rejected — saved to the archive, not applied</span><br>' +
+        'An approver replied <b>REJECT</b>. These results were <b>saved to the Rejected Results Archive</b> just in case they are needed later, but they were <b>not applied</b> — the standings and official records did not change.' +
+        '<div class="pb-actions"><button type="button" class="btn btn-ghost" id="boxArchiveBtn">🗂 View Rejected Archive</button><button type="button" class="btn btn-gold" id="boxResubmitBtn">↻ Re-submit for Approval</button></div>';
+      var ab = document.getElementById("boxArchiveBtn");
+      if(ab) ab.addEventListener("click", openArchive);
+      var rb = document.getElementById("boxResubmitBtn");
+      if(rb) rb.addEventListener("click", function(){ setPending(); openApproval(); });
+    } else {
+      box.className = "pending-box hidden";
+      box.innerHTML = "";
+    }
+  }
+  function setPending(){
+    if(!T) return;
+    if(!T.uploadStatus || T.uploadStatus === "rejected"){
+      T.uploadStatus = "pending";
+      T.pendingSince = new Date();
+      T.approvedBy = null;
+    }
+    lastApprovalEmail = buildApprovalEmail();
+    syncUploadUI();
+  }
+  function renderApproval(){
+    if(!T) return;
+    setPendingSilent();
+    var email = lastApprovalEmail || buildApprovalEmail();
+    lastApprovalEmail = email;
+    document.getElementById("approvalMeta").innerHTML =
+      "<b>" + esc(T.gameTitle) + "</b> · Host: <b>" + esc(T.host) + "</b> · " + esc(fmtDate(T.startedAt)) +
+      " · " + T.players.length + " players · Pot <b>" + money(T.payouts.first + T.payouts.second + T.payouts.third) + "</b>";
+    var status = T.uploadStatus || null;
+    document.getElementById("approvalStatusLine").innerHTML = status === "official"
+      ? '<span class="status-pill official">✓ Official</span> Approved by <b>' + esc(T.approvedBy || "an approver") + '</b> — pending removed.'
+      : (status === "rejected"
+        ? '<span class="status-pill rejected">✕ Rejected</span> Rejected by an approver — <b>saved to the Rejected Results Archive, not applied.</b> The standings and official records did not change.'
+        : '<span class="status-pill pending">⏳ Pending</span> Not official yet — waiting on <b>one</b> approval from either approver.');
+    document.getElementById("approvalApproveBtn").classList.toggle("hidden", status === "official" || status === "rejected");
+    document.getElementById("approvalRejectBtn").classList.toggle("hidden", status === "rejected");
+    document.getElementById("approvalRejectBtn").textContent = status === "official" ? "Undo Official — Back to Un-uploaded" : "Reject — Archive, Don't Apply";
+    document.getElementById("approvalResubmitBtn").classList.toggle("hidden", status !== "rejected");
+    document.getElementById("approvalArchiveBtn").textContent = "🗂 Rejected Results Archive" + (rejectedResults.length ? " (" + rejectedResults.length + ")" : "");
+    /* Proposed standings table — same live computation as Updated Standings */
+    var data = computeUpdatedStandings();
+    var body = document.getElementById("approvalStandingsBody");
+    body.innerHTML = "";
+    if(data){
+      data.rows.forEach(function(r){
+        var tr = document.createElement("tr");
+        var classes = [];
+        if(r.newRank === 1) classes.push("new-leader");
+        if(data.tonightWinner && r.name === data.tonightWinner) classes.push("tonight-winner");
+        tr.className = classes.join(" ");
+        var moveHtml;
+        if(r.isNew) moveHtml = '<span class="move new">★ NEW</span>';
+        else if(r.move > 0) moveHtml = '<span class="move up">▲ ' + r.move + '</span>';
+        else if(r.move < 0) moveHtml = '<span class="move down">▼ ' + (-r.move) + '</span>';
+        else moveHtml = '<span class="move same">—</span>';
+        var tonightHtml = r.played
+          ? '<span class="tonight-net ' + (r.net > 0 ? "pos" : (r.net < 0 ? "neg" : "")) + '">' + fmtSignedMoney(r.net) + ' net</span><span class="tonight-prize">' + (r.prize > 0 ? money(r.prize) + " prize" : "no prize") + '</span>'
+          : '<span class="move same">—</span>';
+        tr.innerHTML =
+          '<td><span class="rank">' + r.newRank + '</span></td>' +
+          '<td>' + esc(r.name) + (r.newRank === 1 ? ' <span class="crown">👑</span>' : "") + '</td>' +
+          '<td>' + moveHtml + '</td>' +
+          '<td class="num">' + tonightHtml + '</td>' +
+          '<td class="num money">' + money(r.total) + '</td>';
+        body.appendChild(tr);
+      });
+    }
+    document.getElementById("approvalEmailPreview").textContent = email ? ("Subject: " + email.subject + "\n\n" + email.body) : "";
+    document.getElementById("approvalCopyOk").classList.add("hidden");
+  }
+  function setPendingSilent(){
+    if(T && !lastApprovalEmail) lastApprovalEmail = buildApprovalEmail();
+  }
+  function openApproval(){
+    if(!T) return;
+    if(!T.uploadStatus) setPending();
+    renderApproval();
+    closeGameOver(); closePpotn(); closeUpdatedStandings();
+    document.getElementById("approvalModal").classList.remove("hidden");
+  }
+  function closeApproval(){ document.getElementById("approvalModal").classList.add("hidden"); }
+  function isApprovalOpen(){ return !document.getElementById("approvalModal").classList.contains("hidden"); }
+  function handleUploadClick(){
+    if(!T) return;
+    if(T.uploadStatus === "official"){ openApproval(); return; }
+    if(T.uploadStatus === "rejected"){ openApproval(); return; }
+    setPending();
+    openApproval();
+  }
+  document.getElementById("uploadResultsBtn").addEventListener("click", handleUploadClick);
+  document.getElementById("winnerUploadBtn").addEventListener("click", handleUploadClick);
+  document.getElementById("approvalSendBtn").addEventListener("click", function(){
+    var email = lastApprovalEmail || buildApprovalEmail();
+    if(!email) return;
+    lastApprovalEmail = email;
+    var to = APPROVERS.map(function(a){ return a.email; }).join(",");
+    var a = document.createElement("a");
+    a.href = "mailto:" + to + "?subject=" + encodeURIComponent(email.subject) + "&body=" + encodeURIComponent(email.body);
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+  document.getElementById("approvalCopyBtn").addEventListener("click", function(){
+    var email = lastApprovalEmail || buildApprovalEmail();
+    if(!email) return;
+    var text = "To: " + APPROVERS.map(function(a){ return a.name + " <" + a.email + ">"; }).join(", ") + "\nSubject: " + email.subject + "\n\n" + email.body;
+    function done(){ document.getElementById("approvalCopyOk").classList.remove("hidden"); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+    } else { fallbackCopy(text); done(); }
+  });
+  function fallbackCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.getElementById("approvalApproveBtn").addEventListener("click", function(){
+    if(!T) return;
+    T.uploadStatus = "official";
+    T.approvedBy = T.approvedBy || "Rob or James K (approval reply received)";
+    T.pendingSince = null;
+    syncUploadUI();
+    closeApproval();
+    openGameOver();
+  });
+  /* ---------- Rejected Results Archive ----------
+     When an approver replies REJECT / REJECTED to a pending approval
+     email, the rejected results are SAVED here — a full snapshot of
+     the game as submitted — but NOT applied: the game never becomes
+     official and the standings do not change. The snapshot stays in
+     this log just in case it is needed later, even if the game is
+     afterwards corrected and re-submitted. */
+  function archiveRejectedResults(){
+    if(!T) return null;
+    var now = new Date();
+    var entry = {
+      nightKey: T.nightKey,
+      gameNumber: T.gameNumber,
+      title: T.gameTitle,
+      host: T.host,
+      dateLabel: fmtDate(T.startedAt),
+      rejectedAtLabel: fmtDate(now) + " · " + now.toLocaleTimeString("en-US", {hour:"numeric", minute:"2-digit"}),
+      players: T.players.length,
+      buyin: T.buyin || 100,
+      pot: T.payouts.first + T.payouts.second + T.payouts.third,
+      bounty: T.bounty || null,
+      standings: finalStandings().map(function(p){
+        return {name:p.name, finishPlace:p.finishPlace, bustedBy:p.bustedBy, bustedAtLabel:p.bustedAtLabel, payout:payoutForPlace(p.finishPlace)};
+      }),
+      knockouts: T.knockouts.slice(),
+      ppotn: T.ppotn ? {winnerNames: T.ppotn.winners.map(function(w){ return w.name; }), bestTotal: T.ppotn.bestTotal, split: T.ppotn.split} : null,
+      emailSubject: lastApprovalEmail ? lastApprovalEmail.subject : null,
+      applied: false
+    };
+    rejectedResults.push(entry);
+    return entry;
+  }
+  function renderArchive(){
+    var list = document.getElementById("archiveList");
+    if(!list) return;
+    list.innerHTML = "";
+    if(!rejectedResults.length){
+      list.innerHTML = '<p class="approval-meta" style="margin-top:14px">No rejected results yet. When an approver replies REJECT to a pending results email, the rejected game is saved here — kept for the record, never applied.</p>';
+      return;
+    }
+    rejectedResults.slice().reverse().forEach(function(e){
+      var div = document.createElement("div");
+      div.className = "archive-entry";
+      var winner = e.standings.filter(function(s){ return s.finishPlace === 1; })[0];
+      var rows = e.standings.map(function(s){
+        return '<li><span class="ar-who">' + fmtPlace(s.finishPlace) + ' — ' + esc(s.name) +
+          (s.bustedBy
+            ? ' <span style="color:var(--muted)">(busted by ' + esc(s.bustedBy) + (s.bustedAtLabel ? ' at ' + esc(s.bustedAtLabel) : '') + ')</span>'
+            : ' <span style="color:var(--muted)">(winner)</span>') +
+          '</span><span class="ar-pay">' + (s.payout !== null && s.payout !== undefined ? money(s.payout) : '—') + '</span></li>';
+      }).join("");
+      div.innerHTML =
+        '<h4><span class="rej-x">✕</span> ' + esc(e.title) + ' — ' + esc(e.host) + '&rsquo;s · ' + esc(e.dateLabel) + '</h4>' +
+        '<p class="archive-meta">Rejected <b>' + esc(e.rejectedAtLabel) + '</b> · ' + e.players + ' players · Pot <b>' + money(e.pot) + '</b>' +
+        (e.bounty ? ' · Bounty: <b>' + esc(e.bounty) + '</b>' : '') +
+        (winner ? '<br>Winner as submitted: <b>' + esc(winner.name) + '</b>' : '') +
+        (e.ppotn ? '<br>PPOTN Player of the Night as submitted: <b>' + esc(e.ppotn.winnerNames.join(" & ")) + '</b> (total ' + e.ppotn.bestTotal + (e.ppotn.split ? ', split title' : '') + ')' : '') +
+        '</p>' +
+        '<ul class="archive-results">' + rows + '</ul>' +
+        '<p class="archive-note-line">NOT APPLIED — the standings and official records were not updated by this game.</p>';
+      list.appendChild(div);
+    });
+  }
+  function openArchive(){
+    renderArchive();
+    closeApproval();
+    document.getElementById("archiveModal").classList.remove("hidden");
+  }
+  function closeArchive(){ document.getElementById("archiveModal").classList.add("hidden"); }
+  document.getElementById("approvalArchiveBtn").addEventListener("click", openArchive);
+  document.getElementById("archiveCloseBtn").addEventListener("click", function(){
+    closeArchive();
+    if(T && T.gameOver) openGameOver();
+  });
+  document.getElementById("approvalResubmitBtn").addEventListener("click", function(){
+    if(!T) return;
+    setPending();
+    syncUploadUI();
+    renderApproval();
+  });
+  document.getElementById("approvalRejectBtn").addEventListener("click", function(){
+    if(!T) return;
+    if(T.uploadStatus === "official"){
+      /* Undoing an official game is not a rejection — back to un-uploaded, nothing archived */
+      T.uploadStatus = null;
+      T.approvedBy = null;
+      T.pendingSince = null;
+      lastApprovalEmail = null;
+    } else {
+      /* REJECT / REJECTED reply: archive the results as submitted —
+         saved for the record, NOT applied — and mark the game rejected */
+      archiveRejectedResults();
+      T.uploadStatus = "rejected";
+      T.approvedBy = null;
+      T.pendingSince = null;
+    }
+    syncUploadUI();
+    closeApproval();
+    openGameOver();
+  });
+  document.getElementById("approvalCloseBtn").addEventListener("click", function(){
+    closeApproval();
+    if(T && T.gameOver) openGameOver();
+  });
+
+  /* ---------- Updated PPOTN Standings — computed live, on this device ----------
+     Starts from the current 2026 standings (ROSTER),
+     then applies tonight's finished game(s) for this date + host: every player
+     who played gets their prize money added, minus their buy-in (net), and one
+     more game played; everyone is then re-ranked. Display only — this does not
+     change the Upload Results flow or the saved standings. */
+  function fmtSignedMoney(n){
+    if(n > 0) return "+" + money(n);
+    if(n < 0) return "−" + money(-n);
+    return "$0";
+  }
+  function computeUpdatedStandings(){
+    if(!T) return null;
+    var buyin = T.buyin || 100;
+    /* Rank before tonight, from the current standings */
+    var before = ROSTER.slice().sort(function(a,b){ return b.winnings - a.winnings; });
+    var oldRank = {}, oldTotal = {};
+    before.forEach(function(p, i){ oldRank[p.name] = i + 1; oldTotal[p.name] = p.winnings; });
+    var totals = {};
+    ROSTER.forEach(function(p){
+      totals[p.name] = { name:p.name, isNew:false, played:false, gamesPlayed:0, prize:0, net:0, total:p.winnings };
+    });
+    /* Tonight's finished games at this host, in game order — the game that
+       just finished is filed already; if it isn't (e.g. a player was
+       restored), apply the current game on top so it is never missed. */
+    var games = completedGames.filter(function(g){ return g.nightKey === T.nightKey; })
+      .sort(function(a,b){ return a.gameNumber - b.gameNumber; });
+    var hasCurrent = games.some(function(g){ return g.gameNumber === T.gameNumber; });
+    if(!hasCurrent){
+      games.push({
+        gameNumber: T.gameNumber,
+        standings: finalStandings().map(function(p){
+          return { name:p.name, finishPlace:p.finishPlace, payout:payoutForPlace(p.finishPlace) };
+        })
+      });
+      games.sort(function(a,b){ return a.gameNumber - b.gameNumber; });
+    }
+    games.forEach(function(g){
+      (g.standings || []).forEach(function(s){
+        var prize = s.payout || 0;
+        var net = prize - buyin;
+        if(!totals[s.name]){
+          totals[s.name] = { name:s.name, isNew:true, played:false, gamesPlayed:0, prize:0, net:0, total:0 };
+        }
+        var row = totals[s.name];
+        row.played = true;
+        row.gamesPlayed += 1;
+        row.prize += prize;
+        row.net += net;
+        row.total += net;
+      });
+    });
+    var rows = Object.keys(totals).map(function(k){ return totals[k]; });
+    rows.sort(function(a,b){
+      return (b.total - a.total) || ((oldTotal[b.name] || 0) - (oldTotal[a.name] || 0)) || a.name.localeCompare(b.name);
+    });
+    rows.forEach(function(r, i){
+      r.newRank = i + 1;
+      r.oldRank = r.isNew ? null : oldRank[r.name];
+      r.move = r.isNew ? null : (r.oldRank - r.newRank);
+    });
+    var winner = T.players.filter(function(p){ return p.finishPlace === 1; })[0];
+    return { rows:rows, buyin:buyin, gamesApplied:games.map(function(g){ return g.gameNumber; }), tonightWinner: winner ? winner.name : null };
+  }
+  function renderUpdatedStandings(){
+    var data = computeUpdatedStandings();
+    if(!data) return;
+    var gameList = data.gamesApplied.map(function(n){ return "Game " + n; }).join(" & ");
+    document.getElementById("updatedStandingsSub").innerHTML =
+      "After <b>" + esc(gameList) + "</b> · Host: " + esc(T.host) + " · " + esc(fmtDate(T.startedAt)) +
+      "<br>The newest 2026 standings, figured live from the result" + (data.gamesApplied.length > 1 ? "s" : "") + " that just finished tonight.";
+    var body = document.getElementById("updatedStandingsBody");
+    body.innerHTML = "";
+    data.rows.forEach(function(r){
+      var tr = document.createElement("tr");
+      var classes = [];
+      if(r.newRank === 1) classes.push("new-leader");
+      if(data.tonightWinner && r.name === data.tonightWinner) classes.push("tonight-winner");
+      tr.className = classes.join(" ");
+      var moveHtml;
+      if(r.isNew) moveHtml = '<span class="move new">★ NEW</span>';
+      else if(r.move > 0) moveHtml = '<span class="move up">▲ ' + r.move + '</span>';
+      else if(r.move < 0) moveHtml = '<span class="move down">▼ ' + (-r.move) + '</span>';
+      else moveHtml = '<span class="move same">—</span>';
+      var tonightHtml;
+      if(r.played){
+        tonightHtml = '<span class="tonight-net ' + (r.net > 0 ? "pos" : (r.net < 0 ? "neg" : "")) + '">' + fmtSignedMoney(r.net) + ' net</span>' +
+          '<span class="tonight-prize">' + (r.prize > 0 ? money(r.prize) + " prize" : "no prize") + ' · +' + r.gamesPlayed + (r.gamesPlayed === 1 ? " game" : " games") + ' played</span>';
+      } else {
+        tonightHtml = '<span class="move same">—</span>';
+      }
+      tr.innerHTML =
+        '<td><span class="rank">' + r.newRank + '</span></td>' +
+        '<td>' + esc(r.name) + (r.newRank === 1 ? ' <span class="crown">👑</span>' : "") + (data.tonightWinner && r.name === data.tonightWinner ? ' <span title="Won tonight">🏆</span>' : "") + '</td>' +
+        '<td>' + moveHtml + '</td>' +
+        '<td class="num">' + tonightHtml + '</td>' +
+        '<td class="num money">' + money(r.total) + '</td>';
+      body.appendChild(tr);
+    });
+    document.getElementById("updatedStandingsNote").textContent =
+      "How this was figured: start from the current 2026 standings, then for everyone who played tonight, add their prize money and subtract the " + money(data.buyin) + " buy-in — the net shown above — and count one more game played. Anyone who didn't play tonight is unchanged, and the field is re-ranked on the new totals. This is a live look on this screen only; Upload Results still handles the official update to the Historical side.";
+  }
+  function openUpdatedStandings(){
+    if(!T) return;
+    renderUpdatedStandings();
+    closeGameOver();
+    closePpotn();
+    document.getElementById("updatedStandingsModal").classList.remove("hidden");
+  }
+  function closeUpdatedStandings(){
+    document.getElementById("updatedStandingsModal").classList.add("hidden");
+  }
+  function isStandingsOpen(){ return !document.getElementById("updatedStandingsModal").classList.contains("hidden"); }
+  document.getElementById("updatedStandingsBtn").addEventListener("click", openUpdatedStandings);
+  document.getElementById("winnerStandingsBtn").addEventListener("click", openUpdatedStandings);
+  document.getElementById("standingsBackBtn").addEventListener("click", function(){
+    closeUpdatedStandings();
+    openGameOver();
+  });
+  document.getElementById("standingsNewGameBtn").addEventListener("click", function(){
+    if(T) toggleRun(false, true);
+    closeHitmanModal(); closeGameOver(); closePpotn(); closeUpdatedStandings(); closeApproval();
+    lastApprovalEmail = null;
+    T = null;
+    bountyName = null;
+    renderPlayers();
+    show("setup");
+  });
   document.getElementById("winnerResultsBtn").addEventListener("click", function(){ openGameOver(); });
   document.getElementById("closeResultsBtn").addEventListener("click", closeGameOver);
   document.getElementById("resultsNewGameBtn").addEventListener("click", function(){
     if(T) toggleRun(false, true);
-    closeHitmanModal(); closeGameOver(); closePpotn();
+    closeHitmanModal(); closeGameOver(); closePpotn(); closeApproval();
+    lastApprovalEmail = null;
     T = null;
     bountyName = null; /* each game gets its own bounty — mark the next one on setup */
     renderPlayers();
@@ -1561,25 +2136,10 @@
   }, 200);
 
   document.getElementById("toggleBtn").addEventListener("click", function(){ ensureAudio(); toggleRun(); });
-  document.getElementById("prevLevelBtn").addEventListener("click", function(){
-    if(!T) return; toggleRun(false, true);
-    if(T.level > 0) T.level--;
-    T.secondsLeft = T.totalSeconds; T.lastBeepSecond = null; renderClock();
-  });
   document.getElementById("nextLevelBtn").addEventListener("click", function(){
     if(!T) return; toggleRun(false, true);
     if(T.level < T.levels.length-1) T.level++;
     T.secondsLeft = T.totalSeconds; T.lastBeepSecond = null; renderClock();
-  });
-  document.getElementById("resetBtn").addEventListener("click", function(){
-    if(!T) return; toggleRun(false, true);
-    T.secondsLeft = T.totalSeconds; T.lastBeepSecond = null; renderClock();
-  });
-  document.getElementById("soundBtn").addEventListener("click", function(){
-    soundOn = !soundOn;
-    this.textContent = soundOn ? "🔊 Sound On" : "🔇 Sound Off";
-    this.setAttribute("aria-pressed", soundOn ? "true" : "false");
-    if(soundOn){ ensureAudio(); playStartSound(); }
   });
   /* Blind structure — collapsed by default so the payouts panel never gets
      squeezed; the link under the payouts expands it on demand */
@@ -1607,7 +2167,7 @@
   function inFocusMode(){ return viewGame.classList.contains("focus-mode"); }
   function syncFsBtn(){
     var on = inFocusMode() || !!nativeFsEl();
-    fsBtn.textContent = on ? "✕ Exit Fullscreen" : "⛶ Fullscreen — Timer Only";
+    fsBtn.textContent = on ? "Exit Full Screen" : "Fullscreen";
     fsBtn.setAttribute("aria-pressed", on ? "true" : "false");
   }
   function enterFocusMode(fallback){
@@ -1637,7 +2197,7 @@
      with the Busted Players panel open, Esc just closes the panel */
   document.addEventListener("keydown", function(e){
     if(e.key !== "Escape" && e.key !== "Esc") return;
-    if(isHitmanOpen() || isGameOverOpen() || isPpotnOpen()) return;
+    if(isHitmanOpen() || isGameOverOpen() || isPpotnOpen() || isStandingsOpen() || isApprovalOpen()) return;
     if(isFsBustOpen()){ closeFsBust(); return; }
     if(fsFallback && inFocusMode() && !nativeFsEl()){ exitFocusMode(); }
   });
@@ -1682,7 +2242,8 @@
   });
   document.getElementById("newGameBtn").addEventListener("click", function(){
     if(T) toggleRun(false, true);
-    closeHitmanModal(); closeGameOver(); closePpotn(); closeFsBust();
+    closeHitmanModal(); closeGameOver(); closePpotn(); closeFsBust(); closeApproval(); closeUpdatedStandings();
+    lastApprovalEmail = null;
     T = null;
     bountyName = null; /* each game gets its own bounty — mark the next one on setup */
     renderPlayers();
@@ -1695,7 +2256,7 @@
     var tag = (e.target && e.target.tagName) || "";
     if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
     if(viewGame.classList.contains("hidden")) return;
-    if(isHitmanOpen() || isGameOverOpen() || isPpotnOpen() || isFsBustOpen()) return;
+    if(isHitmanOpen() || isGameOverOpen() || isPpotnOpen() || isFsBustOpen() || isStandingsOpen() || isApprovalOpen()) return;
     if(T && T.gameOver) return;
     e.preventDefault();
     ensureAudio();
