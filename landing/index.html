@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PPOTN — Poker Player of the Night</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --felt: #14532d;
+    --felt-dark: #0b3d20;
+    --panel: #182028;
+    --panel-2: #1e2830;
+    --border: #2a3540;
+    --text: #e8edf1;
+    --text-dim: #8a97a3;
+    --gold: #f2c94c;
+    --accent: #3ecf8e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(ellipse at center, var(--felt) 0%, var(--felt-dark) 55%, var(--bg) 100%);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  .wrap { max-width: 760px; width: 100%; text-align: center; }
+  .suits { font-size: 22px; letter-spacing: 12px; color: var(--gold); opacity: 0.85; }
+  h1 {
+    font-size: clamp(56px, 14vw, 110px);
+    margin: 8px 0 4px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-shadow: 0 3px 0 #8a6d1f, 0 8px 28px rgba(0,0,0,0.6);
+  }
+  .tagline { color: var(--text); font-size: clamp(16px, 3.5vw, 21px); margin: 0 0 6px; font-weight: 600; }
+  .sub { color: var(--text-dim); font-size: 15px; margin: 0 0 40px; }
+  .choices { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+  a.choice {
+    flex: 1 1 280px;
+    max-width: 340px;
+    display: block;
+    text-decoration: none;
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 30px 24px 26px;
+    color: var(--text);
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  a.choice:hover, a.choice:focus {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+  }
+  a.choice .icon { font-size: 40px; display: block; margin-bottom: 12px; }
+  a.choice h2 { margin: 0 0 8px; font-size: 26px; color: var(--gold); letter-spacing: 1px; }
+  a.choice p { margin: 0; color: var(--text-dim); font-size: 14.5px; line-height: 1.5; }
+  .staging {
+    margin: 44px auto 0;
+    max-width: 520px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.25);
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="suits" aria-hidden="true">&#9824; &#9829; &#9830; &#9827;</div>
+    <h1>PPOTN</h1>
+    <p class="tagline">Poker Player of the Night</p>
+    <p class="sub">Friends playing together for 20+ years. Two tournaments a night, one Player of the Night.</p>
+
+    <div class="choices">
+      <a class="choice" href="../index.html">
+        <span class="icon" aria-hidden="true">&#127942;</span>
+        <h2>Historical</h2>
+        <p>Current standings, season stats, and the league&rsquo;s historical records.</p>
+      </a>
+      <a class="choice" href="../game/">
+        <span class="icon" aria-hidden="true">&#9201;</span>
+        <h2>New Game</h2>
+        <p>Start a new tournament &mdash; the PPOTN tournament clock, blinds, seat draw, and bust-outs.</p>
+      </a>
+    </div>
+
+    <p class="staging">Staging preview &mdash; this landing page is not live yet. It is being built in the background for ppotn.com.</p>
+  </main>
+</body>
+</html>
