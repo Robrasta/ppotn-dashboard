@@ -12,6 +12,10 @@ affecting www.ppotn.com.
   two options, "Historical" and "New Game".
 - `game/index.html` — the PPOTN Tournament clock app (exported from the Muse
   artifact `ppotn-tournament`), staged to sit alongside the existing site.
+- `historical/index.html` — a copy of the legacy dashboard, already moved
+  under `historical/` with its relative paths fixed (`../`) and its graphics
+  restyled to match the new felt-green + gold look. Staged Nov 24, 2026;
+  see the "Historical page" section below.
 - Everything else is inherited unchanged from `main` — in particular the
   existing root `index.html` (the current dashboard), `CNAME`, `data/`,
   `config/`, `scripts/`, and `.github/workflows/`.
@@ -82,6 +86,43 @@ never as a side effect of staging work on this branch.
 6. Merge this branch to `main` (Pages only publishes `main`). Verify
    www.ppotn.com serves the landing page, and that Historical and New Game
    both load, before announcing it to the league.
+
+## Historical page (staged Nov 24, 2026)
+
+`historical/index.html` on this branch is the legacy dashboard, copied from
+`main`'s root `index.html` (67,950 bytes; 68,742 bytes after the edits below)
+with ONLY these changes:
+
+- **Relative paths fixed for `historical/`:** every `data/`, `config/`,
+  `assets/`, `photos/`, `docs/` reference now carries the `../` prefix — the
+  `data/season.json` fetch, the chip images, the three `docs/` links, the
+  champion sound clips (`../assets/<surname>-sound.mp3`) and Graham card
+  photo, and the gallery photo paths (the URLs come from the data, so the
+  prefix was applied where the page consumes them: the gallery thumbnail
+  `src` and the lightbox image `src`).
+- **CSS-only visual restyle** to align with the landing page / tournament
+  app: felt green (`#14532d` / `#0b3d20`) radial glow over a deep
+  green-black background, dark green panels (`#16241a` / `#1d2f21`,
+  `#2c4230` lines), gold (`#f2c94c` / `#d4a017`) headings and accents,
+  cream text, 18px card corners with the game's soft shadow, and a serif
+  display font on headings. No layout, markup, IDs/classes, JavaScript, or
+  text content was changed.
+- **Features verified intact** by a before/after marker inventory (counts
+  identical): passphrase gate, the single `data/season.json` fetch,
+  analytics + Scenario / What-if modeling, champions record, champion
+  sound clips + photo pop, photo gallery + lightbox, and the scrolling
+  message banner. At go-live, step 1's move is already done — this file
+  replaces the "move it whole" step; just verify it once more.
+
+**Banner message (Rob, Nov 24, 2026):** the page renders the scrolling
+banner from `data.message` inside `data/season.json` (the build folds
+`config/message.json` into it). The current banner text stays as-is.
+Going forward, BOTH ways of setting the banner stay open — neither is
+retired: (1) Rob asks Amber to update `config/message.json` directly via
+GitHub, and (2) the email option remains — Rob may later authorize other
+hosts to send banner messages to Amber's Muse Mail address
+(robharrison@muse.ai), with Rob authorizing who; he will design that
+later.
 
 ## Notes
 
