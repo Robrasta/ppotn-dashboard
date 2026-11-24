@@ -46,3 +46,21 @@ During staging, the landing page links are relative to its staged location:
 - The tournament app currently keeps game state in the browser only. Its
   "Upload Results" button is a placeholder; saving results centrally is a
   later step.
+
+## Upload protocol (when Upload Results goes live)
+
+Every results upload follows these steps, in order. **No upload ever skips
+step 1.**
+
+1. **Snapshot the previous results.** Copy the current
+   `data/manual_games.json` and `data/season.json` into
+   `archive/snapshots/<YYYY-MM-DD-HHMM>-before-<short-label>/` (see
+   `archive/README.md`). Snapshots are permanent — never modified or deleted —
+   so any previous standings can be restored.
+2. **Rob reviews and approves** the new game record before anything is
+   written.
+3. **Append** the approved game object to `data/manual_games.json` (the
+   per-game source of truth) and commit.
+4. **The bot rebuilds the standings** — the build workflow regenerates
+   `data/season.json` automatically.
+5. **Verify** www.ppotn.com shows the new standings before calling it done.
