@@ -446,11 +446,32 @@
   .modal-actions .btn{flex:1}
   footer{margin-top:26px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
 </style>
+<style>
+/* Nov 24 fixes: crash-recovery resume banner + photo lightbox */
+.resume-banner{background:linear-gradient(180deg, rgba(212,160,23,.16), rgba(212,160,23,.05));border:2px solid var(--gold,#d4a017);border-radius:14px;padding:14px 16px;margin:0 0 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.resume-banner.hidden{display:none}
+.resume-banner .resume-text{font-size:14.5px;line-height:1.45}
+.resume-banner .resume-actions{display:flex;gap:10px;flex-wrap:wrap}
+.photo-lightbox{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:18px}
+.photo-lightbox.hidden{display:none}
+.photo-lightbox img{max-width:96vw;max-height:94vh;border-radius:10px;box-shadow:0 30px 90px rgba(0,0,0,.65)}
+.photo-entry img{cursor:zoom-in}
+.stop-game-btn{position:fixed;right:8px;bottom:6px;z-index:70;background:#000;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:7px;font-family:inherit;font-size:10.5px;line-height:1.2;padding:4px 8px;cursor:pointer;opacity:.65}
+.stop-game-btn:hover{opacity:1}
+</style>
 </head>
 <body>
 
 <!-- ================= SETUP ================= -->
 <div class="wrap" id="view-setup">
+
+  <div class="resume-banner hidden" id="resumeBanner" role="status">
+    <div class="resume-text"><b>⏸ Game in progress — saved on this device</b><br><span id="resumeDetail"></span></div>
+    <div class="resume-actions">
+      <button type="button" class="btn btn-gold" id="resumeGameBtn">▶ Resume Game in Progress</button>
+      <button type="button" class="btn btn-ghost" id="discardSaveBtn">Discard — Start Fresh</button>
+    </div>
+  </div>
   <div class="brand">
     <div class="suit">♠</div>
     <div>
@@ -553,6 +574,8 @@
 
 <!-- ================= TOURNAMENT CLOCK ================= -->
 <div class="wrap hidden" id="view-game">
+
+  <button type="button" class="stop-game-btn" id="stopGameBtn" title="Stop this game and delete it — nothing is saved or uploaded">Stop Game and Return</button>
   <div class="winner-banner" id="winnerBanner">
     <div class="wb-t" id="winnerText">🏆 WINNER</div>
     <div id="winnerSub" style="font-weight:700;margin-top:4px"></div>
@@ -800,6 +823,156 @@
      records for the same date at the same host's place */
   var selectedGameNumber = 1;
   var completedGames = []; // filed records for tonight, in memory: {nightKey, gameNumber, title, host, dateLabel, standings, knockouts, ppotn}
+
+  /* ---------- Crash recovery — autosave + resume ----------
+     The whole in-progress game is saved to this browser's localStorage
+     on every meaningful change (renderClock fires on every clock tick,
+     bust-out, level change and pause) and at least every few seconds
+     while a game exists, so an accidental browser close, crash, or
+     power loss doesn't lose the game. On load, a saved game is offered
+     back on the setup screen: Resume restores it PAUSED at the saved
+     clock time; Discard clears it. The save is cleared when a game is
+     made official (uploaded) or reset for a new game, so stale saves
+     never resurrect old games. */
+  var SAVE_KEY = "ppotn.inProgressGame.v1";
+  var lastSaveAt = 0;
+  var savedSnapshot = null;
+  function saveGameState(force){
+    if(!T) return;
+    var now = Date.now();
+    if(!force && now - lastSaveAt < 900) return;
+    lastSaveAt = now;
+    try {
+      var data = {
+        v: 1,
+        savedAt: now,
+        setup: {
+          isStandard: isStandard,
+          selected: selected,
+          bountyName: bountyName,
+          guests: guests,
+          hosts: hosts,
+          selectedHost: selectedHost,
+          selectedGameNumber: selectedGameNumber,
+          seatAssignments: seatAssignments,
+          customBuyin: (document.getElementById("customBuyin") || {}).value || "",
+          customMinutes: (document.getElementById("customMinutes") || {}).value || ""
+        },
+        T: T,
+        completedGames: completedGames,
+        rejected: (typeof rejectedArchive !== "undefined") ? rejectedArchive
+          : ((typeof rejectedResults !== "undefined") ? rejectedResults : [])
+      };
+      localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+    } catch(e){ /* storage full or blocked — the game continues without autosave */ }
+  }
+  function saveGameStateThrottled(){ saveGameState(false); }
+  function clearSavedGame(){
+    lastSaveAt = 0;
+    savedSnapshot = null;
+    try { localStorage.removeItem(SAVE_KEY); } catch(e){}
+    var b = document.getElementById("resumeBanner");
+    if(b) b.classList.add("hidden");
+  }
+  function reviveDate(v){ return v ? new Date(v) : null; }
+  function resumeSavedGame(){
+    var data = savedSnapshot;
+    if(!data || !data.T) return;
+    var s = data.setup || {};
+    isStandard = (s.isStandard !== false);
+    selected = s.selected || {};
+    bountyName = s.bountyName || null;
+    guests = s.guests || [];
+    if(s.hosts && s.hosts.length) hosts = s.hosts;
+    selectedHost = s.selectedHost || selectedHost;
+    selectedGameNumber = s.selectedGameNumber || 1;
+    seatAssignments = s.seatAssignments || [];
+    var cb = document.getElementById("customBuyin"); if(cb && s.customBuyin) cb.value = s.customBuyin;
+    var cm = document.getElementById("customMinutes"); if(cm && s.customMinutes) cm.value = s.customMinutes;
+    if(typeof setMode === "function") setMode(isStandard);
+    renderHosts(); renderGameNums(); renderPlayers();
+    T = data.T;
+    T.startedAt = reviveDate(T.startedAt) || new Date();
+    T.endedAt = reviveDate(T.endedAt);
+    T.players.forEach(function(p){ p.bustedAt = reviveDate(p.bustedAt); });
+    if(T.uploadRequestedAt) T.uploadRequestedAt = reviveDate(T.uploadRequestedAt);
+    if(T.approvedAt) T.approvedAt = reviveDate(T.approvedAt);
+    if(T.rejectedAt) T.rejectedAt = reviveDate(T.rejectedAt);
+    if(T.pendingSince) T.pendingSince = reviveDate(T.pendingSince);
+    T.running = false; /* always resume paused — press Start when ready */
+    T.lastTick = null;
+    completedGames = data.completedGames || [];
+    if(typeof rejectedArchive !== "undefined") rejectedArchive = data.rejected || [];
+    else if(typeof rejectedResults !== "undefined") rejectedResults = data.rejected || [];
+    var sp1 = document.getElementById("sidePay1"); if(sp1) sp1.textContent = money(T.payouts.first);
+    var sp2 = document.getElementById("sidePay2"); if(sp2) sp2.textContent = money(T.payouts.second);
+    var sp3 = document.getElementById("sidePay3"); if(sp3) sp3.textContent = money(T.payouts.third);
+    var gt = document.getElementById("gameTitleLabel"); if(gt) gt.textContent = T.gameTitle;
+    var banner = document.getElementById("resumeBanner");
+    if(banner) banner.classList.add("hidden");
+    renderAlive(); renderSchedule(); renderClock();
+    if(typeof syncUploadUI === "function") syncUploadUI();
+    if(typeof renderPendingUI === "function") renderPendingUI();
+    show("game");
+    if(T.gameOver){
+      var left = T.players.filter(function(p){ return !p.out; });
+      if(left.length === 1){
+        document.getElementById("winnerText").textContent = "🎉 GAME OVER — " + left[0].name.toUpperCase() + " WINS " + T.gameTitle.toUpperCase() + "! 🏆";
+        document.getElementById("winnerSub").textContent = "Takes home " + money(T.payouts.first) + " — congratulations!";
+        document.getElementById("winnerBanner").classList.add("show");
+      }
+      renderResults();
+      openGameOver();
+    }
+  }
+  function offerResume(){
+    var raw = null;
+    try { raw = localStorage.getItem(SAVE_KEY); } catch(e){}
+    if(!raw) return;
+    var data = null;
+    try { data = JSON.parse(raw); } catch(e){}
+    if(!data || !data.T || !data.T.players || !data.T.players.length){ clearSavedGame(); return; }
+    savedSnapshot = data;
+    var t = data.T;
+    var left = t.players.filter(function(p){ return !p.out; }).length;
+    var detail = document.getElementById("resumeDetail");
+    if(detail){
+      detail.textContent = t.gameTitle + " at " + t.host + "'s · " + t.players.length + " players · " +
+        left + " still in · Round " + (t.level + 1) + " · " + fmt(t.secondsLeft) + " left on the clock (resumes paused)" +
+        (t.gameOver ? " · This game had finished — its results are still here." : "");
+    }
+    var banner = document.getElementById("resumeBanner");
+    if(banner) banner.classList.remove("hidden");
+  }
+  var resumeBtn = document.getElementById("resumeGameBtn");
+  if(resumeBtn) resumeBtn.addEventListener("click", resumeSavedGame);
+  var discardBtn = document.getElementById("discardSaveBtn");
+  if(discardBtn) discardBtn.addEventListener("click", function(){ clearSavedGame(); });
+  /* Stop Game and Return — the small black tab tucked in the bottom-right
+     corner of the clock screen, deliberately out of the way of the main
+     controls. It stops the clock, DELETES the game (including the
+     localStorage autosave, so it can never be resumed), saves and uploads
+     nothing, and returns home: the PPOTN landing in the full app, the
+     setup screen in the standalone game page. */
+  var stopGameBtn = document.getElementById("stopGameBtn");
+  if(stopGameBtn) stopGameBtn.addEventListener("click", function(){
+    if(T) toggleRun(false, true);
+    closeHitmanModal(); closeGameOver(); closePpotn();
+    if(typeof closeFsBust === "function") closeFsBust();
+    if(typeof closeApproval === "function") closeApproval();
+    if(typeof closeUpdatedStandings === "function") closeUpdatedStandings();
+    lastApprovalEmail = null;
+    T = null;
+    clearSavedGame();
+    bountyName = null;
+    renderPlayers();
+    var backBtn = document.getElementById("backToLandingBtn");
+    if(backBtn){ backBtn.click(); }
+    else { show("setup"); }
+  });
+  window.addEventListener("beforeunload", function(){ saveGameState(true); });
+  setInterval(function(){ if(T) saveGameState(false); }, 3000);
+  offerResume();
   var rejectedResults = []; // Rejected-results archive/log, in memory: full snapshots of games an approver rejected — saved for the record, NEVER applied to standings or official records
   var gameNumGrid = document.getElementById("gameNumGrid");
   function syncStartBtnLabel(){
@@ -1794,6 +1967,7 @@
   document.getElementById("approvalApproveBtn").addEventListener("click", function(){
     if(!T) return;
     T.uploadStatus = "official";
+    clearSavedGame();
     T.approvedBy = T.approvedBy || "Rob or James K (approval reply received)";
     T.pendingSince = null;
     syncUploadUI();
@@ -2029,6 +2203,7 @@
     closeHitmanModal(); closeGameOver(); closePpotn(); closeUpdatedStandings(); closeApproval();
     lastApprovalEmail = null;
     T = null;
+    clearSavedGame();
     bountyName = null;
     renderPlayers();
     show("setup");
@@ -2040,6 +2215,7 @@
     closeHitmanModal(); closeGameOver(); closePpotn(); closeApproval();
     lastApprovalEmail = null;
     T = null;
+    clearSavedGame();
     bountyName = null; /* each game gets its own bounty — mark the next one on setup */
     renderPlayers();
     show("setup");
@@ -2062,6 +2238,7 @@
   }
   function renderClock(){
     if(!T) return;
+    saveGameStateThrottled();
     var lv = T.levels[T.level];
     var next = T.levels[T.level+1];
     document.getElementById("timerDisplay").textContent = fmt(T.secondsLeft);
@@ -2245,6 +2422,7 @@
     closeHitmanModal(); closeGameOver(); closePpotn(); closeFsBust(); closeApproval(); closeUpdatedStandings();
     lastApprovalEmail = null;
     T = null;
+    clearSavedGame();
     bountyName = null; /* each game gets its own bounty — mark the next one on setup */
     renderPlayers();
     show("setup");

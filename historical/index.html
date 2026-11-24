@@ -1043,6 +1043,8 @@ function lightboxStep(delta) {
 }
 
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+/* Rob's flow: clicking the enlarged photo itself also shrinks it back */
+document.getElementById('lightboxImg').addEventListener('click', closeLightbox);
 document.getElementById('lightboxPrev').addEventListener('click', () => lightboxStep(-1));
 document.getElementById('lightboxNext').addEventListener('click', () => lightboxStep(1));
 document.getElementById('lightboxOverlay').addEventListener('click', (e) => {
