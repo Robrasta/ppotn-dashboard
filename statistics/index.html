@@ -3321,7 +3321,7 @@
       entry.className = "photo-entry";
       entry.innerHTML = '<span class="pe-date">' + esc(label) + '</span><span class="pe-file">' + esc(p.f) + '</span>';
       var pimg = document.createElement("img");
-      pimg.src = "../photos/" + p.f;
+      pimg.src = "../photos/full/" + p.f;
       pimg.alt = "PPOTN photo — " + p.f;
       pimg.loading = "lazy";
       pimg.addEventListener("error", function(){ pimg.remove(); });
